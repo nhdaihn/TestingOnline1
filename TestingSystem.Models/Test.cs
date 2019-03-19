@@ -1,7 +1,10 @@
-﻿namespace TestingSystem.Models
+﻿using System.Collections;
+
+namespace TestingSystem.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
@@ -79,5 +82,7 @@
         /// </summary>
         [Required]
         public byte Status { get; set; }
+
+		public ICollection<TestResult> TestResults { get; set; }
     }
 }

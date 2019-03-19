@@ -94,7 +94,6 @@
         /// <summary>
         /// Gets or sets the ManagerTests
         /// </summary>
-        public DbSet<ManagerTest> ManagerTests { get; set; }
 
         /// <summary>
         /// The Commit
