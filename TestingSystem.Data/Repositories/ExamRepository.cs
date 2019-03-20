@@ -12,10 +12,11 @@ namespace TestingSystem.Data.Repositories
 	{
 		IEnumerable<Exam> GetAllExams();
 		bool UpdateExam(Exam exam);
+		Exam GetExamsByID(int id);
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
 	}
-	public class ExamRepository:RepositoryBase<Exam>,IExamRepository
+	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -36,7 +37,7 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return null;
 			}
-			
+
 		}
 
 		public bool UpdateExam(Exam exam)
@@ -64,6 +65,21 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return false;
 			}
+
+		}
+
+		public Exam GetExamsByID(int id)
+		{
+			try
+			{
+				var exam = DbContext.Exams.SingleOrDefault(x => x.ExamID == id);
+				return exam;
+			}
+			catch (Exception e)
+			{
+				log.Debug(e.Message);
+				return null;
+			}
 			
 		}
 
@@ -81,7 +97,7 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return 0;
 			}
-			
+
 		}
 
 		public int DeleteExam(int id)
@@ -104,7 +120,7 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return 0;
 			}
-			
+
 		}
 	}
 }
