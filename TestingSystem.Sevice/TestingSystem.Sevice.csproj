@@ -45,6 +45,7 @@
     <Compile Include="AnswerService.cs" />
     <Compile Include="ExamPaperQuestionService.cs" />
     <Compile Include="ExamPaperService.cs" />
+    <Compile Include="ExamService.cs" />
     <Compile Include="GroupService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionCategorySevice.cs" />
