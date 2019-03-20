@@ -87,15 +87,6 @@
         public DbSet<Candidate> Candidates { get; set; }
 
         /// <summary>
-        /// Gets or sets the TestResults
-        /// </summary>
-        public DbSet<TestResult> TestResults { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ManagerTests
-        /// </summary>
-
-        /// <summary>
         /// The Commit
         /// </summary>
         public virtual void Commit()

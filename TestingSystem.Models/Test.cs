@@ -83,6 +83,7 @@ namespace TestingSystem.Models
         [Required]
         public byte Status { get; set; }
 
-		public ICollection<TestResult> TestResults { get; set; }
+        public int Score { get; set; }
+        public Candidate Candidates { get; set; }
     }
 }
