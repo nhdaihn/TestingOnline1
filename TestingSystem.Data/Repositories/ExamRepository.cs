@@ -15,6 +15,7 @@ namespace TestingSystem.Data.Repositories
 		Exam GetExamsByID(int id);
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
+
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
@@ -87,6 +88,7 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
+				exam.ExamCode = Guid.NewGuid().ToString("n");
 				exam.CreateDate = DateTime.Now;
 				DbContext.Exams.Add(exam);
 				DbContext.SaveChanges();
