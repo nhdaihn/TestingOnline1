@@ -15,6 +15,8 @@ namespace TestingSystem.Data.Repositories
 		Exam GetExamsByID(int id);
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
+		IEnumerable<Exam> SearchExams(string txtSearch);
+
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
@@ -48,7 +50,7 @@ namespace TestingSystem.Data.Repositories
 				if (objExam != null)
 				{
 					objExam.ExamName = exam.ExamName;
-					objExam.ExamCode = exam.ExamCode;
+					objExam.ExamCode = objExam.ExamCode;
 					objExam.Description = exam.Description;
 					objExam.StartDate = exam.StartDate;
 					objExam.EndDate = exam.EndDate;
@@ -87,6 +89,7 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
+				exam.ExamCode = Guid.NewGuid().ToString("n");
 				exam.CreateDate = DateTime.Now;
 				DbContext.Exams.Add(exam);
 				DbContext.SaveChanges();
@@ -121,6 +124,12 @@ namespace TestingSystem.Data.Repositories
 				return 0;
 			}
 
+		}
+
+		public IEnumerable<Exam> SearchExams(string txtSearch)
+		{
+			var listExams = DbContext.Exams.Where(x => x.ExamName.Contains(txtSearch)).ToList();
+			return listExams;
 		}
 	}
 }

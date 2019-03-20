@@ -184,6 +184,7 @@
     <Compile Include="Areas\Admin\Controllers\ActionController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExamPaperQuestion\ExamPaperQuestionController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExamPaper\ExamPaperController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuestionCategory\QuestionCategoryController.cs" />
@@ -7709,6 +7710,9 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Areas\Admin\Views\ExamPaper\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Exams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Exams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Exams\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
