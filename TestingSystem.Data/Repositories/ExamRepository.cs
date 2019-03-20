@@ -49,7 +49,7 @@ namespace TestingSystem.Data.Repositories
 				if (objExam != null)
 				{
 					objExam.ExamName = exam.ExamName;
-					objExam.ExamCode = exam.ExamCode;
+					objExam.ExamCode = objExam.ExamCode;
 					objExam.Description = exam.Description;
 					objExam.StartDate = exam.StartDate;
 					objExam.EndDate = exam.EndDate;
