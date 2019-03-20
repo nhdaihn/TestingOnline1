@@ -91,6 +91,10 @@ namespace TestingSystem
 			//
 			container.RegisterType<IExamRepository, ExamRepository>();
 			container.RegisterType<IExamService, ExamService>();
+
+			container.RegisterType<ITestRepository, TestRepository>();
+			container.RegisterType<ITestService, TestService>();
+
 		}
     }
 }

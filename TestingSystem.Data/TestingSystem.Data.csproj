@@ -101,6 +101,7 @@
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RoleActionRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\TestRepository.cs" />
     <Compile Include="Repositories\UserGroupRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SeedData.cs" />

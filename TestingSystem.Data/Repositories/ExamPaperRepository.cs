@@ -16,6 +16,8 @@ namespace TestingSystem.Data.Repositories
         ExamPaper FindById(int id);
         int Delete(int id);
 
+        IEnumerable<ExamPaper> ListExamPapersTop();
+
         int GetNumberOfQuestionByExamPaperId(int examPaperId);
     }
 
@@ -176,6 +178,9 @@ namespace TestingSystem.Data.Repositories
             }
         }
 
-
-    }
+		public IEnumerable<ExamPaper> ListExamPapersTop()
+		{
+			return DbContext.ExamPapers.OrderByDescending(x => x.CreatedDate).Take(6).ToList();
+		}
+	}
 }

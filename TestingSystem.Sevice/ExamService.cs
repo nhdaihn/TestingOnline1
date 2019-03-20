@@ -15,6 +15,7 @@ namespace TestingSystem.Sevice
 		bool UpdateExam(Exam exam);
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
+		Exam GetExamsByID(int id);
 	}
 
 	public class ExamService : IExamService
@@ -40,6 +41,11 @@ namespace TestingSystem.Sevice
 		public IEnumerable<Exam> GetAllExams()
 		{
 			return examRepository.GetAllExams();
+		}
+
+		public Exam GetExamsByID(int id)
+		{
+			return examRepository.GetExamsByID(id);
 		}
 
 		public bool UpdateExam(Exam exam)

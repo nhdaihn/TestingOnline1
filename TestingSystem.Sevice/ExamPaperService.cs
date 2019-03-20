@@ -21,6 +21,9 @@ namespace TestingSystem.Sevice
         int Delete(int id);
 
         int GetNumberOfQuestionByExamPaperId(int examPaperId);
+
+        IEnumerable<ExamPaper> ListExamPapersTop();
+
     }
     public class ExamPaperService : IExamPaperService
     {
@@ -73,5 +76,10 @@ namespace TestingSystem.Sevice
         {
             return examPaperRepository.GetNumberOfQuestionByExamPaperId(examPaperId);
         }
-    }
+
+		public IEnumerable<ExamPaper> ListExamPapersTop()
+		{
+			return examPaperRepository.ListExamPapersTop();
+		}
+	}
 }
