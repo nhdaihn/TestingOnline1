@@ -15,6 +15,7 @@ namespace TestingSystem.Data.Repositories
 		Exam GetExamsByID(int id);
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
+		IEnumerable<Exam> SearchExams(string txtSearch);
 
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
@@ -123,6 +124,12 @@ namespace TestingSystem.Data.Repositories
 				return 0;
 			}
 
+		}
+
+		public IEnumerable<Exam> SearchExams(string txtSearch)
+		{
+			var listExams = DbContext.Exams.Where(x => x.ExamName.Contains(txtSearch)).ToList();
+			return listExams;
 		}
 	}
 }
