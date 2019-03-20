@@ -101,10 +101,6 @@
       <Project>{cdfe41b6-aa93-4618-ae3c-ad5b1b3ceb78}</Project>
       <Name>TestingSystem.Sevice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestingSystem\TestingSystem.csproj">
-      <Project>{b6804b9f-e5ae-4358-9fb9-9aaf5a90b65a}</Project>
-      <Name>TestingSystem</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
