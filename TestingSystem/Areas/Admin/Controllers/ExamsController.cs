@@ -12,10 +12,12 @@ namespace TestingSystem.Areas.Admin.Controllers
     public class ExamsController : AdminController
 	{
 	    private readonly IExamService examService;
+	    private readonly IExamPaperService examPaperService;
 
-	    public ExamsController(IUserService user,IExamService examService) :base(user)
+	    public ExamsController(IUserService user,IExamService examService, IExamPaperService examPaperService) :base(user)
 	    {
 		    this.examService = examService;
+		    this.examPaperService = examPaperService;
 	    }
         // GET: Admin/Exams
         public ActionResult Index()
@@ -54,6 +56,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 		}
         public ActionResult Edit(int id)
         {
+	        ViewBag.listAllExamPaper = examPaperService.GetAll();
 	        var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
 	        ViewBag.listExamPaperByExamID = listExamPaperByExamID;
 			var exam = examService.GetExamsByID(id);
