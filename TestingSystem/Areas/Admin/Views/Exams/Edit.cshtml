@@ -1,11 +1,28 @@
 ﻿@model TestingSystem.Models.Exam
 @{
-	ViewBag.Title = "Create";
+	ViewBag.Title = "Edit";
 	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 <link href="~/Scripts/DatetimePicker/css/gijgo.min.css" rel="stylesheet" />
+<style>
+	.gj-icon {
+		position: absolute;
+		left: 191px;
+		margin-top: 5px;
+	}
+	#StartDate,#EndDate {
+		margin-right: 0;
+		width: 220px;
+		position: relative;
+		border: 1px solid #cccccc;
+	}
+	#Description {
+		height:200px;
+		width: 776px;
+	}
+</style>
 <section class="content-header">
 	<h1>
 		Edit Exam
@@ -25,11 +42,11 @@
 			@Html.AntiForgeryToken()
 			<div class="box-body">
 				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-				<input type="hidden" name="ExamID" />
+				<input type="hidden" name="ExamID" value="@Model.ExamID" />
 				<div class="form-group">
-					<label for="" class="col-sm-2 control-label">Category Name</label>
+					<label for="" class="col-sm-2 control-label"> Name</label>
 					<div class="col-sm-6">
-						@Html.EditorFor(model => model.ExamName, new { htmlAttributes = new { @class = "form-control", onchange = "CategoryCheckCreate()" } })
+						<input type="text" name="ExamName" id="ExamName" class="form-control" value="@Model.ExamName" onchange="CategoryCheckCreate()" />
 						@Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })
 					</div>
 					<span id="Status"></span>
@@ -38,14 +55,14 @@
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">Start Date</label>
 					<div class="col-sm-6">
-						<input id="StartDate" name="StartDate" class="form-control" value="@Model.StartDate.ToString("MM/dd/yyyy")" style="width: 300px" />
+						<input id="StartDate" name="StartDate" class="form-control"  value="@Model.StartDate.ToString("MM/dd/yyyy")" />
 						@Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">End Date</label>
 					<div class="col-sm-6">
-						<input name="EndDate" type="date" value="@Model.EndDate" />
+						<input id="EndDate" name="EndDate" class="form-control"  value="@Model.EndDate.ToString("MM/dd/yyyy")" />
 						@Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
 					</div>
 				</div>
@@ -60,7 +77,7 @@
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-6">
-						<textarea name="Description">@Model.Description</textarea>
+						<textarea name="Description" id="Description">@Model.Description</textarea>
 						@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
 					</div>
 				</div>
@@ -75,32 +92,49 @@
 	</div><!-- /.box -->
 </section>
 <script language="JavaScript">
-    function checkstatus(id) {
-        if (id.checked == true)
-            id.value = true;
-        else
-            id.value = false;
-    }
-    function CategoryCheckCreate() {
-        $("#Status").html("Checking...");
-        $.post("@Url.Action("_CheckExamsAvailableCreate", "Exams")",
-            {
-                userdata: $("#Name").val()
-            },
-            function (data) {
-                if ($("#Name").val() == "") {
-                    $("#Name-error").css("display", "none");
-                }
-                if (data == 0) {
-                    $("#Status").html('<font color="Green">Available !. you can take it.</font>');
-                    $("#Name").css("border-color", "Green");
-                    $("#btnsub2").css("display", "block");
-                }
-                else {
-                    $("#Status").html('<font color="Red">Exams Exists!</font>');
-                    $("#Name").css("border-color", "Red");
-                    $("#btnsub2").css("display", "none");
-                }
-            });
-    }
+	function checkstatus(id) {
+		if (id.checked == true)
+			id.value = true;
+		else
+			id.value = false;
+	}
+	function CategoryCheckCreate() {
+		$("#Status").html("Checking...");
+		$.post("@Url.Action("_CheckExamsAvailableCreate", "Exams")",
+			{
+				userdata: $("#ExamName").val()
+			},
+			function (data) {
+				if ($("#ExamName").val() == "") {
+					$("#Name-error").css("display", "none");
+				}
+				if (data == 0) {
+					$("#Status").html('<font color="Green">Available !. you can take it.</font>');
+					$("#ExamName").css("border-color", "Green");
+					$("#btnsub2").css("display", "block");
+				}
+				else {
+					$("#Status").html('<font color="Red">Exams Exists!</font>');
+					$("#ExamName").css("border-color", "Red");
+					$("#btnsub2").css("display", "none");
+				}
+			});
+	}
 </script>
+<script src="~/Scripts/DatetimePicker/JS/gijgo.min.js"></script>
+<script>
+	//
+	$('#StartDate').datepicker({
+		uiLibrary: 'bootstrap3'
+	});
+	$('#EndDate').datepicker({
+		uiLibrary: 'bootstrap3'
+	});
+</script>
+@*<script src="~/Scripts/Question/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function () {
+		CKEDITOR.replace('Description');
+	});
+</script>*@
