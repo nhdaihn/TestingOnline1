@@ -198,7 +198,7 @@
     <Compile Include="Controllers\AuditionsController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExamPaperController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TestNotLoginController.cs" />
     <Compile Include="Controllers\_AccountController.cs" />
     <Compile Include="Controllers\ActionsController.cs" />
     <Compile Include="Controllers\_ErrorController.cs" />
@@ -7769,6 +7769,8 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Auditions\Index.cshtml" />
     <Content Include="Views\Shared\_AuditionLayout.cshtml" />
+    <Content Include="Views\Test\ShowExamPaperById.cshtml" />
+    <Content Include="Views\TestNotLogin\ShowExamPaperById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
