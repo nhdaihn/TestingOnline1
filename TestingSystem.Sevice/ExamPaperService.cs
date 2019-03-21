@@ -24,6 +24,8 @@ namespace TestingSystem.Sevice
 
         IEnumerable<ExamPaper> ListExamPapersTop();
 
+        IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
+
     }
     public class ExamPaperService : IExamPaperService
     {
@@ -81,5 +83,10 @@ namespace TestingSystem.Sevice
 		{
 			return examPaperRepository.ListExamPapersTop();
 		}
-	}
+
+        public IEnumerable<ExamPaper> GetExamPaperByExamID(string code)
+        {
+            return examPaperRepository.GetExamPaperByExamID(code);
+        }
+    }
 }

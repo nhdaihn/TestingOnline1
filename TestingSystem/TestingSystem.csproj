@@ -195,8 +195,10 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="BaseController\AdminControllter.cs" />
     <Compile Include="BaseController\ClientController.cs" />
+    <Compile Include="Controllers\AuditionsController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExamPaperController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\_AccountController.cs" />
     <Compile Include="Controllers\ActionsController.cs" />
     <Compile Include="Controllers\_ErrorController.cs" />
@@ -6735,7 +6737,9 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\loadding.css" />
+    <Content Include="Content\oclock.gif" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\question.png" />
     <Content Include="Content\QuestionUpload\Images\250px-Terry_Crews_by_Gage_Skidmore_5.jpg" />
     <Content Include="Content\QuestionUpload\Images\Chelsea_old_logo.png" />
     <Content Include="Content\QuestionUpload\Images\i.png" />
@@ -7709,13 +7713,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Areas\Admin\Views\ExamPaper\Edit.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\Admin\Views\Test\Index.cshtml" />
-=======
     <Content Include="Areas\Admin\Views\Exams\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\Edit.cshtml" />
->>>>>>> origin/BeDai
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7764,6 +7765,10 @@
     <Content Include="Scripts\Question\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Shared\PartialExamPaper.cshtml" />
+    <Content Include="Views\Shared\_LayoutExamine.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Auditions\Index.cshtml" />
+    <Content Include="Views\Shared\_AuditionLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
