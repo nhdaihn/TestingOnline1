@@ -16,6 +16,8 @@ namespace TestingSystem.Data.Repositories
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
 		IEnumerable<Exam> SearchExams(string txtSearch);
+		IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
+		int RemoveExamPaperInExams(int id);
 
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
@@ -82,7 +84,7 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return null;
 			}
-			
+
 		}
 
 		public int AddExam(Exam exam)
@@ -130,6 +132,41 @@ namespace TestingSystem.Data.Repositories
 		{
 			var listExams = DbContext.Exams.Where(x => x.ExamName.Contains(txtSearch)).ToList();
 			return listExams;
+		}
+
+		public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
+		{
+			var listTestByExamPaperID = DbContext.Tests.Where(x => x.ExamID == examID).ToList();
+			List<ExamPaper> listExamPapers = new List<ExamPaper>();
+			foreach (var item in listTestByExamPaperID)
+			{
+				var examPaper = DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperID == item.ExamPaperID);
+				listExamPapers.Add(examPaper);
+			}
+
+			return listExamPapers.AsEnumerable();
+		}
+
+		public int RemoveExamPaperInExams(int id)
+		{
+			try
+			{
+				var test = DbContext.Tests.FirstOrDefault(x => x.ExamPaperID == id);
+				if (test != null)
+				{
+					this.DbContext.Tests.Remove(test);
+					return DbContext.SaveChanges();
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			catch (Exception e)
+			{
+				log.Debug(e.Message);
+				return 0;
+			}
 		}
 	}
 }
