@@ -182,6 +182,11 @@ namespace TestingSystem.Data.Repositories
 		{
 			return DbContext.ExamPapers.OrderByDescending(x => x.CreatedDate).Take(6).ToList();
 		}
+
+        public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
         //public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
         //{
         //    var listTestByExamPaperID = DbContext.Tests.Where(x => x.ExamID == examID).ToList();
