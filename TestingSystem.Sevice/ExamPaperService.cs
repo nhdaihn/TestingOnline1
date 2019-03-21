@@ -84,9 +84,9 @@ namespace TestingSystem.Sevice
 			return examPaperRepository.ListExamPapersTop();
 		}
 
-        public IEnumerable<ExamPaper> GetExamPaperByExamID(string code)
+        public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
         {
-            return NotImplementedException;
+            throw new NotImplementedException();
         }
     }
 }

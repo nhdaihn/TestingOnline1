@@ -15,7 +15,7 @@ namespace TestingSystem.Data.Repositories
         int Edit(ExamPaper examPaper);
         ExamPaper FindById(int id);
         int Delete(int id);
-        IEnumerable<ExamPaper> GetExamPaperByCode(string code);
+        IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code);
         IEnumerable<ExamPaper> ListExamPapersTop();
 
         int GetNumberOfQuestionByExamPaperId(int examPaperId);
@@ -183,9 +183,16 @@ namespace TestingSystem.Data.Repositories
 			return DbContext.ExamPapers.OrderByDescending(x => x.CreatedDate).Take(6).ToList();
 		}
 
-        public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
+        public IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code)
         {
-            throw new NotImplementedException();
+            var listTestByExamPaperID = DbContext.Tests.Where(x => x.ExamID == ExamId && x.Exams.ExamCode==code).ToList();
+            List<ExamPaper> listExamPapers = new List<ExamPaper>();
+            foreach (var item in listTestByExamPaperID)
+            {
+                var examPaper = DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperID == item.ExamPaperID);
+                listExamPapers.Add(examPaper);
+            }
+            return listExamPapers.AsEnumerable();
         }
         //public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
         //{
