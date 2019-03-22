@@ -100,6 +100,9 @@
         /// <param name="modelBuilder">The modelBuilder<see cref="DbModelBuilder"/></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<TestingSystemEntities>(null);
+            base.OnModelCreating(modelBuilder);
+
             // Configtion
             modelBuilder
                 .Entity<User>()

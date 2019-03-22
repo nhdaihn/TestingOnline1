@@ -81,7 +81,7 @@
         /// <summary>
         /// Gets or sets the ExamPaperQuesions
         /// </summary>
-        public string Code { set; get; }
+        public string ExamPaperCode { set; get; }
 
         public ICollection<ExamPaperQuesion> ExamPaperQuesions { get; set; }
 
