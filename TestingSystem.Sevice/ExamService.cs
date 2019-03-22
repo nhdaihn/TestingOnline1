@@ -19,6 +19,7 @@ namespace TestingSystem.Sevice
 		IEnumerable<Exam> SearchExams(string txtSearch);
 		IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
 		int RemoveExamPaperInExams(int id);
+		int AddExamPaperIntoExams(int examPaperID, int examID);
 	}
 
 	public class ExamService : IExamService
@@ -64,6 +65,11 @@ namespace TestingSystem.Sevice
 		public int RemoveExamPaperInExams(int id)
 		{
 			return examRepository.RemoveExamPaperInExams(id);
+		}
+
+		public int AddExamPaperIntoExams(int examPaperID, int examID)
+		{
+			return examRepository.AddExamPaperIntoExams(examPaperID, examID);
 		}
 
 		public bool UpdateExam(Exam exam)

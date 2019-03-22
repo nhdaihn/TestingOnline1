@@ -182,6 +182,11 @@ namespace TestingSystem.Areas.Admin.Controllers
 
 		//	return Json(new { data = examPaper }, JsonRequestBehavior.AllowGet);
 		//}
+		public ActionResult UpdateExamPaper()
+		{
+
+			return View();
+		}
 
 	}
 }

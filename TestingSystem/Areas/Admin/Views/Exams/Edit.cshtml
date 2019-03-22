@@ -118,7 +118,9 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<button type="button" style="margin-top: -1px" id="btn-add-question" class="btn btn-success" data-toggle="modal" data-target="#ModalAddExams"><span class="glyphicon glyphicon-plus"></span> Add ExamPaper</button>
+							<button class="btn btn-sm btn-success">
+								@Html.ActionLink("Update Exam Paper", "UpdateExamPaper", new { id = Model.ExamID }, new { @style = "color: white;" })
+							</button>
 						</div>
 					</div>
 				}
