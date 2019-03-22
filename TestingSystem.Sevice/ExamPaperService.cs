@@ -86,7 +86,12 @@ namespace TestingSystem.Sevice
 
         public IEnumerable<ExamPaper> GetExamPaperByExamID(string code)
         {
-            return examPaperRepository.GetExamPaperByExamID(code);
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
+        {
+            throw new NotImplementedException();
         }
     }
 }
