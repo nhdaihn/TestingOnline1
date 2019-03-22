@@ -26,6 +26,10 @@ namespace TestingSystem.Sevice
 
         IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
 
+        int GetCode(ExamPaper examPaper);
+
+        ExamPaper FindCode(string code);
+
     }
     public class ExamPaperService : IExamPaperService
     {
@@ -87,6 +91,16 @@ namespace TestingSystem.Sevice
         public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetCode(ExamPaper examPaper)
+        {
+            return examPaperRepository.GetCode(examPaper);
+        }
+
+        public ExamPaper FindCode(string code)
+        {
+            return examPaperRepository.FindCode(code);
         }
     }
 }

@@ -30,16 +30,6 @@ namespace TestingSystem.Models
         /// </summary>
         public virtual ExamPaper ExamPapers { get; set; }
 
-        /// <summary>
-        /// Gets or sets the ExamID
-        /// </summary>
-        [ForeignKey("Exams")]
-        public int ExamID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Exams
-        /// </summary>
-        public virtual Exam Exams { get; set; }
 
         /// <summary>
         /// Gets or sets the TestName

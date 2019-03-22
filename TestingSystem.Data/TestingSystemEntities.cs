@@ -89,6 +89,7 @@
         /// <summary>
         /// The Commit
         /// </summary>
+        public DbSet<ExamPaperExam> ExamPaperExams { get; set; }
         public virtual void Commit()
         {
             base.SaveChanges();
@@ -112,15 +113,6 @@
                 .Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
-
-
-
-
-
-
-
-
-
 
             // Dual foreign key QuestionCategory
             modelBuilder.Entity<QuestionCategory>()

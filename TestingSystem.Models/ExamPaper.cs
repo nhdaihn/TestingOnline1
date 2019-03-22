@@ -86,5 +86,7 @@
         public ICollection<ExamPaperQuesion> ExamPaperQuesions { get; set; }
 
         public ICollection<Test> Tests { get; set; }
+
+        public ICollection<ExamPaperExam> examPaperExams { set; get; }
 	}
 }

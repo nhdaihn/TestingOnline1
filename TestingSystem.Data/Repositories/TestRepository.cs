@@ -31,7 +31,7 @@ namespace TestingSystem.Data.Repositories
 				entity.CreateDate = DateTime.Now;
 				DbContext.Tests.Add(entity);
 				DbContext.SaveChanges();
-				return entity.ExamID;
+				return entity.TestID;
 			}
 			catch (Exception e)
 			{

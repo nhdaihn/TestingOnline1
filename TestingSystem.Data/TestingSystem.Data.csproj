@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201903220244524_duc_update.Designer.cs">
       <DependentUpon>201903220244524_duc_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903220442125_duc_update01.cs" />
+    <Compile Include="Migrations\201903220442125_duc_update01.Designer.cs">
+      <DependentUpon>201903220442125_duc_update01.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ActionRepository.cs" />
@@ -163,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903220244524_duc_update.resx">
       <DependentUpon>201903220244524_duc_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903220442125_duc_update01.resx">
+      <DependentUpon>201903220442125_duc_update01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

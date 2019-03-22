@@ -69,6 +69,7 @@
     <Compile Include="Candidate.cs" />
     <Compile Include="Exam.cs" />
     <Compile Include="ExamPaper.cs" />
+    <Compile Include="ExamPaperExam.cs" />
     <Compile Include="ExamPaperQuesion.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
