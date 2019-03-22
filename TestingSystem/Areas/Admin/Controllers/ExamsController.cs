@@ -9,85 +9,85 @@ using TestingSystem.Sevice;
 
 namespace TestingSystem.Areas.Admin.Controllers
 {
-    public class ExamsController : AdminController
+	public class ExamsController : AdminController
 	{
-	    private readonly IExamService examService;
-	    private readonly IExamPaperService examPaperService;
+		private readonly IExamService examService;
+		private readonly IExamPaperService examPaperService;
 
-	    public ExamsController(IUserService user,IExamService examService, IExamPaperService examPaperService) :base(user)
-	    {
-		    this.examService = examService;
-		    this.examPaperService = examPaperService;
-	    }
-        // GET: Admin/Exams
-        public ActionResult Index()
-        {
-	        var listExams = examService.GetAllExams();
-	        ViewBag.listExams = listExams;
-            return View();
-        }
+		public ExamsController(IUserService user, IExamService examService, IExamPaperService examPaperService) : base(user)
+		{
+			this.examService = examService;
+			this.examPaperService = examPaperService;
+		}
+		// GET: Admin/Exams
+		public ActionResult Index()
+		{
+			var listExams = examService.GetAllExams();
+			ViewBag.listExams = listExams;
+			return View();
+		}
 
-        public ActionResult Create()
-        {
-	        return View();
-        }
+		public ActionResult Create()
+		{
+			return View();
+		}
 
 		[HttpPost]
-        public ActionResult Create(Exam exam)
-        {
-	        try
-	        {
-		        if ( examService.AddExam(exam) >0)
-		        {
+		public ActionResult Create(Exam exam)
+		{
+			try
+			{
+				if (examService.AddExam(exam) > 0)
+				{
 					Success = "Insert Exam successfully!";
 					return RedirectToAction("Index", "Exams");
 				}
-		        else
-		        {
+				else
+				{
 					Failure = "Something went wrong, please try again!";
 					return RedirectToAction("Create", "Exams");
-				}	       
-	        }
-	        catch (Exception e)
-	        {
+				}
+			}
+			catch (Exception e)
+			{
 				Failure = "Something went wrong, please try again!";
 				return RedirectToAction("Create", "Exams");
 			}
 		}
-        public ActionResult Edit(int id)
-        {
-	        ViewBag.listAllExamPaper = examPaperService.GetAll();
-	        var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
-	        ViewBag.listExamPaperByExamID = listExamPaperByExamID;
+		public ActionResult Edit(int id)
+		{
+			ViewBag.listAllExamPaper = examPaperService.GetAll();
+			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
 			var exam = examService.GetExamsByID(id);
 			return View(exam);
-        }
+		}
 
-        [HttpPost]
-        public ActionResult Edit(Exam exam)
-        {
-	        try
-	        {
-		        if (examService.UpdateExam(exam))
-		        {
-			        Success = "Update Exam successfully!";
-			        return RedirectToAction("Index", "Exams");
-		        }
-		        else
-		        {
-			        Failure = "Something went wrong, please try again!";
-			        return RedirectToAction("Edit", "Exams");
-		        }
-	        }
-	        catch (Exception e)
-	        {
-		        Failure = "Something went wrong, please try again!";
-		        return RedirectToAction("Edit", "Exams");
-	        }
-        }
+		[HttpPost]
+		public ActionResult Edit(Exam exam)
+		{
+			try
+			{
+				if (examService.UpdateExam(exam))
+				{
+					Success = "Update Exam successfully!";
+					return RedirectToAction("Index", "Exams");
+				}
+				else
+				{
+					Failure = "Something went wrong, please try again!";
+					return RedirectToAction("Edit", "Exams");
+				}
+			}
+			catch (Exception e)
+			{
+				Failure = "Something went wrong, please try again!";
+				return RedirectToAction("Edit", "Exams");
+			}
+		}
 
 		public ActionResult Delete(List<int> ids)
-        {
+		{
 			try
 			{
 				if (ids.Count > 0)
@@ -140,7 +140,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 		}
 
-		public ActionResult RemoveExamPaperInExams(List<int> ids)
+		public ActionResult RemoveExamPaperInExams(List<int> ids, int examID)
 		{
 			try
 			{
@@ -162,16 +162,16 @@ namespace TestingSystem.Areas.Admin.Controllers
 					if (i > 0)
 					{
 						Success = "Delete ExamPaper successfully!";
-						return RedirectToAction("Index", "Exams");
+						return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
 					}
 				}
 				Failure = "Something went wrong, please try again!";
-				return RedirectToAction("Index", "Exams");
+				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
 			}
 			catch (System.Exception exception)
 			{
 				Failure = exception.Message;
-				return RedirectToAction("Index", "Exams");
+				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
 			}
 		}
 
@@ -182,11 +182,37 @@ namespace TestingSystem.Areas.Admin.Controllers
 
 		//	return Json(new { data = examPaper }, JsonRequestBehavior.AllowGet);
 		//}
-		public ActionResult UpdateExamPaper()
+		public ActionResult UpdateExamPaper(int id)
 		{
+			var listExamPaperIsActive = examPaperService.GetAllExamPapersIsActive();
+			ViewBag.listExamPaperIsActive = listExamPaperIsActive;
+			//
+			ViewBag.examID = id;
+			//
+			var countlistExamPaperIsActive = listExamPaperIsActive.Count();
+			ViewBag.countlistExamPaperIsActive = countlistExamPaperIsActive;
+
+			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
+
+			ViewBag.CountExamPaperInExam = listExamPaperByExamID.Count();
 
 			return View();
 		}
 
+		public ActionResult AddExamPaperInExams(int examID, int examPaperID)
+		{
+			try
+			{
+				examService.AddExamPaperIntoExams(examPaperID, examID);
+				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+			}
+			catch (Exception e)
+			{
+				Failure = "Something went wrong, please try again!";
+				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+			}
+			
+		}
 	}
 }

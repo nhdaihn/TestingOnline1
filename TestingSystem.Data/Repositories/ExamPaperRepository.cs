@@ -25,6 +25,7 @@ namespace TestingSystem.Data.Repositories
         int GetNumberOfQuestionByExamPaperId(int examPaperId);
 
         ExamPaper FindCode(string code);
+        IEnumerable<ExamPaper> GetAllExamPapersIsActive();
     }
 
     public class ExamPaperRepository : RepositoryBase<ExamPaper>, IExamPaperRepository
@@ -205,6 +206,13 @@ namespace TestingSystem.Data.Repositories
         {
             return DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperCode == code);
         }
+
+        public IEnumerable<ExamPaper> GetAllExamPapersIsActive()
+        {
+	        var listExamPaperIsActive = DbContext.ExamPapers.Where(x => x.IsActive == true).ToList();
+	        return listExamPaperIsActive.AsEnumerable();
+        }
+
         public string RandomString(int size, bool lowerCase)
         {
             StringBuilder builder = new StringBuilder();

@@ -173,6 +173,7 @@ namespace TestingSystem.Data.Repositories
 			examPaperExam.ExamPaperID = examPaperID;
 			examPaperExam.ExamID = examID;
 			DbContext.ExamPaperExams.Add(examPaperExam);
+			DbContext.SaveChanges();
 			return examPaperExam.ExamPaperID;
 		}
 	}

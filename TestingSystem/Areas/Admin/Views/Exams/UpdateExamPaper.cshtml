@@ -1,8 +1,9 @@
 ﻿
+@using TestingSystem.Models
 @model IEnumerable<TestingSystem.Models.ExamPaper>
 
 @{
-	ViewBag.Title = "UpdateAccount";
+	ViewBag.Title = "Update Exam Paper";
 	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 	int i = 0;
 	bool check = false;
@@ -11,35 +12,36 @@
 
 <section class="content-header">
 	<h1>
-		Cập nhật tài khoản trong nhóm
+		Update Exam Paper
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="@Url.Action("Index", "Group")"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="@Url.Action("Details", "Group", new { id = @ViewBag.IdGroup})"><i class="fa fa-dashboard"></i> Details</a></li>
-		<li><a href="@Url.Action("UpdateAccount", "Group", new { id = @ViewBag.IdGroup})"><i class="fa fa-dashboard"></i> Update User in Group</a></li>
+		<li><a href="@Url.Action("Index", "Exams")"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="@Url.Action("Edit", "Exams", new { id = @ViewBag.examID})"><i class="fa fa-dashboard"></i> Edit</a></li>
+		<li><a href="@Url.Action("UpdateExamPaper", "Exams", new { id = @ViewBag.examID})"><i class="fa fa-dashboard"></i> Update Exam Paper</a></li>
 	</ol>
 </section>
 
 <section class="content">
 	<div class="box box-info">
+		<p></p>
 		@using (Html.BeginForm("UpdateExamPaper", "Exams", FormMethod.Post))
 		{
 			<div class="row">
-				<div class="col-md-6" style="margin-bottom:15px">
+				<div class="col-md-6" style="margin-bottom: 15px">
 					<div class="input-group">
-						<input type="hidden" name="id" value="@ViewBag.IdGroup" />
+						<input type="hidden" name="id" value="@ViewBag.examID" />
 						<input type="text" class="form-control" value="@ViewBag.SearchString" name="SearchString" placeholder="User Name">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit">Tìm kiếm</button>
 						</span>
 					</div><!-- /input-group -->
 				</div>
-				<div class="col-md-6">
-					<a href="/Admin/User/Create">
-						<div class="btn btn-success">Thêm mới</div>
-					</a>
+				@*<div class="col-md-6">
+						<a href="/Admin/User/Create">
+							<div class="btn btn-success">Thêm mới</div>
+						</a>
 
-				</div>
+					</div>*@
 			</div>
 		}
 		<!-- form start -->
@@ -58,26 +60,26 @@
 				<th></th>
 			</tr>
 
-			@foreach (var item in @ViewBag.ListUser)
+			@foreach (ExamPaper item in @ViewBag.listExamPaperIsActive)
 			{
 				<tr>
 					<td>
-						@item.Roles.RoleName
+						@item.Title
 					</td>
 					<td>
-						@item.UserName
+						@item.Time
 					</td>
 					<td>
-						@item.Name
+						@item.CreatedDate
 					</td>
 
 					<td>
-						@if (ViewBag.CountListGroup > 0)
+						@if (ViewBag.countlistExamPaperIsActive > 0)
 						{
 							checkUrl = true;
-							foreach (var obj in ViewBag.ListUserGroup)
+							foreach (ExamPaper obj in @ViewBag.listExamPaperByExamID)
 							{
-								if (item.UserId == obj.UserId)
+								if (item.ExamPaperID == obj.ExamPaperID)
 								{
 									check = true;
 									<img src="~/Content/add.png" alt="Sample Image" width="20px" />
@@ -87,35 +89,36 @@
 								{
 									i++;
 								}
-								if (i >= ViewBag.CountListGroup)
+								if (i >= ViewBag.CountExamPaperInExam)
 								{
 									<img src="~/Content/remove.png" width="20px" />
 									i = 0;
 									check = false;
 									break;
+
 								}
 							}
 							i = 0;
 						}
 						else
 						{
-							<img src="~/Content/remove.png" width="20px" />
+							<img src="~/Content/remove.png" />
 						}
 					</td>
 					<td>
-						@if (check == true && ViewBag.CountListGroup > 0)
+						@if (check == true && ViewBag.countlistExamPaperIsActive > 0)
 						{
-							@Html.ActionLink("Remove", "RemoveAccount", "Group", new { idUser = item.UserId, idGroup = ViewBag.IdGroup }, null)
+							@Html.ActionLink("Remove", "RemoveExamPaperInExams", "Exams", new { ids = item.ExamPaperID, examID = ViewBag.examID  }, null )
 							check = false;
 						}
 						else if (check == false && ViewBag.CountListGroup > 0)
 						{
-							@Html.ActionLink("Add", "AddAccount", "Group", new { idUser = item.UserId, idGroup = ViewBag.IdGroup }, null)
+							@Html.ActionLink("Add", "AddExamPaperInExams", "Exams", new { examID = ViewBag.examID, examPaperID = item.ExamPaperID  }, null)
 							check = true;
 						}
 						else
 						{
-							@Html.ActionLink("Add", "AddAccount", "Group", new { idUser = item.UserId, idGroup = ViewBag.IdGroup }, null)
+							@Html.ActionLink("Add", "AddExamPaperInExams", "Exams", new { examID = ViewBag.examID, examPaperID = item.ExamPaperID }, null)
 						}
 					</td>
 				</tr>
@@ -124,6 +127,12 @@
 		</table>
 
 	</div><!-- /.box -->
-	<a href="@Url.Action("Details", "Group", new { id = ViewBag.IdGroup})"><button class="btn btn-success">Trở lại</button></a>
+	<a href="@Url.Action("Edit", "Exams", new { id = ViewBag.examID})"><button class="btn btn-success">Back</button></a>
 </section>
-
+@*<script>
+	$(document).ready(function() {
+		$('#removeExamPaper').click(function() {
+			confirm('Are you sure you want to Delete?');
+		});
+	});
+</script>*@
