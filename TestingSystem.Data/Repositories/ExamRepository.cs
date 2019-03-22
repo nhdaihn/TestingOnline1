@@ -18,7 +18,7 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Exam> SearchExams(string txtSearch);
 		IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
 		int RemoveExamPaperInExams(int id);
-
+		int AddExamPaperIntoExams(int examPaperID, int examID);
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
@@ -149,10 +149,10 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
-				var test = DbContext.Tests.FirstOrDefault(x => x.ExamPaperID == id);
+				var test = DbContext.ExamPaperExams.FirstOrDefault(x => x.ExamPaperID == id);
 				if (test != null)
 				{
-					this.DbContext.Tests.Remove(test);
+					this.DbContext.ExamPaperExams.Remove(test);
 					return DbContext.SaveChanges();
 				}
 				else
@@ -165,6 +165,16 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return 0;
 			}
+		}
+
+		public int AddExamPaperIntoExams(int examPaperID, int examID)
+		{
+			ExamPaperExam examPaperExam= new ExamPaperExam();
+			examPaperExam.ExamPaperID = examPaperID;
+			examPaperExam.ExamID = examID;
+			DbContext.ExamPaperExams.Add(examPaperExam);
+			DbContext.SaveChanges();
+			return examPaperExam.ExamPaperID;
 		}
 	}
 }

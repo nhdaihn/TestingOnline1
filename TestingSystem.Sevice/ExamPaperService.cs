@@ -29,8 +29,8 @@ namespace TestingSystem.Sevice
         string GetCode(int idExamPaper);
 
         ExamPaper FindCode(string code);
-
-    }
+        IEnumerable<ExamPaper> GetAllExamPapersIsActive();
+	}
     public class ExamPaperService : IExamPaperService
     {
         private readonly IExamPaperRepository examPaperRepository;
@@ -107,5 +107,9 @@ namespace TestingSystem.Sevice
         //{
         //    return examPaperRepository.FindCode(code);
         //}
+        public IEnumerable<ExamPaper> GetAllExamPapersIsActive()
+        {
+	        return examPaperRepository.GetAllExamPapersIsActive();
+        }
     }
 }
