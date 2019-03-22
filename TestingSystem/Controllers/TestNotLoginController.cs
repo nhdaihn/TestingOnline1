@@ -40,31 +40,32 @@ namespace TestingSystem.Controllers
             TempData["idExamPaper"] = idExamPaper;
             return View();
         }
-        //[HttpPost]
-        //public void RepostTest(IEnumerable<ResultTest> fruits)
-        //{
-        //    var list = fruits;
-        //    List<Answer> listAnswerCorrect = new List<Answer>();
-        //    foreach(var item in list)
-        //    {
-        //        var obj = answerService.GetAnswerCorrect(item.id);
-        //        if (obj != null) {
-        //            listAnswerCorrect.Add(obj);
-        //        }
-        //    }
-        //    int numberOfCorrectAnswer = 0;
-        //    foreach(var item in listAnswerCorrect)
-        //    {
-        //        foreach(var item2 in list)
-        //        {
-        //            if(item.AnswerID == item2.id)
-        //            {
-        //                numberOfCorrectAnswer++;
-        //                continue;
-        //            }
-        //        }
-        //    }
+        [HttpPost]
+        public void RepostTest(IEnumerable<ResultTest> fruits)
+        {
+            var list = fruits;
+            List<Answer> listAnswerCorrect = new List<Answer>();
+            foreach (var item in list)
+            {
+                var obj = answerService.GetAnswerCorrect(item.id);
+                if (obj != null)
+                {
+                    listAnswerCorrect.Add(obj);
+                }
+            }
+            int numberOfCorrectAnswer = 0;
+            foreach (var item in listAnswerCorrect)
+            {
+                foreach (var item2 in list)
+                {
+                    if (item.AnswerID == item2.id)
+                    {
+                        numberOfCorrectAnswer++;
+                        continue;
+                    }
+                }
+            }
 
-        //}
+        }
     }
 }

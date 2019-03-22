@@ -60,18 +60,6 @@ namespace TestingSystem.Models
         public DateTime CreateDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the StartDate
-        /// </summary>
-        [Required]
-        public DateTime StartDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the EndDate
-        /// </summary>
-        [Required]
-        public DateTime EndDate { get; set; }
-
-        /// <summary>
         /// Gets or sets the PassingScore
         /// </summary>
         [Required]

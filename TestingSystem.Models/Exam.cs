@@ -23,9 +23,6 @@
         [Required]
         public string ExamName { get; set; }
 
-		[Required]
-		public string ExamCode { set; get; }
-        /// <summary>
         /// Gets or sets the Description
         /// </summary>
         public string Description { get; set; }

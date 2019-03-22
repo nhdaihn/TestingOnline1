@@ -92,8 +92,6 @@ namespace TestingSystem.Data.Repositories
 					objExam.TestName = entity.TestName;
 					objExam.CreateDate = DateTime.Now;
 					objExam.Description = entity.Description;
-					objExam.StartDate = entity.StartDate;
-					objExam.EndDate = entity.EndDate;
 					objExam.Status = entity.Status;
 					objExam.PassingScore = entity.PassingScore;
 					this.DbContext.SaveChanges();

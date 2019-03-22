@@ -185,7 +185,7 @@ namespace TestingSystem.Data.Repositories
 
         public IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code)
         {
-            var listTestByExamPaperID = DbContext.Tests.Where(x => x.ExamID == ExamId && x.Exams.ExamCode==code).ToList();
+            var listTestByExamPaperID = DbContext.Tests.Where(x => x.ExamID == ExamId).ToList();
             List<ExamPaper> listExamPapers = new List<ExamPaper>();
             foreach (var item in listTestByExamPaperID)
             {

@@ -52,7 +52,6 @@ namespace TestingSystem.Data.Repositories
 				if (objExam != null)
 				{
 					objExam.ExamName = exam.ExamName;
-					objExam.ExamCode = objExam.ExamCode;
 					objExam.Description = exam.Description;
 					objExam.StartDate = exam.StartDate;
 					objExam.EndDate = exam.EndDate;
@@ -91,7 +90,6 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
-				exam.ExamCode = Guid.NewGuid().ToString("n");
 				exam.CreateDate = DateTime.Now;
 				DbContext.Exams.Add(exam);
 				DbContext.SaveChanges();
