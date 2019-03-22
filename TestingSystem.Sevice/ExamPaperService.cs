@@ -103,10 +103,9 @@ namespace TestingSystem.Sevice
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
-        {
-            throw new NotImplementedException();
-            return examPaperRepository.FindCode(code);
-        }
+        //public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
+        //{
+        //    return examPaperRepository.FindCode(code);
+        //}
     }
 }
