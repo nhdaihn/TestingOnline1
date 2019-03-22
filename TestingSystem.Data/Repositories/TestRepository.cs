@@ -31,7 +31,7 @@ namespace TestingSystem.Data.Repositories
 				entity.CreateDate = DateTime.Now;
 				DbContext.Tests.Add(entity);
 				DbContext.SaveChanges();
-				return entity.ExamID;
+				return entity.TestID;
 			}
 			catch (Exception e)
 			{
@@ -92,8 +92,6 @@ namespace TestingSystem.Data.Repositories
 					objExam.TestName = entity.TestName;
 					objExam.CreateDate = DateTime.Now;
 					objExam.Description = entity.Description;
-					objExam.StartDate = entity.StartDate;
-					objExam.EndDate = entity.EndDate;
 					objExam.Status = entity.Status;
 					objExam.PassingScore = entity.PassingScore;
 					this.DbContext.SaveChanges();

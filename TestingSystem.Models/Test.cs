@@ -30,16 +30,6 @@ namespace TestingSystem.Models
         /// </summary>
         public virtual ExamPaper ExamPapers { get; set; }
 
-        /// <summary>
-        /// Gets or sets the ExamID
-        /// </summary>
-        [ForeignKey("Exams")]
-        public int ExamID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Exams
-        /// </summary>
-        public virtual Exam Exams { get; set; }
 
         /// <summary>
         /// Gets or sets the TestName
@@ -58,18 +48,6 @@ namespace TestingSystem.Models
         /// </summary>
         [Required]
         public DateTime CreateDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the StartDate
-        /// </summary>
-        [Required]
-        public DateTime StartDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the EndDate
-        /// </summary>
-        [Required]
-        public DateTime EndDate { get; set; }
 
         /// <summary>
         /// Gets or sets the PassingScore

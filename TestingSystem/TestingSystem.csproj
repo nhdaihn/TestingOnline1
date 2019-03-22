@@ -198,7 +198,7 @@
     <Compile Include="Controllers\AuditionsController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExamPaperController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TestNotLoginController.cs" />
     <Compile Include="Controllers\_AccountController.cs" />
     <Compile Include="Controllers\ActionsController.cs" />
     <Compile Include="Controllers\_ErrorController.cs" />
@@ -7717,6 +7717,7 @@
     <Content Include="Areas\Admin\Views\Exams\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ExamPaper\Code.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7769,6 +7770,8 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Auditions\Index.cshtml" />
     <Content Include="Views\Shared\_AuditionLayout.cshtml" />
+    <Content Include="Views\Test\ShowExamPaperById.cshtml" />
+    <Content Include="Views\TestNotLogin\ShowExamPaperById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

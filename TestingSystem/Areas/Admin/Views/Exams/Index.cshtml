@@ -50,7 +50,6 @@
 								<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
 								<th width="7%">Number</th>
 								<th>Exam Name </th>
-								<th>Code</th>
 								<th>Description</th>
 								<th width="12%">Start Date</th>
 								<th width="12%">End Date</th>
@@ -67,10 +66,11 @@
 									<td>
 										@item.ExamName
 									</td>
-									<td>@item.ExamCode</td>
+
 									<td>@item.Description</td>
 									<td>@item.StartDate</td>
 									<td>@item.EndDate</td>
+          
 									<td>
 										<a href='@Url.Action("Edit","Exams", new {id= @item.ExamID })'>
 											<div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>

@@ -23,9 +23,6 @@
         [Required]
         public string ExamName { get; set; }
 
-		[Required]
-		public string ExamCode { set; get; }
-        /// <summary>
         /// Gets or sets the Description
         /// </summary>
         public string Description { get; set; }
@@ -55,5 +52,7 @@
         public byte Status { get; set; }
 
         public ICollection<Test> Tests{ get; set; }
+
+        public ICollection<ExamPaperExam> examPaperExam { set; get; }
 	}
 }

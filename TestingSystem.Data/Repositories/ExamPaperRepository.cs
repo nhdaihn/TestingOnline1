@@ -4,6 +4,8 @@ using System.Linq;
 using TestingSystem.Data.Infrastructure;
 using TestingSystem.Models;
 using TestingSystem.DataTranferObject;
+using System.Text;
+
 namespace TestingSystem.Data.Repositories
 {
 
@@ -15,10 +17,14 @@ namespace TestingSystem.Data.Repositories
         int Edit(ExamPaper examPaper);
         ExamPaper FindById(int id);
         int Delete(int id);
-        IEnumerable<ExamPaper> GetExamPaperByCode(string code);
+        //IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code);
         IEnumerable<ExamPaper> ListExamPapersTop();
 
+        string GetCode(int idExamPaper);
+
         int GetNumberOfQuestionByExamPaperId(int examPaperId);
+
+        ExamPaper FindCode(string code);
     }
 
     public class ExamPaperRepository : RepositoryBase<ExamPaper>, IExamPaperRepository
@@ -187,6 +193,46 @@ namespace TestingSystem.Data.Repositories
         {
             throw new NotImplementedException();
         }
+        //public IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code)
+        //{
+        //    var listTestByExamPaperID = DbContext.Exx.Where(x => x.ExamID == ExamId).ToList();
+        //    List<ExamPaper> listExamPapers = new List<ExamPaper>();
+        //    foreach (var item in listTestByExamPaperID)
+        //    {
+        //        var examPaper = DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperID == item.ExamPaperID);
+        //        listExamPapers.Add(examPaper);
+        //    }
+        //    return listExamPapers.AsEnumerable();
+        //}
+
+        public ExamPaper FindCode(string code)
+        {
+            return DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperCode == code);
+        }
+        public string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            return builder.ToString();
+        }
+        public string GetCode(int idExamPaper)
+        {
+            ExamPaper exam = new ExamPaper();
+            exam = DbContext.ExamPapers.Find(idExamPaper);
+            var examcode = RandomString(10, true);
+            exam.ExamPaperCode = examcode;
+            examcode = exam.ExamPaperCode;
+            return examcode;
+        }
+
         //public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
         //{
         //    var listTestByExamPaperID = DbContext.Tests.Where(x => x.ExamID == examID).ToList();

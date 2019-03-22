@@ -26,6 +26,10 @@ namespace TestingSystem.Sevice
 
         IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
 
+        string GetCode(int idExamPaper);
+
+        ExamPaper FindCode(string code);
+
     }
     public class ExamPaperService : IExamPaperService
     {
@@ -84,7 +88,17 @@ namespace TestingSystem.Sevice
 			return examPaperRepository.ListExamPapersTop();
 		}
 
-        public IEnumerable<ExamPaper> GetExamPaperByExamID(string code)
+        public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetCode(int idExamPaper)
+        {
+            return examPaperRepository.GetCode(idExamPaper);
+        }
+
+        public ExamPaper FindCode(string code)
         {
             throw new NotImplementedException();
         }
@@ -92,6 +106,7 @@ namespace TestingSystem.Sevice
         public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
         {
             throw new NotImplementedException();
+            return examPaperRepository.FindCode(code);
         }
     }
 }

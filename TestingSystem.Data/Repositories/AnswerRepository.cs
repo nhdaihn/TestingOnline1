@@ -12,6 +12,7 @@ namespace TestingSystem.Data.Repositories
         int AddAnswer(Answer answer);
         int DeleteAnswer(int id);
         int DelteAnswerbyQuestionID(int id);
+        Answer GetAnswerCorrect(int idAnswer);
     }
 
     public class AnswerRepository : RepositoryBase<Answer>, IAnswerRepository
@@ -76,6 +77,11 @@ namespace TestingSystem.Data.Repositories
                 return true;
             }
             return false;
+        }
+        public Answer GetAnswerCorrect(int idAnswer)
+        {
+            var obj = this.DbContext.Answers.Where(s => s.IsCorrect == true && s.AnswerID == idAnswer).FirstOrDefault();
+            return obj;
         }
     }
 }

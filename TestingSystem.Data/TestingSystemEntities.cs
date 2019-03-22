@@ -89,6 +89,7 @@
         /// <summary>
         /// The Commit
         /// </summary>
+        public DbSet<ExamPaperExam> ExamPaperExams { get; set; }
         public virtual void Commit()
         {
             base.SaveChanges();
@@ -100,6 +101,9 @@
         /// <param name="modelBuilder">The modelBuilder<see cref="DbModelBuilder"/></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<TestingSystemEntities>(null);
+            base.OnModelCreating(modelBuilder);
+
             // Configtion
             modelBuilder
                 .Entity<User>()
@@ -109,15 +113,6 @@
                 .Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
-
-
-
-
-
-
-
-
-
 
             // Dual foreign key QuestionCategory
             modelBuilder.Entity<QuestionCategory>()
