@@ -131,12 +131,12 @@
                             <td style="text-align: center"><b>Answer</b></td>
                             <td>
                                 <input type="hidden" id="AnswerID" name="AnswerID" value="@item.AnswerID">
-                                <input type="text" name="AnswerContent" id="AnswerContent" value="@item.AnswerContent" onchange="myFunction(this)" class="form-control chkWebSite myin">
+                                <input type="text" name="AnswerContent" id="AnswerContent" value="@item.AnswerContent" onchange="myFunction()" class="form-control chkWebSite myin @item.AnswerID">
                                 <span class="check-input" style="color:red;display:none">Please input Content Question!</span>
 
                             </td>
                             <td>
-                                <input type="checkbox" id="IsCorrect" checked="@item.IsCorrect" name="IsCorrect" value="@item.AnswerContent" />
+                                <input type="checkbox" class="@item.AnswerID" id="IsCorrect" checked="@item.IsCorrect" name="IsCorrect" value="@item.AnswerContent" />
                             </td>
                             <td>
                                 @if (j > 0)

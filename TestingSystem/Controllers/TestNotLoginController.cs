@@ -37,11 +37,12 @@ namespace TestingSystem.Controllers
             List<Answer> listA = new List<Answer>();
             ViewBag.ListQuestion = listExamPaperQuesions;
             ViewBag.ListAnswer = listAnswerInExamPaper;
+            ViewBag.IdExamPaper = idExamPaper;
             TempData["idExamPaper"] = idExamPaper;
             return View();
         }
         [HttpPost]
-        public void RepostTest(IEnumerable<ResultTest> fruits)
+        public JsonResult RepostTest(IEnumerable<ResultTest> fruits)
         {
             var list = fruits;
             List<Answer> listAnswerCorrect = new List<Answer>();
@@ -65,7 +66,7 @@ namespace TestingSystem.Controllers
                     }
                 }
             }
-
+            return Json(numberOfCorrectAnswer);
         }
     }
 }
