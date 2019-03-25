@@ -8,7 +8,11 @@ using TestingSystem.Sevice;
 
 namespace TestingSystem.Controllers
 {
+<<<<<<< HEAD
     public class ExamPaperController : ClientController
+=======
+    public class ExamPaperController : AdminController
+>>>>>>> origin/vananh
     {
 	    public IExamPaperService examPaperService;
 		// GET: ExamPaper
