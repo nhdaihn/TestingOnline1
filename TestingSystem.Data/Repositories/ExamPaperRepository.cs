@@ -208,9 +208,12 @@ namespace TestingSystem.Data.Repositories
 
         public ExamPaper FindCode(string code)
         {
-            return DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperCode == code);
+            if (code != null)
+            {
+                 return DbContext.ExamPapers.Where(s =>s.ExamPaperCode == code).FirstOrDefault();
+            }
+            return null;
         }
-
         public IEnumerable<ExamPaper> GetAllExamPapersIsActive()
         {
 	        var listExamPaperIsActive = DbContext.ExamPapers.Where(x => x.IsActive == true).ToList();
@@ -238,6 +241,7 @@ namespace TestingSystem.Data.Repositories
             var examcode = RandomString(10, true);
             exam.ExamPaperCode = examcode;
             examcode = exam.ExamPaperCode;
+            DbContext.SaveChanges();
             return examcode;
         }
 

@@ -195,6 +195,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="BaseController\AdminControllter.cs" />
     <Compile Include="BaseController\ClientController.cs" />
+    <Compile Include="BaseController\LoginBaseController.cs" />
     <Compile Include="Controllers\AuditionsController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExamPaperController.cs" />
@@ -7773,6 +7774,7 @@
     <Content Include="Views\Shared\_AuditionLayout.cshtml" />
     <Content Include="Views\Test\ShowExamPaperById.cshtml" />
     <Content Include="Views\TestNotLogin\ShowExamPaperById.cshtml" />
+    <Content Include="Views\Auditions\AuditionsTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

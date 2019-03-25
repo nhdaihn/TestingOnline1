@@ -100,7 +100,7 @@ namespace TestingSystem.Sevice
 
         public ExamPaper FindCode(string code)
         {
-            throw new NotImplementedException();
+            return examPaperRepository.FindCode(code);
         }
 
         //public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
