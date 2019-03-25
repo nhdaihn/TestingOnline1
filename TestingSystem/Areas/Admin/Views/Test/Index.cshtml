@@ -47,12 +47,11 @@
                             <tr>
                                 <td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
                                 <th width="7%">Number</th>
-                                <th>Test Name</th>
+	                            <th>Test Name</th>
                                 <th>Score</th>
                                 <th>PassingScore</th>
-                                <th width="12%">Start Date</th>
-                                <th width="12%">End Date</th>
-                                <th width="12%">Status</th>
+	                            <th width="12%">Status</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -60,15 +59,13 @@
                             {
                                 stt++;
                                 <tr>
-                                    <td><input type="checkbox" id="checkone" name="ids" value="@item.ExamID" onchange="changee(this);" /></td>
+                                    <td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
                                     <td>@stt</td>
-                                    <td>
-                                        @item.ExamPapers.Title
-                                    </td>
+	                                <td>
+		                                @item.ExamPapers.Title
+	                                </td>
                                     <td>@item.Score</td>
                                     <td>@item.PassingScore</td>
-                                    <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
                                     <td>@item.Status</td>
                                 </tr>
                             }
