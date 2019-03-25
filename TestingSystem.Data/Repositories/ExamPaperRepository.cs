@@ -20,7 +20,7 @@ namespace TestingSystem.Data.Repositories
         //IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code);
         IEnumerable<ExamPaper> ListExamPapersTop();
 
-        int GetCode(ExamPaper examPaper);
+        string GetCode(int idExamPaper);
 
         int GetNumberOfQuestionByExamPaperId(int examPaperId);
 
@@ -190,6 +190,10 @@ namespace TestingSystem.Data.Repositories
 			return DbContext.ExamPapers.OrderByDescending(x => x.CreatedDate).Take(6).ToList();
 		}
 
+        public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
         //public IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code)
         //{
         //    var listTestByExamPaperID = DbContext.Exx.Where(x => x.ExamID == ExamId).ToList();
@@ -227,14 +231,14 @@ namespace TestingSystem.Data.Repositories
                 return builder.ToString().ToLower();
             return builder.ToString();
         }
-        public int GetCode(ExamPaper examPaper)
+        public string GetCode(int idExamPaper)
         {
             ExamPaper exam = new ExamPaper();
-            exam = DbContext.ExamPapers.Find(examPaper.ExamPaperID);
+            exam = DbContext.ExamPapers.Find(idExamPaper);
             var examcode = RandomString(10, true);
             exam.ExamPaperCode = examcode;
-            examcode = examPaper.ExamPaperCode;
-            return DbContext.SaveChanges();
+            examcode = exam.ExamPaperCode;
+            return examcode;
         }
 
         //public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
