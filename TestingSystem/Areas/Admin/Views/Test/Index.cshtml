@@ -60,15 +60,13 @@
                             {
                                 stt++;
                                 <tr>
-                                    <td><input type="checkbox" id="checkone" name="ids" value="@item.ExamID" onchange="changee(this);" /></td>
+                                    <td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
                                     <td>@stt</td>
                                     <td>
                                         @item.ExamPapers.Title
                                     </td>
                                     <td>@item.Score</td>
                                     <td>@item.PassingScore</td>
-                                    <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
                                     <td>@item.Status</td>
                                 </tr>
                             }

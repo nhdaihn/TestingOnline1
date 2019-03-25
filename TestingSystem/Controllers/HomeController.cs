@@ -13,7 +13,7 @@
         /// Initializes a new instance of the <see cref="HomeController"/> class.
         /// </summary>
         /// <param name="userService">The userService<see cref="IUserService"/></param>
-        public HomeController(IUserService userService) : base(userService)
+        public HomeController(IUserService userService):base(userService)
         {
         }
 
