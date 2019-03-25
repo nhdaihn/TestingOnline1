@@ -181,6 +181,8 @@
                     {
                         examPaper.ModifiedDate = DateTime.Now;
                         examPaper.ModifiedBy = int.Parse(Session["Name"].ToString());
+						//lay so cau hoi
+						examPaper.NumberOfQuestion=examPaperService.GetNumberOfQuestionByExamPaperId(examPaper.ExamPaperID);
                         if (examPaperService.Edit(examPaper) > 0)
                         {
                             Success = "Update exam paper successfully!";

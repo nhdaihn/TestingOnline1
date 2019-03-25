@@ -64,6 +64,10 @@ namespace TestingSystem.Areas.Admin.Controllers
 		{
 			ViewBag.listAllExamPaper = examPaperService.GetAll();
 			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+			foreach (var item in listExamPaperByExamID)
+			{
+				item.NumberOfQuestion = examPaperService.GetNumberOfQuestionByExamPaperId(item.ExamPaperID);
+			}
 			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
 			var exam = examService.GetExamsByID(id);
 			return View(exam);
