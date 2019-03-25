@@ -182,6 +182,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ActionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExamClientController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExamPaperQuestion\ExamPaperQuestionController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExamPaper\ExamPaperController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExamsController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleActionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestLoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="BaseController\AdminControllter.cs" />
     <Compile Include="BaseController\ClientController.cs" />
@@ -7719,6 +7721,10 @@
     <Content Include="Areas\Admin\Views\Exams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ExamPaper\Code.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\UpdateExamPaper.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\PartialViewListExam.cshtml" />
+    <Content Include="Areas\Admin\Views\ExamClient\ListExamClient.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutExamine.cshtml" />
+    <Content Include="Areas\Admin\Views\TestLogin\ShowExamPaperById.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

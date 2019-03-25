@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ActionService.cs" />
     <Compile Include="AnswerService.cs" />
+    <Compile Include="ExamPaperExamService.cs" />
     <Compile Include="ExamPaperQuestionService.cs" />
     <Compile Include="ExamPaperService.cs" />
     <Compile Include="ExamService.cs" />
