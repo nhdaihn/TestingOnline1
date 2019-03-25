@@ -78,7 +78,11 @@
                                 <td><input type="checkbox" checked="@item.IsActive" disabled="" /></td>
                                 <td>
                                     <a onclick="getCodeExamPaper(@item.ExamPaperID)">
+<<<<<<< HEAD
                                         <div class="btn btn-success" data-toggle="modal" data-target="#ModalAddCate" value=" ">GetCodeExamPaper</div>
+=======
+                                        <div class="btn btn-success"> GetCodeExamPaper</div>
+>>>>>>> Dai
                                     </a>
                                 </td>
 
@@ -104,6 +108,7 @@
         </div>
     </div>
 </section>
+<<<<<<< HEAD
 <div class="modal fade" id="ModalAddCate" tabindex="-1" role="dialog" aria-labelledby="ModalAddCate" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -127,6 +132,8 @@
     </div>
 </div>
 
+=======
+>>>>>>> Dai
 <script>
     function getCodeExamPaper(x) {
         $.post("@Url.Action("_GetCode", "ExamPaper")",
@@ -134,8 +141,13 @@
                 idExamPaper: x
             },
             function (str) {
+<<<<<<< HEAD
                 if (str != null) {
                     document.getElementById("cateName").value = str;
+=======
+            if (str != null) {
+                alert(str);
+>>>>>>> Dai
             }
             else {
                 alert("fails!");

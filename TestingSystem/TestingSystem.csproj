@@ -6775,6 +6775,12 @@
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DatetimePicker\css\Annou.css" />
+    <Content Include="Scripts\DatetimePicker\css\gijgo.min.css" />
+    <Content Include="Scripts\DatetimePicker\JS\gijgo.min.js" />
+    <Content Include="Scripts\DatetimePicker\JS\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\DatetimePicker\JS\PrivewHint.js" />
+    <Content Include="Scripts\DatetimePicker\JS\PrivirewAnnoun.js" />
     <Content Include="Scripts\myjquery.js" />
     <Content Include="Scripts\notify.min.js" />
     <Content Include="Scripts\Question\ckeditor\adapters\jquery.js" />
@@ -7720,6 +7726,9 @@
     <Content Include="Areas\Admin\Views\Exams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ExamPaper\Code.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\UpdateExamPaper.cshtml" />
+    <Content Include="Scripts\DatetimePicker\fonts\gijgo-material.eot" />
+    <Content Include="Scripts\DatetimePicker\fonts\gijgo-material.ttf" />
+    <Content Include="Scripts\DatetimePicker\fonts\gijgo-material.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

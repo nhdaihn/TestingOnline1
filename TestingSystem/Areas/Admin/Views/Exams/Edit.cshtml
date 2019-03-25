@@ -75,9 +75,20 @@
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-6">
-						<div class="checkbox">
-							<input type="number" name="Status" value="@Model.Status" />
-						</div>
+						<select class="form-control" id="" name="Status" style="width: 222px;" required>
+							@if (@Model.Status == 1)
+							{
+								<option selected value="1">Public</option>
+								<option value="2">Private</option>
+
+							}
+							else
+							{
+								<option selected value="2">Private</option>
+								<option  value="1">Public</option>
+							}
+						</select>
+						@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
 					</div>
 				</div>
 				<div class="form-group">
@@ -187,15 +198,15 @@
 			<div class="modal-body">
 				<table id="example2" class="table table-bordered table-hover">
 					<thead>
-					<tr>
-						<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
-						<th width="7%">Number</th>
-						<th>Title</th>
-						<th>Questions</th>
-						<th>Time</th>
-						<th>Status</th>
-						<th width="12%">Create Date</th>
-					</tr>
+						<tr>
+							<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
+							<th width="7%">Number</th>
+							<th>Title</th>
+							<th>Questions</th>
+							<th>Time</th>
+							<th>Status</th>
+							<th width="12%">Create Date</th>
+						</tr>
 					</thead>
 					<tbody>
 						@foreach (ExamPaper item in ViewBag.listExamPaperByExamID)
@@ -211,8 +222,7 @@
 								<td>@item.Time</td>
 								<td>@item.Status</td>
 								<td>@item.CreatedDate</td>
-								<td>
-								</td>
+								<td></td>
 							</tr>
 						}
 					</tbody>
