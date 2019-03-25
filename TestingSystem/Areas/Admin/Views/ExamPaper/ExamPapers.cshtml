@@ -44,6 +44,7 @@
                             <a href="@Url.Action("ImportExamPaper","ExamPaper")">
                                 <div class="btn btn-success"><span class="glyphicon glyphicon-open"></span>  Import exam</div>
                             </a>
+
                         </div>
                     </div>
                 }
@@ -66,7 +67,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td><input type="checkbox" class="checkone" name="ids" value="@item.ExamPaperID" onchange="changee(this);" /></td>
+                                <td><input type="radio" class="checkone" name="ids" id="@item.ExamPaperID" value="@item.ExamPaperID" onchange="changee(this);" /></td>
                                 <td>
                                     @item.Title
                                 </td>
@@ -75,6 +76,11 @@
                                 <td><input type="checkbox" checked="@item.Status" disabled="" /></td>
                                 <td>@item.CreatedDate</td>
                                 <td><input type="checkbox" checked="@item.IsActive" disabled="" /></td>
+                                <td>
+                                    <a onclick="getCodeExamPaper(@item.ExamPaperID)">
+                                        <div class="btn btn-success"> GetCodeExamPaper</div>
+                                    </a>
+                                </td>
 
                                 <td>
                                     <a href='@Url.Action("ExamPaper","ExamPaper", new {examPaperId = @item.ExamPaperID })'>
@@ -97,8 +103,36 @@
             </div>
         </div>
     </div>
-    </div>
 </section>
+<script>
+    function getCodeExamPaper(x) {
+        $.post("@Url.Action("_GetCode", "ExamPaper")",
+            {
+                idExamPaper: x
+            },
+            function (str) {
+            if (str != null) {
+                alert(str);
+            }
+            else {
+                alert("fails!");
+            }
+        });
+    }
+</script>
+<script>
+    function getIdExamPaper() {
+        var idExamPaper = 0;
+        var inputs = document.getElementsByClassName('checkone');
+        for (var i = 0; i < @ViewBag.CountExamPaper; i += 1) {
+            if (inputs[i].checked == true) {
+                idExamPaper = inputs[i].id;
+                break;
+            }
+        }
+        alert(idExamPaper);
+    }
+</script>
 <script language="JavaScript">
     function Check(source) {
         checkboxes = document.getElementsByName('ids');
