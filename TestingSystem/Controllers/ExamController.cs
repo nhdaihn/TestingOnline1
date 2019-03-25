@@ -3,28 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TestingSystem.BaseController;
 using TestingSystem.Data.Repositories;
-using TestingSystem.Sevice;
 
 namespace TestingSystem.Controllers
 {
-	public class ExamController : ClientController
+	public class ExamController : Controller
 	{
-		private readonly IExamPaperService examPaperService;
-        private readonly IExamPaperExamService examPaperExamService;
-		public ExamController(IExamPaperService examPaperService, IUserService userService, IExamPaperExamService examPaperExamService):base(userService)
+		private readonly IExamPaperRepository examPaperRepository;
+		public ExamController(IExamPaperRepository ExamPaperRepository)
 		{
-            this.examPaperExamService = examPaperExamService;
-
-            this.examPaperService = examPaperService;
-        }
+			this.examPaperRepository = ExamPaperRepository;
+		}
 		// GET: Exam
 		public ActionResult Index()
 		{
-			var model = examPaperService.ListExamPapersTop();
-
-            return PartialView(model);
+			var model = examPaperRepository.ListExamPapersTop();
+			return PartialView(model);
 		}
 
 	}

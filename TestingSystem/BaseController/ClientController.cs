@@ -17,26 +17,6 @@
         protected readonly IUserService userService;
 
         /// <summary>
-        /// Sets the title.
-        /// </summary>
-        /// <value>
-        /// The title.
-        /// </value>
-        public string Title { set { ViewBag.Title = value; } }
-
-        /// <summary>
-        /// Sets the success.
-        /// </summary>
-        /// <value>The success.</value>
-        public string Success { set { TempData["Success"] = ViewData["Success"] = value; } }
-        /// <summary>
-        /// Sets the failure.
-        /// </summary>
-        /// <value>The failure.</value>
-        public string Failure { set { TempData["Failure"] = ViewData["Failure"] = value; } }
-
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ClientController"/> class.
         /// </summary>
         /// <param name="userService">The userService<see cref="IUserService"/></param>

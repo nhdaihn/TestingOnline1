@@ -343,12 +343,7 @@
                 fruits.push(obj);
             }
         }
-        $.post('@Url.Action("RepostTest", "TestNotLogin")', 
-        { 
-            fruits: fruits,
-            exampaperid: @ViewBag.IdExamPaper,
-
-        },
+        $.post('@Url.Action("RepostTest", "TestNotLogin")', { fruits: fruits },
            function () {
                alert("successful!");
            });

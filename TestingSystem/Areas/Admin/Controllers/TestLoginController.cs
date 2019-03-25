@@ -47,7 +47,8 @@ namespace TestingSystem.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid)
         {
-            var list = fruits;
+	        int idUser = int.Parse(Session["Name"].ToString());
+			var list = fruits;
             List<Answer> listAnswerCorrect = new List<Answer>();
             foreach (var item in list)
             {
