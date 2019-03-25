@@ -9,7 +9,11 @@
 	bool check = false;
 	bool checkUrl = false;
 }
-
+<style>
+	.nhleft {
+		margin-left: 10px;
+	}
+</style>
 <section class="content-header">
 	<h1>
 		Update Exam Paper
@@ -26,11 +30,11 @@
 		<p></p>
 		@using (Html.BeginForm("UpdateExamPaper", "Exams", FormMethod.Post))
 		{
-			<div class="row">
+			<div class="row nhleft">
 				<div class="col-md-6" style="margin-bottom: 15px">
 					<div class="input-group">
 						<input type="hidden" name="id" value="@ViewBag.examID" />
-						<input type="text" class="form-control" value="@ViewBag.SearchString" name="SearchString" placeholder="User Name">
+						<input type="text" class="form-control" value="@ViewBag.SearchString" name="keySearch" placeholder="Key search">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit">Tìm kiếm</button>
 						</span>
@@ -45,7 +49,7 @@
 			</div>
 		}
 		<!-- form start -->
-		<table class="table">
+		<table class="table nhleft">
 			<tr>
 				<th>
 					@Html.DisplayNameFor(model => model.Title)

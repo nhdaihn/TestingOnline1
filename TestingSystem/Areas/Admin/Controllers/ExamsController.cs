@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 using TestingSystem.BaseController;
 using TestingSystem.Models;
 using TestingSystem.Sevice;
@@ -24,9 +25,14 @@ namespace TestingSystem.Areas.Admin.Controllers
 		{
 			var listExams = examService.GetAllExams();
 			ViewBag.listExams = listExams;
-			return View();
+			return View(listExams);
 		}
-
+		[HttpPost]
+		public ActionResult Index(string keySearch)
+		{
+			var listExams = examService.SearchExams(keySearch);
+			return View(listExams);
+		}
 		public ActionResult Create()
 		{
 			return View();
@@ -199,6 +205,25 @@ namespace TestingSystem.Areas.Admin.Controllers
 
 			return View();
 		}
+		[HttpPost]
+		public ActionResult UpdateExamPaper(int id,string keySearch)
+		{
+			var listExamPaperIsActive = examPaperService.SearchExamPapersIsActive(keySearch);
+			ViewBag.listExamPaperIsActive = listExamPaperIsActive;
+			//
+			ViewBag.examID = id;
+			//
+			var countlistExamPaperIsActive = listExamPaperIsActive.Count();
+			ViewBag.countlistExamPaperIsActive = countlistExamPaperIsActive;
+
+			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
+
+			ViewBag.CountExamPaperInExam = listExamPaperByExamID.Count();
+
+			return View();
+		}
+
 
 		public ActionResult AddExamPaperInExams(int examID, int examPaperID)
 		{

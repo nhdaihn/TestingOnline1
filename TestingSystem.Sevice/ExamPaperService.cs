@@ -25,8 +25,8 @@ namespace TestingSystem.Sevice
         IEnumerable<ExamPaper> ListExamPapersTop();
 
         IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
-
-        string GetCode(int idExamPaper);
+        IEnumerable<ExamPaper> SearchExamPapersIsActive(string keySearch);
+		string GetCode(int idExamPaper);
 
         ExamPaper FindCode(string code);
         IEnumerable<ExamPaper> GetAllExamPapersIsActive();
@@ -91,6 +91,11 @@ namespace TestingSystem.Sevice
         public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<ExamPaper> SearchExamPapersIsActive(string keySearch)
+        {
+	        return examPaperRepository.SearchExamPapersIsActive(keySearch);
         }
 
         public string GetCode(int idExamPaper)
