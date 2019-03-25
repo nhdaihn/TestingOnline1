@@ -45,7 +45,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public void RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid)
+        public JsonResult RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid)
         {
             var list = fruits;
             List<Answer> listAnswerCorrect = new List<Answer>();
@@ -69,7 +69,7 @@ namespace TestingSystem.Areas.Admin.Controllers
                     }
                 }
             }
-
+            return Json(numberOfCorrectAnswer);
         }
     }
 }
