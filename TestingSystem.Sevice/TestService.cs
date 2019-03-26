@@ -15,6 +15,7 @@ namespace TestingSystem.Sevice
 		int AddTest(Test test);
 		int DeleteTest(int id);
 		Test GetTestByID(int id);
+		IEnumerable<Test> GetAllTestIsActive();
 	}
 	public class TestService : ITestService
 	{
@@ -42,6 +43,11 @@ namespace TestingSystem.Sevice
 		public Test GetTestByID(int id)
 		{
 			return testRepository.GetTestByID(id);
+		}
+
+		public IEnumerable<Test> GetAllTestIsActive()
+		{
+			return testRepository.GetAllTestIsActive();
 		}
 
 		public bool UpdateTest(Test test)

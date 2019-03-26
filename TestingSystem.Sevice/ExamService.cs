@@ -17,9 +17,9 @@ namespace TestingSystem.Sevice
 		int DeleteExam(int id);
 		Exam GetExamsByID(int id);
 		IEnumerable<Exam> SearchExams(string txtSearch);
-		//IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
-		//int RemoveExamPaperInExams(int id);
-		//int AddExamPaperIntoExams(int examPaperID, int examID);
+		IEnumerable<Test> GetTestByExamID(int examID);
+		int RemoveTestInExams(int id);
+		int AddTestIntoExams(int testID, int examID);
 	}
 
 	public class ExamService : IExamService
@@ -57,20 +57,21 @@ namespace TestingSystem.Sevice
 			return examRepository.SearchExams(txtSearch);
 		}
 
-		//public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
-		//{
-		//	return examRepository.GetExamPaperByExamID(examID);
-		//}
+		public IEnumerable<Test> GetTestByExamID(int examID)
+		{
+			return examRepository.GetTestByExamID(examID);
+		}
 
-		//public int RemoveExamPaperInExams(int id)
-		//{
-		//	return examRepository.RemoveExamPaperInExams(id);
-		//}
+		public int RemoveTestInExams(int id)
+		{
+			return examRepository.RemoveTestInExams(id);
+		}
 
-		//public int AddExamPaperIntoExams(int examPaperID, int examID)
-		//{
-		//	return examRepository.AddExamPaperIntoExams(examPaperID, examID);
-		//}
+		public int AddTestIntoExams(int testID, int examID)
+		{
+			return examRepository.AddTestIntoExams(testID, examID);
+		}
+
 
 		public bool UpdateExam(Exam exam)
 		{

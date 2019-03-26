@@ -16,9 +16,9 @@ namespace TestingSystem.Data.Repositories
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
 		IEnumerable<Exam> SearchExams(string txtSearch);
-		//IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
-		//int RemoveExamPaperInExams(int id);
-		//int AddExamPaperIntoExams(int examPaperID, int examID);
+		IEnumerable<Test> GetTestByExamID(int examID);
+		int RemoveTestInExams(int id);
+		int AddTestIntoExams(int testID, int examID);
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
@@ -132,49 +132,49 @@ namespace TestingSystem.Data.Repositories
 			return listExams;
 		}
 
-		//public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
-		//{
-		//	var listTestByExamPaperID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
-		//	List<ExamPaper> listExamPapers = new List<ExamPaper>();
-		//	foreach (var item in listTestByExamPaperID)
-		//	{
-		//		var examPaper = DbContext.ExamPapers.SingleOrDefault(x => x.ExamPaperID == item.ExamPaperID);
-		//		listExamPapers.Add(examPaper);
-		//	}
+		public IEnumerable<Test> GetTestByExamID(int examID)
+		{
+			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
+			List<Test> listTests = new List<Test>();
+			foreach (var item in listExamTestByExamID)
+			{
+				var examTest = DbContext.Tests.SingleOrDefault(x => x.TestID == item.TestID);
+				listTests.Add(examTest);
+			}
 
-		//	return listExamPapers.AsEnumerable();
-		//}
+			return listTests.AsEnumerable();
+		}
 
-		//public int RemoveExamPaperInExams(int id)
-		//{
-		//	try
-		//	{
-		//		var test = DbContext.ExamPaperExams.FirstOrDefault(x => x.ExamPaperID == id);
-		//		if (test != null)
-		//		{
-		//			this.DbContext.ExamPaperExams.Remove(test);
-		//			return DbContext.SaveChanges();
-		//		}
-		//		else
-		//		{
-		//			return 0;
-		//		}
-		//	}
-		//	catch (Exception e)
-		//	{
-		//		log.Debug(e.Message);
-		//		return 0;
-		//	}
-		//}
+		public int RemoveTestInExams(int id)
+		{
+			try
+			{
+				var test = DbContext.ExamTests.FirstOrDefault(x => x.TestID == id);
+				if (test != null)
+				{
+					this.DbContext.ExamTests.Remove(test);
+					return DbContext.SaveChanges();
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			catch (Exception e)
+			{
+				log.Debug(e.Message);
+				return 0;
+			}
+		}
 
-		//public int AddExamPaperIntoExams(int examPaperID, int examID)
-		//{
-		//	ExamTest examPaperExam= new ExamTest();
-		//	examPaperExam.ExamPaperID = examPaperID;
-		//	examPaperExam.ExamID = examID;
-		//	DbContext.ExamPaperExams.Add(examPaperExam);
-		//	DbContext.SaveChanges();
-		//	return examPaperExam.ExamPaperID;
-		//}
+		public int AddTestIntoExams(int testID, int examID)
+		{
+			ExamTest examTest = new ExamTest();
+			examTest.TestID = testID;
+			examTest.ExamID = examID;
+			DbContext.ExamTests.Add(examTest);
+			DbContext.SaveChanges();
+			return examTest.ExamID;
+		}
 	}
 }

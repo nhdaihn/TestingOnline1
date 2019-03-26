@@ -7726,7 +7726,7 @@
     <Content Include="Areas\Admin\Views\Exams\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Exams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ExamPaper\Code.cshtml" />
-    <Content Include="Areas\Admin\Views\Exams\UpdateExamPaper.cshtml" />
+    <Content Include="Areas\Admin\Views\Exams\UpdateTest.cshtml" />
     <Content Include="Scripts\DatetimePicker\fonts\gijgo-material.eot" />
     <Content Include="Scripts\DatetimePicker\fonts\gijgo-material.ttf" />
     <Content Include="Scripts\DatetimePicker\fonts\gijgo-material.woff" />

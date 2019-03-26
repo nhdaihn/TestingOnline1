@@ -16,6 +16,7 @@ namespace TestingSystem.Data.Repositories
 		Test GetTestByID(int id);
 		int AddTest(Test entity);
 		int DeleteTest(int id);
+		IEnumerable<Test> GetAllTestIsActive();
 	}
 	public class TestRepository : RepositoryBase<Test>, ITestRepository
 	{
@@ -60,6 +61,12 @@ namespace TestingSystem.Data.Repositories
 				log.Debug(e.Message);
 				return 0;
 			}
+		}
+
+		public IEnumerable<Test> GetAllTestIsActive()
+		{
+			var listTestActive = DbContext.Tests.Where(x => x.IsActive == true).ToList();
+			return listTestActive.AsEnumerable();
 		}
 
 		public IEnumerable<Test> GetAllTest()
