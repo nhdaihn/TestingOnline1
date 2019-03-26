@@ -20,11 +20,11 @@ namespace TestingSystem.Data.Repositories
 		//IEnumerable<ExamPaper> GetExamPaperByCode(int ExamId, string code);
 		IEnumerable<ExamPaper> ListExamPapersTop();
 
-		string GetCode(int idExamPaper);
+		//string GetCode(int idExamPaper);
 
 		int GetNumberOfQuestionByExamPaperId(int examPaperId);
 
-		ExamPaper FindCode(string code);
+		//ExamPaper FindCode(string code);
 		IEnumerable<ExamPaper> GetAllExamPapersIsActive();
 		IEnumerable<ExamPaper> SearchExamPapersIsActive(string keySearch);
 	}
@@ -207,15 +207,15 @@ namespace TestingSystem.Data.Repositories
 		//    return listExamPapers.AsEnumerable();
 		//}
 
-		public ExamPaper FindCode(string code)
-		{
-			if (code != null)
-			{
-				return DbContext.ExamPapers.Where(x => x.ExamPaperCode == code).FirstOrDefault();
-			}
+		//public ExamPaper FindCode(string code)
+		//{
+		//	if (code != null)
+		//	{
+		//		return DbContext.ExamPapers.Where(x => x.ExamPaperCode == code).FirstOrDefault();
+		//	}
 
-			return null;
-		}
+		//	return null;
+		//}
 
 		public IEnumerable<ExamPaper> GetAllExamPapersIsActive()
 		{
@@ -243,16 +243,16 @@ namespace TestingSystem.Data.Repositories
 				return builder.ToString().ToLower();
 			return builder.ToString();
 		}
-		public string GetCode(int idExamPaper)
-		{
-			ExamPaper exam = new ExamPaper();
-			exam = DbContext.ExamPapers.Find(idExamPaper);
-			var examcode = RandomString(10, true);
-			exam.ExamPaperCode = examcode;
-			examcode = exam.ExamPaperCode;
-			DbContext.SaveChanges();
-			return examcode;
-		}
+		//public string GetCode(int idExamPaper)
+		//{
+		//	ExamPaper exam = new ExamPaper();
+		//	exam = DbContext.ExamPapers.Find(idExamPaper);
+		//	var examcode = RandomString(10, true);
+		//	exam.ExamPaperCode = examcode;
+		//	examcode = exam.ExamPaperCode;
+		//	DbContext.SaveChanges();
+		//	return examcode;
+		//}
 
 		//public IEnumerable<ExamPaper> GetExamPaperByCode(string code)
 		//{

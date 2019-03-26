@@ -26,9 +26,9 @@ namespace TestingSystem.Sevice
 
         IEnumerable<ExamPaper> GetExamPaperByExamID(int examID);
         IEnumerable<ExamPaper> SearchExamPapersIsActive(string keySearch);
-		string GetCode(int idExamPaper);
+		//string GetCode(int idExamPaper);
 
-        ExamPaper FindCode(string code);
+  //      ExamPaper FindCode(string code);
         IEnumerable<ExamPaper> GetAllExamPapersIsActive();
 	}
     public class ExamPaperService : IExamPaperService
@@ -98,15 +98,15 @@ namespace TestingSystem.Sevice
 	        return examPaperRepository.SearchExamPapersIsActive(keySearch);
         }
 
-        public string GetCode(int idExamPaper)
-        {
-            return examPaperRepository.GetCode(idExamPaper);
-        }
+        //public string GetCode(int idExamPaper)
+        //{
+        //    return examPaperRepository.GetCode(idExamPaper);
+        //}
 
-        public ExamPaper FindCode(string code)
-        {
-	        return examPaperRepository.FindCode(code);
-        }
+        //public ExamPaper FindCode(string code)
+        //{
+	       // return examPaperRepository.FindCode(code);
+        //}
 
         //public IEnumerable<ExamPaper> GetExamPaperByExamID(int examID)
         //{

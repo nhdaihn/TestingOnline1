@@ -60,18 +60,18 @@ namespace TestingSystem.Areas.Admin.Controllers
 				return RedirectToAction("Create", "Exams");
 			}
 		}
-		public ActionResult Edit(int id)
-		{
-			ViewBag.listAllExamPaper = examPaperService.GetAll();
-			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
-			foreach (var item in listExamPaperByExamID)
-			{
-				item.NumberOfQuestion = examPaperService.GetNumberOfQuestionByExamPaperId(item.ExamPaperID);
-			}
-			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
-			var exam = examService.GetExamsByID(id);
-			return View(exam);
-		}
+		//public ActionResult Edit(int id)
+		//{
+		//	ViewBag.listAllExamPaper = examPaperService.GetAll();
+		//	var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+		//	foreach (var item in listExamPaperByExamID)
+		//	{
+		//		item.NumberOfQuestion = examPaperService.GetNumberOfQuestionByExamPaperId(item.ExamPaperID);
+		//	}
+		//	ViewBag.listExamPaperByExamID = listExamPaperByExamID;
+		//	var exam = examService.GetExamsByID(id);
+		//	return View(exam);
+		//}
 
 		[HttpPost]
 		public ActionResult Edit(Exam exam)
@@ -150,40 +150,40 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 		}
 
-		public ActionResult RemoveExamPaperInExams(List<int> ids, int examID)
-		{
-			try
-			{
-				if (ids.Count > 0)
-				{
-					int i = 0;
-					foreach (var id in ids)
-					{
-						if (examService.RemoveExamPaperInExams(id) > 0)
-						{
-							i++;
-							continue;
-						}
-						else
-						{
-							break;
-						}
-					}
-					if (i > 0)
-					{
-						Success = "Delete ExamPaper successfully!";
-						return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
-					}
-				}
-				Failure = "Something went wrong, please try again!";
-				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
-			}
-			catch (System.Exception exception)
-			{
-				Failure = exception.Message;
-				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
-			}
-		}
+		//public ActionResult RemoveExamPaperInExams(List<int> ids, int examID)
+		//{
+		//	try
+		//	{
+		//		if (ids.Count > 0)
+		//		{
+		//			int i = 0;
+		//			foreach (var id in ids)
+		//			{
+		//				if (examService.RemoveExamPaperInExams(id) > 0)
+		//				{
+		//					i++;
+		//					continue;
+		//				}
+		//				else
+		//				{
+		//					break;
+		//				}
+		//			}
+		//			if (i > 0)
+		//			{
+		//				Success = "Delete ExamPaper successfully!";
+		//				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+		//			}
+		//		}
+		//		Failure = "Something went wrong, please try again!";
+		//		return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+		//	}
+		//	catch (System.Exception exception)
+		//	{
+		//		Failure = exception.Message;
+		//		return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+		//	}
+		//}
 
 		//public ActionResult GetExamPaperByExamID(int examID)
 		//{
@@ -192,56 +192,56 @@ namespace TestingSystem.Areas.Admin.Controllers
 
 		//	return Json(new { data = examPaper }, JsonRequestBehavior.AllowGet);
 		//}
-		public ActionResult UpdateExamPaper(int id)
-		{
-			var listExamPaperIsActive = examPaperService.GetAllExamPapersIsActive();
-			ViewBag.listExamPaperIsActive = listExamPaperIsActive;
-			//
-			ViewBag.examID = id;
-			//
-			var countlistExamPaperIsActive = listExamPaperIsActive.Count();
-			ViewBag.countlistExamPaperIsActive = countlistExamPaperIsActive;
+		//public ActionResult UpdateExamPaper(int id)
+		//{
+		//	var listExamPaperIsActive = examPaperService.GetAllExamPapersIsActive();
+		//	ViewBag.listExamPaperIsActive = listExamPaperIsActive;
+		//	//
+		//	ViewBag.examID = id;
+		//	//
+		//	var countlistExamPaperIsActive = listExamPaperIsActive.Count();
+		//	ViewBag.countlistExamPaperIsActive = countlistExamPaperIsActive;
 
-			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
-			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
+		//	var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+		//	ViewBag.listExamPaperByExamID = listExamPaperByExamID;
 
-			ViewBag.CountExamPaperInExam = listExamPaperByExamID.Count();
+		//	ViewBag.CountExamPaperInExam = listExamPaperByExamID.Count();
 
-			return View();
-		}
-		[HttpPost]
-		public ActionResult UpdateExamPaper(int id,string keySearch)
-		{
-			var listExamPaperIsActive = examPaperService.SearchExamPapersIsActive(keySearch);
-			ViewBag.listExamPaperIsActive = listExamPaperIsActive;
-			//
-			ViewBag.examID = id;
-			//
-			var countlistExamPaperIsActive = listExamPaperIsActive.Count();
-			ViewBag.countlistExamPaperIsActive = countlistExamPaperIsActive;
+		//	return View();
+		//}
+		//[HttpPost]
+		//public ActionResult UpdateExamPaper(int id,string keySearch)
+		//{
+		//	var listExamPaperIsActive = examPaperService.SearchExamPapersIsActive(keySearch);
+		//	ViewBag.listExamPaperIsActive = listExamPaperIsActive;
+		//	//
+		//	ViewBag.examID = id;
+		//	//
+		//	var countlistExamPaperIsActive = listExamPaperIsActive.Count();
+		//	ViewBag.countlistExamPaperIsActive = countlistExamPaperIsActive;
 
-			var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
-			ViewBag.listExamPaperByExamID = listExamPaperByExamID;
+		//	var listExamPaperByExamID = examService.GetExamPaperByExamID(id);
+		//	ViewBag.listExamPaperByExamID = listExamPaperByExamID;
 
-			ViewBag.CountExamPaperInExam = listExamPaperByExamID.Count();
+		//	ViewBag.CountExamPaperInExam = listExamPaperByExamID.Count();
 
-			return View();
-		}
+		//	return View();
+		//}
 
 
-		public ActionResult AddExamPaperInExams(int examID, int examPaperID)
-		{
-			try
-			{
-				examService.AddExamPaperIntoExams(examPaperID, examID);
-				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
-			}
-			catch (Exception e)
-			{
-				Failure = "Something went wrong, please try again!";
-				return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
-			}
+		//public ActionResult AddExamPaperInExams(int examID, int examPaperID)
+		//{
+		//	try
+		//	{
+		//		examService.AddExamPaperIntoExams(examPaperID, examID);
+		//		return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+		//	}
+		//	catch (Exception e)
+		//	{
+		//		Failure = "Something went wrong, please try again!";
+		//		return RedirectToAction("UpdateExamPaper", "Exams", new { id = examID });
+		//	}
 			
-		}
+		//}
 	}
 }

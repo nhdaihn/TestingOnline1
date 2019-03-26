@@ -14,6 +14,6 @@ namespace TestingSystem.Models
 	    public int CandidateID { get; set; }
 
 	    public virtual User Users { get; set; }
-	    public ICollection<Test> Tests { get; set; }
+	    public ICollection<TestResult> TestResults { get; set; }
 	}
 }

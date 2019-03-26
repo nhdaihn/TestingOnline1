@@ -546,17 +546,17 @@
             return Json(new { data = listCategory }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult _GetCode(int idExamPaper)
-        {
-            var str = examPaperService.GetCode(idExamPaper);
-            if (str != "") {
-                return Json(str, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(null);
-            }
-        }
+        //public JsonResult _GetCode(int idExamPaper)
+        //{
+        //    var str = examPaperService.GetCode(idExamPaper);
+        //    if (str != "") {
+        //        return Json(str, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        return Json(null);
+        //    }
+        //}
         //public JsonResult GetCodeExamPaper()
         //{
         //    GetCode();

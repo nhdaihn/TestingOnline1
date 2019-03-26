@@ -9,13 +9,13 @@ using TestingSystem.Models;
 
 namespace TestingSystem.Data.Repositories
 {
-    public interface IExamPaperExamRepository : IRepository<ExamPaperExam>
+    public interface IExamPaperExamRepository : IRepository<ExamTest>
     {
 
         List<int> GetIdExamByIdExamPaper(int examPaperId);
         
     }
-    public class ExamPaperExamRepository : RepositoryBase<ExamPaperExam>, IExamPaperExamRepository
+    public class ExamPaperExamRepository : RepositoryBase<ExamTest>, IExamPaperExamRepository
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ExamPaperExamRepository(IDbFactory dbFactory) : base(dbFactory)
@@ -28,7 +28,7 @@ namespace TestingSystem.Data.Repositories
             try
             {
                 // query all usergroup by idGroup
-                var listExamPaper = this.DbContext.ExamPaperExams.Where(c => c.ExamPaperID == examPaperId).ToList();
+                var listExamPaper = this.DbContext.ExamTests.Where(c => c.TestID == examPaperId).ToList();
                 List<int> listIdExam = new List<int>();
                 for(int i = 0; i < listExamPaper.Count(); i++)
                 {

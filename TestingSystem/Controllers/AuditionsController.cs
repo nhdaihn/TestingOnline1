@@ -49,12 +49,12 @@ namespace TestingSystem.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult AuditionsTest(string code)
-        {
-            var model = examPaperService.FindCode(code);
-            var examPaperID = model.ExamPaperID;
-            return RedirectToAction("ShowExamPaperById", "TestNotLogin",new { idExamPaper = examPaperID });
-        }
+        //[HttpPost]
+        //public ActionResult AuditionsTest(string code)
+        //{
+        //    var model = examPaperService.FindCode(code);
+        //    var examPaperID = model.ExamPaperID;
+        //    return RedirectToAction("ShowExamPaperById", "TestNotLogin",new { idExamPaper = examPaperID });
+        //}
     }
 }

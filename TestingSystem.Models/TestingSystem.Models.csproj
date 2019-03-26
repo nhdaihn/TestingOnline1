@@ -69,7 +69,7 @@
     <Compile Include="Candidate.cs" />
     <Compile Include="Exam.cs" />
     <Compile Include="ExamPaper.cs" />
-    <Compile Include="ExamPaperExam.cs" />
+    <Compile Include="ExamTest.cs" />
     <Compile Include="ExamPaperQuesion.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="RoleAction.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="TestResult.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserGroup.cs" />
   </ItemGroup>

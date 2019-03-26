@@ -89,7 +89,10 @@
         /// <summary>
         /// The Commit
         /// </summary>
-        public DbSet<ExamPaperExam> ExamPaperExams { get; set; }
+        public DbSet<ExamTest> ExamTests { get; set; }
+
+        public DbSet<TestResult> TestResults { get; set; }
+
         public virtual void Commit()
         {
             base.SaveChanges();
