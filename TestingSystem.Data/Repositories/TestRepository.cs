@@ -17,6 +17,7 @@ namespace TestingSystem.Data.Repositories
 		int AddTest(Test entity);
 		int DeleteTest(int id);
 		IEnumerable<Test> GetAllTestIsActive();
+		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
 	}
 	public class TestRepository : RepositoryBase<Test>, ITestRepository
 	{
@@ -67,6 +68,12 @@ namespace TestingSystem.Data.Repositories
 		{
 			var listTestActive = DbContext.Tests.Where(x => x.IsActive == true).ToList();
 			return listTestActive.AsEnumerable();
+		}
+
+		public IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch)
+		{
+			var listTestActiveByKey = DbContext.Tests.Where(x => x.TestName.Contains(keySearch) && x.IsActive == true);
+			return listTestActiveByKey;
 		}
 
 		public IEnumerable<Test> GetAllTest()

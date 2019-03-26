@@ -16,6 +16,7 @@ namespace TestingSystem.Sevice
 		int DeleteTest(int id);
 		Test GetTestByID(int id);
 		IEnumerable<Test> GetAllTestIsActive();
+		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
 	}
 	public class TestService : ITestService
 	{
@@ -48,6 +49,11 @@ namespace TestingSystem.Sevice
 		public IEnumerable<Test> GetAllTestIsActive()
 		{
 			return testRepository.GetAllTestIsActive();
+		}
+
+		public IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch)
+		{
+			return testRepository.GetAllTestIsActiveByKeySearch(keySearch);
 		}
 
 		public bool UpdateTest(Test test)

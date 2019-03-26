@@ -46,7 +46,7 @@
 			<div class="box-body">
 				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 				<div class="form-group">
-					<label for="" class="col-sm-2 control-label">Category Name</label>
+					<label for="" class="col-sm-2 control-label">Exam Name</label>
 					<div class="col-sm-6">
 						<input type="text" name="ExamName" id="ExamName" class="form-control" onchange="CategoryCheckCreate()" />
 						@Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })

@@ -214,7 +214,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 		[HttpPost]
 		public ActionResult UpdateTest(int id, string keySearch)
 		{
-			var listTestActive = testService.GetAllTestIsActive();
+			var listTestActive = testService.GetAllTestIsActiveByKeySearch(keySearch);
 			ViewBag.listTestActive = listTestActive;
 			//
 			ViewBag.examID = id;

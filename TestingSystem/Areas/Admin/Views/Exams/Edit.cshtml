@@ -28,6 +28,12 @@
 		height: 200px;
 		width: 776px;
 	}
+	.mydate {
+		font-size: 14px;
+		font-family: inherit;
+		padding-left: 11px;
+
+	}
 </style>
 <section class="content-header">
 	<h1>
@@ -61,14 +67,14 @@
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">Start Date</label>
 					<div class="col-sm-6">
-						<input id="StartDate" name="StartDate" class="form-control" value="@Model.StartDate.ToString("MM/dd/yyyy")" />
+						<input id="StartDate" name="StartDate" class="form-control mydate" value="@Model.StartDate.ToString("MM/dd/yyyy")" />
 						@Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">End Date</label>
 					<div class="col-sm-6">
-						<input id="EndDate" name="EndDate" class="form-control" value="@Model.EndDate.ToString("MM/dd/yyyy")" />
+						<input id="EndDate" name="EndDate" class="form-control mydate" value="@Model.EndDate.ToString("MM/dd/yyyy")" />
 						@Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
 					</div>
 				</div>
@@ -117,7 +123,7 @@
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				@using (Html.BeginForm("Index", "Exams", FormMethod.Post))
+				@*@using (Html.BeginForm("Index", "Exams", FormMethod.Post))
 				{
 					<div class="row">
 						<div class="col-md-6" style="margin-bottom:15px">
@@ -128,13 +134,13 @@
 								</span>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6">*@
 							<button class="btn btn-sm btn-success">
-								@Html.ActionLink("Update Exam Paper", "UpdateTest", new { id = Model.ExamID }, new { @style = "color: white;" })
+								@Html.ActionLink("Update Test", "UpdateTest", new { id = Model.ExamID }, new { @style = "color: white;" })
 							</button>
-						</div>
+						@*</div>
 					</div>
-				}
+				}*@
 				<form action="@Url.Action("RemoveTestInExams","Exams")" id="form-delete" method="post">
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
