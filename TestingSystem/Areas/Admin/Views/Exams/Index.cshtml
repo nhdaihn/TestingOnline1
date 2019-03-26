@@ -70,7 +70,7 @@
 									<td>@item.EndDate</td>
           
 									<td>
-										<a href="#" id="btnGetCode">
+										<a href="#" id="btnGetCode" name="@item.ExamCode">
 											<div class="btn btn-sm btn-instagram" data-toggle="modal" data-target="#GetCodeModal">Get Code</div>
 										</a>
 										<a href='@Url.Action("Edit", "Exams", new {id = @item.ExamID})'>
@@ -110,7 +110,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label for="Name"></label>
-					<input type="text" class="form-control" value="" id="thisExamCode" />
+					<input type="text" class="form-control" id="thisExamCode" />
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -123,7 +123,8 @@
 	$(document).ready(function() {
 
 		$('#btnGetCode').click(function(this) {
-			
+			consolog.log($(this).attr("name"));
+			consolog.log("dsd");
 		});
 	});
 </script>
