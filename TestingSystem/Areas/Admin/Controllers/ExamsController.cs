@@ -64,6 +64,9 @@ namespace TestingSystem.Areas.Admin.Controllers
 		}
 		public ActionResult Edit(int id)
 		{
+			var listUser = userService.ListAll();
+			ViewBag.listUser = listUser;
+			ViewBag.countUser = listUser.Count;
 			ViewBag.listAllTest = testService.GetAllTests();
 			var listTestByExamID = examService.GetTestByExamID(id);
 			//foreach (var item in listTestByExamID)
