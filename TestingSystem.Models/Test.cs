@@ -37,11 +37,9 @@ namespace TestingSystem.Models
 		[Required]
 		public string PassingScore { get; set; }
 
-
 		[Required]
-		public byte Status { get; set; }
+		public bool Status { get; set; }
 
-		public int Score { get; set; }
 		public virtual ICollection<TestResult> TestResults { get; set; }
 		public virtual ICollection<ExamTest> ExamTests { get; set; }
 		public virtual ExamPaper ExamPapers { get; set; }

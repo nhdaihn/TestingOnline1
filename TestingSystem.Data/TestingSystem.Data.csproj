@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201903260344344_pain.Designer.cs">
       <DependentUpon>201903260344344_pain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903260646169_delete row score.cs" />
+    <Compile Include="Migrations\201903260646169_delete row score.Designer.cs">
+      <DependentUpon>201903260646169_delete row score.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ActionRepository.cs" />
@@ -178,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903260344344_pain.resx">
       <DependentUpon>201903260344344_pain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903260646169_delete row score.resx">
+      <DependentUpon>201903260646169_delete row score.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
