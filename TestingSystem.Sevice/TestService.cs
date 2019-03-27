@@ -17,7 +17,10 @@ namespace TestingSystem.Sevice
 		Test GetTestByID(int id);
 		IEnumerable<Test> GetAllTestIsActive();
 		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
-	}
+
+        IEnumerable<Test> SearchExams(string txtSearch);
+
+    }
 	public class TestService : ITestService
 	{
 		private readonly ITestRepository testRepository;
@@ -60,5 +63,10 @@ namespace TestingSystem.Sevice
 		{
 			return testRepository.UpdateTest(test);
 		}
-	}
+
+        public IEnumerable<Test> SearchExams(string txtSearch)
+        {
+            return testRepository.SearchExams(txtSearch);
+        }
+    }
 }

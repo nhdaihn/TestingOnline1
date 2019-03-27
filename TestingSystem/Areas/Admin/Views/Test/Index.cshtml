@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a href="@Url.Action("Create","Exams")">
+                            <a href="@Url.Action("Create","Test")">
                                 <div class="btn btn-success">Create</div>
                             </a>
                         </div>
@@ -47,10 +47,14 @@
                             <tr>
                                 <td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
                                 <th width="7%">Number</th>
-	                            <th>Test Name</th>
-                                <th>Score</th>
+                                <th>Test Name</th>
+                                <th>ExamPaper</th>
                                 <th>PassingScore</th>
-	                            <th width="12%">Status</th>
+                                <th>StartDate</th>
+                                <th>EndDate</th>
+                                <th>CreatedDate</th>
+                                <th width="5%">Status</th>
+                                <th width="20%">Action</th>
 
                             </tr>
                         </thead>
@@ -61,12 +65,28 @@
                                 <tr>
                                     <td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
                                     <td>@stt</td>
-	                                <td>
-		                                @item.ExamPapers.Title
-	                                </td>
-                                    <td>@item.Score</td>
+                                    <td>
+                                        @item.TestName
+                                    </td>
+                                    <td>
+                                        @item.ExamPapers.Title
+                                    </td>
                                     <td>@item.PassingScore</td>
+                                    <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                                     <td>@item.Status</td>
+                                    <td>
+                                        <a href='@Url.Action("Edit", "Question", new {id = @item.TestID})'>
+                                            <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
+                                        </a>
+                                        <a href='@Url.Action("Detail", "Question", new {id = @item.TestID})'>
+                                            <div class="btn  btn-sm btn-success"><i class="fa fa-eye"></i></div>
+                                        </a>
+                                        <a href='@Url.Action("Delete", "Question", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
+                                            <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -74,6 +94,7 @@
                     <a onclick="return confirm('Are you sure you want to delete multiple exams ?');">
                         <button type="submit" class="btn btn-danger" id="btn-delete" disabled>Delete</button>
                     </a>
+
                 </form>
             </div>
             <!-- /.box-body -->

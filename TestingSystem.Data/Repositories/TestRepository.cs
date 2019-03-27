@@ -18,7 +18,10 @@ namespace TestingSystem.Data.Repositories
 		int DeleteTest(int id);
 		IEnumerable<Test> GetAllTestIsActive();
 		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
-	}
+
+        IEnumerable<Test> SearchExams(string txtSearch);
+
+    }
 	public class TestRepository : RepositoryBase<Test>, ITestRepository
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -30,11 +33,12 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
+                entity.Description = "good";
 				entity.CreateDate = DateTime.Now;
 				DbContext.Tests.Add(entity);
-				DbContext.SaveChanges();
-				return entity.TestID;
-			}
+                return DbContext.SaveChanges();
+
+            }
 			catch (Exception e)
 			{
 				log.Debug(e.Message);
@@ -95,8 +99,12 @@ namespace TestingSystem.Data.Repositories
 			var model = DbContext.Tests.Find(id);
 			return model;
 		}
-
-		public bool UpdateTest(Test entity)
+        public IEnumerable<Test> SearchExams(string txtSearch)
+        {
+            var listTest = DbContext.Tests.Where(x => x.TestName.Contains(txtSearch)).ToList();
+            return listTest;
+        }
+        public bool UpdateTest(Test entity)
 		{
 			try
 			{
@@ -104,10 +112,15 @@ namespace TestingSystem.Data.Repositories
 				if (objExam != null)
 				{
 					objExam.TestName = entity.TestName;
-					objExam.CreateDate = DateTime.Now;
+					objExam.CreateDate = objExam.CreateDate;
 					objExam.Description = entity.Description;
-					objExam.Status = entity.Status;
+					objExam.IsActive = entity.IsActive;
 					objExam.PassingScore = entity.PassingScore;
+                    objExam.ModifiedDate = DateTime.Now;
+                    objExam.StartDate = entity.StartDate;
+                    objExam.EndDate = entity.EndDate;
+                    objExam.ExamPaperID = entity.ExamPaperID;
+
 					this.DbContext.SaveChanges();
 					return true;
 				}
