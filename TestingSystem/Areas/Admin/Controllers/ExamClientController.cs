@@ -19,25 +19,26 @@ namespace TestingSystem.Areas.Admin.Controllers
             this.examPaperService = examPaperService;
             this.examService = examService;
         }
-        // GET: Admin/ExamClient
-        //public ActionResult ListExamClient(int idExam = 0)
-        //{
-        //    var listExam = examService.GetAllExams().ToList();
-        //    if (idExam == 0)
-        //    {
-        //        idExam = listExam[0].ExamID;
-        //    }
-        //    if (idExam != 0)
-        //    {
-        //        ViewBag.ListExam = listExam;
-        //        ViewBag.ListExamPaperInExam = examService.GetExamPaperByExamID(idExam);
-        //    } else
-        //    {
-        //        ViewBag.ListExam = listExam;
-        //        ViewBag.ListExamPaperInExam = examService.GetExamPaperByExamID(idExam);
-        //    }
-        //    ViewBag.IdExam = idExam;
-        //    return View(listExam);
-        //}
+        //GET: Admin/ExamClient
+        public ActionResult ListExamClient(int idExam = 0)
+        {
+            var listExam = examService.GetAllExams().ToList();
+            if (idExam == 0)
+            {
+                idExam = listExam[0].ExamID;
+            }
+            if (idExam != 0)
+            {
+                ViewBag.ListExam = listExam;
+                ViewBag.ListExamPaperInExam = examService.GetTestByExamID(idExam);
+            }
+            else
+            {
+                ViewBag.ListExam = listExam;
+                ViewBag.ListExamPaperInExam = examService.GetTestByExamID(idExam);
+            }
+            ViewBag.IdExam = idExam;
+            return View(listExam);
+        }
     }
 }
