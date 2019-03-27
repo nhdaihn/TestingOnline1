@@ -113,6 +113,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ActionRepository.cs" />
     <Compile Include="Repositories\AnswerRepository.cs" />
+    <Compile Include="Repositories\CandidateRepository.cs" />
     <Compile Include="Repositories\ExamPaperExamRepository.cs" />
     <Compile Include="Repositories\ExamPaperQuestionRepository.cs" />
     <Compile Include="Repositories\ExamPaperRepository.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Repositories\RoleActionRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\TestRepository.cs" />
+    <Compile Include="Repositories\TestResultRepository.cs" />
     <Compile Include="Repositories\UserGroupRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SeedData.cs" />

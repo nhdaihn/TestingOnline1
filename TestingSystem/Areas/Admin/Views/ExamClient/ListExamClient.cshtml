@@ -74,7 +74,7 @@
                 <div class="col-md-9 col-xs-9 margin-top-10">
                     <a href="/thong-tin-bai-thi/5279?cid=3">
                         <span class="exam-title">
-                            <a href="@Url.Action("ShowExamPaperById", "TestLogin", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam})">@item.Title
+                            <a href="@Url.Action("ShowExamPaperById", "TestLogin", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam, idTest = item.TestID})">@item.TestName
                         </span>
                     </a>
                     <div class="box-label-exam">
