@@ -43,6 +43,7 @@
             <hr>
         </div>
     }
+    @Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore , title = ViewBag.TitleTest }));
 </div>
 <script>
     $(document).ready(function () {

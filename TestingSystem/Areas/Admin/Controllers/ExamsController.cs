@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
+using OfficeOpenXml.Style.XmlAccess;
 using TestingSystem.BaseController;
 using TestingSystem.Models;
 using TestingSystem.Sevice;
@@ -248,18 +249,19 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 
 		}
-		//public JsonResult _GetCode(int idExam)
-		//{
-		//	var str = Test.GetCode(idExam);
-		//	if (str != "")
-		//	{
-		//		return Json(str, JsonRequestBehavior.AllowGet);
-		//	}
-		//	else
-		//	{
-		//		return Json(null);
-		//	}
-		//}
+		public JsonResult _FindId(int Id)
+		{
+			var exam = examService.GetExamsByID(Id);
+			if (exam != null)
+			{
+				var code = exam.ExamCode;
+				return Json(code, JsonRequestBehavior.AllowGet);
+			}
+			else
+			{
+				return Json(null);
+			}
+		}
 		//public JsonResult GetCodeExamPaper()
 		//{
 		//	GetCode();

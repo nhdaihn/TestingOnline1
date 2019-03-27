@@ -5,6 +5,7 @@
 	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 	int stt = 0;
 }
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
@@ -70,8 +71,8 @@
 									<td>@item.EndDate</td>
 
 									<td>
-										<a href="#">
-											<div class="btn btn-sm btn-instagram" data-toggle="modal" data-target="#GetCodeModal" id="btnGetCode" value="@item.ExamCode" onclick="getcodefunction();">Get Code</div>
+										<a href="#"  onclick="getCodeExamPaper(@item.ExamID)">
+											<div class="btn btn-sm btn-instagram" data-toggle="modal" data-target="#GetCodeModal" id="btnGetCode">Get Code</div>
 										</a>
 										<a href='@Url.Action("Edit", "Exams", new {id = @item.ExamID})'>
 											<div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
@@ -98,11 +99,11 @@
 	<!-- /.row -->
 </section>
 <!-- /.content -->
-<div class="modal fade" id="getcodemodal" tabindex="-1" role="dialog" aria-labelledby="getcodemodal" aria-hidden="true">
+<div class="modal fade" id="GetCodeModal" tabindex="-1" role="dialog" aria-labelledby="GetCodeModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">code exampaper</h5>
+				<h5 class="modal-title">Code Exam</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -110,7 +111,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label for="name"></label>
-					<input type="text" class="form-control" id="thisexamcode" value="" />
+					<input type="text" class="form-control" id="examCode" value="" />
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -120,12 +121,19 @@
 	</div>
 </div>
 <script>
-
-	function getcodefunction() {
-		bcode = document.getElementById('btnGetCode');
-		icode = document.getElementById('thisExamCode').val();
-		var a = bcode.val();
-		alert(a);
+	function getCodeExamPaper(x) {
+		$.post("@Url.Action("_FindId", "Exams")",
+			{
+				Id: x
+			},
+			function (str) {
+				if (str != null) {
+					document.getElementById("examCode").value = str;
+				}
+				else {
+					alert("fails!");
+				}
+			});
 	}
 </script>
 <script language="JavaScript">
@@ -160,6 +168,7 @@
 
 </script>
 @section scripts{
+
 	<script>
 		$(document).ready(function () {
 			$("#delete-multiple").on("click",
