@@ -3,7 +3,23 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutExamine.cshtml";
     int i = 0;
 }
+<style>
+	.checkboxva {
+		float: left;
+	}
 
+	.myquestion {
+		padding-left: 20px;
+	}
+
+	.radiova {
+		float: left;
+	}
+
+	.myanswer {
+		padding-left: 19px;
+	}
+</style>
 <div>
     @foreach (var item in ViewBag.ListQuestion)
     {
@@ -17,7 +33,9 @@
             {
                 if (item.QuestionID == item2.QuestionID)
                 {
-                    <p><input type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+	                <div>
+		                <input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" style="margin-top: 5px" /><p class="myanswer">@item2.AnswerContent</p>
+	                </div>
                 }
             }
         </div>
@@ -25,6 +43,7 @@
             <hr>
         </div>
     }
+    @Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore , title = ViewBag.TitleTest }));
 </div>
 <script>
     $(document).ready(function () {

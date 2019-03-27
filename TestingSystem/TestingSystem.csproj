@@ -6752,6 +6752,19 @@
     <Content Include="Content\QuestionUpload\Images\skysports-david-luiz-emerson_4574973.jpg" />
     <Content Include="Content\QuestionUpload\Images\Team1 %281%29.png" />
     <Content Include="Content\remove.png" />
+    <Content Include="Content\Root\2017119141915274_logocmc.png" />
+    <Content Include="Content\Root\3.jpg" />
+    <Content Include="Content\Root\4.jpg" />
+    <Content Include="Content\Root\avatar-default.png" />
+    <Content Include="Content\Root\bootstrap.min.css" />
+    <Content Include="Content\Root\bundles_js_dangnhap.js" />
+    <Content Include="Content\Root\components.css" />
+    <Content Include="Content\Root\customize.css" />
+    <Content Include="Content\Root\customize.js" />
+    <Content Include="Content\Root\font-awesome.min.css" />
+    <Content Include="Content\Root\jquery.backstretch.min.js" />
+    <Content Include="Content\Root\login.min.css" />
+    <Content Include="Content\Root\simple-line-icons.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style-export-to-pdf.css" />
     <Content Include="Content\style.css" />
@@ -7735,6 +7748,7 @@
     <Content Include="Areas\Admin\Views\Shared\_LayoutExamine.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\PartialViewListExam.cshtml" />
     <Content Include="Areas\Admin\Views\Test\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TestLogin\_ShowResult.cshtml" />
     <Content Include="Areas\Admin\Views\Test\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

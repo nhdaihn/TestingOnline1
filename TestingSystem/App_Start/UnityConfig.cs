@@ -95,6 +95,12 @@ namespace TestingSystem
 			container.RegisterType<ITestRepository, TestRepository>();
 			container.RegisterType<ITestService, TestService>();
 
-		}
+            container.RegisterType<ITestResultRepository, TestResultRepository>();
+            container.RegisterType<ITestResultService, TestResultService>();
+
+            container.RegisterType<ICandidateRepository, CandidateRepository>();
+            container.RegisterType<ICandidateService, CandidateService>();
+
+        }
     }
 }

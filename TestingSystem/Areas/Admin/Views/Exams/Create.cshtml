@@ -46,25 +46,25 @@
 			<div class="box-body">
 				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 				<div class="form-group">
-					<label for="" class="col-sm-2 control-label">Category Name</label>
+					<label for="" class="col-sm-2 control-label">Exam Name</label>
 					<div class="col-sm-6">
 						<input type="text" name="ExamName" id="ExamName" class="form-control" onchange="CategoryCheckCreate()" />
-						@Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })
+						<span class="check-input" style="color:red;display:none">Please input Exam Name!</span>
 					</div>
 					<span id="Status"></span>
 				</div>
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">Start Date</label>
 					<div class="col-sm-6">
-						<input name="StartDate" id="StartDate" type="date" />
-						@Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+						<input name="StartDate" id="StartDate" type="date" class="form-control"/>
+						<span class="check-input" style="color:red;display:none">Please input </span>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="" class="col-sm-2 control-label">End Date</label>
 					<div class="col-sm-6">
-						<input name="EndDate" id="EndDate" type="date" />
-						@Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+						<input name="EndDate" id="EndDate" type="date" class="form-control" />
+						<span class="check-input" style="color:red;display:none">Please input Content Question!</span>
 					</div>
 				</div>
 				<div class="form-group">
@@ -75,7 +75,7 @@
 							<option value="1">Public</option>
 							<option value="1">Private</option>
 						</select>
-						@Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+						<span class="check-input" style="color:red;display:none">Please input Content Question!</span>
 					</div>
 				</div>
 				<div class="form-group">

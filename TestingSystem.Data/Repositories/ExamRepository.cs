@@ -90,6 +90,7 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
+				exam.ExamCode= Guid.NewGuid().ToString();
 				exam.CreateDate = DateTime.Now;
 				DbContext.Exams.Add(exam);
 				DbContext.SaveChanges();

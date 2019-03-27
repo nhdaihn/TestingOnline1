@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
+using OfficeOpenXml.Style.XmlAccess;
 using TestingSystem.BaseController;
 using TestingSystem.Models;
 using TestingSystem.Sevice;
@@ -64,6 +65,9 @@ namespace TestingSystem.Areas.Admin.Controllers
 		}
 		public ActionResult Edit(int id)
 		{
+			var listUser = userService.ListAll();
+			ViewBag.listUser = listUser;
+			ViewBag.countUser = listUser.Count;
 			ViewBag.listAllTest = testService.GetAllTests();
 			var listTestByExamID = examService.GetTestByExamID(id);
 			//foreach (var item in listTestByExamID)
@@ -214,7 +218,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 		[HttpPost]
 		public ActionResult UpdateTest(int id, string keySearch)
 		{
-			var listTestActive = testService.GetAllTestIsActive();
+			var listTestActive = testService.GetAllTestIsActiveByKeySearch(keySearch);
 			ViewBag.listTestActive = listTestActive;
 			//
 			ViewBag.examID = id;
@@ -245,6 +249,22 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 
 		}
-
-    }
+		public JsonResult _FindId(int Id)
+		{
+			var exam = examService.GetExamsByID(Id);
+			if (exam != null)
+			{
+				var code = exam.ExamCode;
+				return Json(code, JsonRequestBehavior.AllowGet);
+			}
+			else
+			{
+				return Json(null);
+			}
+		}
+		//public JsonResult GetCodeExamPaper()
+		//{
+		//	GetCode();
+		//}
+	}
 }
