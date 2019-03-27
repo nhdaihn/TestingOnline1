@@ -34,8 +34,12 @@ namespace TestingSystem.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult ShowExamPaperById(int idExamPaper, int idExam, int idTest)
         {
+            
             /// danh sach cau hoi trong de thi
             var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(idExamPaper);
+
+            
+
             // so luong cau hoi
             var countQuestion = listExamPaperQuesions.Count();
             ViewBag.CountQuestion = countQuestion;
@@ -49,6 +53,32 @@ namespace TestingSystem.Areas.Admin.Controllers
             List<Answer> listA = new List<Answer>();
             ViewBag.ListQuestion = listExamPaperQuesions;
             ViewBag.ListAnswer = listAnswerInExamPaper;
+
+            List<QuestionCheckMulti> listQuestionCheckMulti = new List<QuestionCheckMulti>();
+            List<Answer> listAnswerByQuestionId = new List<Answer>();
+            
+            // get multi choice in all question
+            foreach (var item in listExamPaperQuesions)
+            {
+                var checkcount = 0;
+                bool multichoice = false;
+                listAnswerByQuestionId = answerService.GetAnswersByQuestionID(item.QuestionID);
+                foreach (var item2 in listAnswerByQuestionId)
+                {
+                    if(answerService.GetAnswerCorrect(item2.AnswerID) != null)
+                    {
+                        checkcount++;
+                    }
+                }
+                if(checkcount > 1)
+                {
+                    multichoice = true;
+                }
+                listQuestionCheckMulti.Add(new QuestionCheckMulti() { QuestionID = item.QuestionID, CheckMulti = multichoice });
+                multichoice = false;
+                checkcount = 0;
+            }
+            ViewBag.ListQuestionCheckMulti = listQuestionCheckMulti;
             ViewBag.IdExamPaper = idExamPaper;
             TempData["idExamPaper"] = idExamPaper;
             ViewBag.TitleTest = examPaperService.GetExamPaperById(idExamPaper).Title;
@@ -62,34 +92,143 @@ namespace TestingSystem.Areas.Admin.Controllers
             ViewBag.IdExam = idExam;
             return View();
         }
+        static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
+        {
+            // 1
+            // Require that the counts are equal
+            if (a.Count != b.Count)
+            {
+                return false;
+            }
+            // 2
+            // Initialize new Dictionary of the type
+            Dictionary<T, int> d = new Dictionary<T, int>();
+            // 3
+            // Add each key's frequency from collection A to the Dictionary
+            foreach (T item in a)
+            {
+                int c;
+                if (d.TryGetValue(item, out c))
+                {
+                    d[item] = c + 1;
+                }
+                else
+                {
+                    d.Add(item, 1);
+                }
+            }
+            // 4
+            // Add each key's frequency from collection B to the Dictionary
+            // Return early if we detect a mismatch
+            foreach (T item in b)
+            {
+                int c;
+                if (d.TryGetValue(item, out c))
+                {
+                    if (c == 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        d[item] = c - 1;
+                    }
+                }
+                else
+                {
+                    // Not in dictionary
+                    return false;
+                }
+            }
+            // 5
+            // Verify that all frequencies are zero
+            foreach (int v in d.Values)
+            {
+                if (v != 0)
+                {
+                    return false;
+                }
+            }
+            // 6
+            // We know the collections are equal
+            return true;
+        }
         [HttpPost]
         public JsonResult _RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid, int passscore, int idtest)
         {
-           
-	        int idUser = int.Parse(Session["Name"].ToString());
+
+            /// danh sach cau hoi trong de thi
+            var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(exampaperid);
+            List<Answer> listAnswerByQuestionId = new List<Answer>();
+            List<QuestionCheckMulti> listQuestionCheckMulti = new List<QuestionCheckMulti>();
+
+            // get multi choice in all question
+            foreach (var item in listExamPaperQuesions)
+            {
+                var checkcount = 0;
+                bool multichoice = false;
+                listAnswerByQuestionId = answerService.GetAnswersByQuestionID(item.QuestionID);
+                foreach (var item2 in listAnswerByQuestionId)
+                {
+                    if (answerService.GetAnswerCorrect(item2.AnswerID) != null)
+                    {
+                        checkcount++;
+                    }
+                }
+                if (checkcount > 1)
+                {
+                    multichoice = true;
+                }
+                listQuestionCheckMulti.Add(new QuestionCheckMulti() { QuestionID = item.QuestionID, CheckMulti = multichoice });
+                multichoice = false;
+                checkcount = 0;
+            }
+
+
+
+
+
+
+            int idUser = int.Parse(Session["Name"].ToString());
             // fruits : chua danh sach tat ca id question va id answer da check
 			var list = fruits;
             int countAnswer = fruits.Count();
-            List<Answer> listAnswerCorrect = new List<Answer>();
+            int numberOfCorrectAnswer = 0;
+            int i = 0;
+            bool checkcontinue = true;
+            int idalive = 0;
             foreach (var item in list)
             {
                 // id: answer id, name: question id
                 // lay answer dung trong fruits
-                var obj = answerService.GetAnswerCorrect(item.id);
-                if (obj != null)
+                if(idalive != item.name)
                 {
-                    listAnswerCorrect.Add(obj);
-                }
-            }
-            int numberOfCorrectAnswer = 0;
-            foreach (var item in listAnswerCorrect)
-            {
-                foreach (var item2 in list)
-                {
-                    if (item.AnswerID == item2.id)
+                    if (listQuestionCheckMulti[i].CheckMulti == false)
                     {
-                        numberOfCorrectAnswer++;
-                        continue;
+                        var obj = answerService.GetAnswerCorrect(item.id);
+                        if (obj != null)
+                        {
+                            numberOfCorrectAnswer++;
+                        }
+                    }
+                    else
+                    {
+                        List<int> listIdAnswerCorrectByIdQuestion = new List<int>();
+                        // lay tat ca id answer dung theo id question
+                        listIdAnswerCorrectByIdQuestion = answerService.GetListIdAnswerCorrectByIdQuestion(item.name);
+                        List<int> listIdAnswerCheckById = new List<int>();
+                        foreach (var obj in list)
+                        {
+                            if (obj.name == item.name)
+                            {
+                                listIdAnswerCheckById.Add(obj.id);
+                            }
+                        }
+                        if (UnorderedEqual(listIdAnswerCorrectByIdQuestion, listIdAnswerCheckById) == true)
+                        {
+                            numberOfCorrectAnswer++;
+                        }
+                        idalive = item.name;
                     }
                 }
             }

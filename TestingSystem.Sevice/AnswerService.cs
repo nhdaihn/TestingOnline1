@@ -18,6 +18,7 @@ namespace TestingSystem.Sevice
         bool UpdateAnswer(Answer answer);
         void DeleteAnswer(Answer answer);
         Answer GetAnswerCorrect(int idAnswer);
+        List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion);
     }
     public class AnswerService : IAnswerService
     {
@@ -61,6 +62,11 @@ namespace TestingSystem.Sevice
         public Answer GetAnswerCorrect(int idAnswer)
         {
             return answerRepository.GetAnswerCorrect(idAnswer);
+        }
+
+        public List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion)
+        {
+            return answerRepository.GetListIdAnswerCorrectByIdQuestion(idQuestion);
         }
     }
 }
