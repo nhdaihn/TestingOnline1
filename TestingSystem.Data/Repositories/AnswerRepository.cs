@@ -13,6 +13,7 @@ namespace TestingSystem.Data.Repositories
         int DeleteAnswer(int id);
         int DelteAnswerbyQuestionID(int id);
         Answer GetAnswerCorrect(int idAnswer);
+        List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion);
     }
 
     public class AnswerRepository : RepositoryBase<Answer>, IAnswerRepository
@@ -82,6 +83,18 @@ namespace TestingSystem.Data.Repositories
         {
             var obj = this.DbContext.Answers.Where(s => s.IsCorrect == true && s.AnswerID == idAnswer).FirstOrDefault();
             return obj;
+        }
+
+        public List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion)
+        {
+            var listAnswer = this.DbContext.Answers.Where(s => s.QuestionID == idQuestion && s.IsCorrect == true).ToList();
+            List<int> listIdAnswer = new List<int>();
+            foreach (var item in listAnswer)
+            {
+                listIdAnswer.Add(item.AnswerID);
+            }
+
+            return listIdAnswer;
         }
     }
 }
