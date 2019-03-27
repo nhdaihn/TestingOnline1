@@ -64,9 +64,6 @@
 						</div>
 					</div>
 					<div class="col-md-12 no-padding">
-
-
-
 						<div class="theme-item col-xs-12 col-md-6 padding-left-0 padding-top-15">
 
 							<div class="row" style="height: 170px;">
@@ -310,7 +307,7 @@
 										</div>
 									</div>
 									<div class="col-md-9 col-xs-9 margin-top-10 padding-left-15 pull-left" style="overflow: hidden">
-										<a @*href="@Url.Action("#", "#", new { idExamPaper = item.ExamPaperID})"*@>
+										<a href="@Url.Action("ShowExamPaperById", "Auditions", new { idExamPaper = item.ExamPaperID})">
 											<span class="exam-title">
 												@item.TestName
 											</span>

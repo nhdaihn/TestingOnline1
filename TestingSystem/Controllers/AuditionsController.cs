@@ -66,5 +66,24 @@ namespace TestingSystem.Controllers
 			return View();
 
 		}
+		public ActionResult ShowExamPaperById(int idExamPaper)
+		{
+			var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(idExamPaper);
+			var countQuestion = listExamPaperQuesions.Count();
+			ViewBag.CountQuestion = countQuestion;
+			ViewBag.Time = examPaperService.GetExamPaperById(idExamPaper).Time;
+			List<Answer> listAnswer = new List<Answer>();
+			List<Answer> listAnswerInExamPaper = new List<Answer>();
+			foreach (var item in listExamPaperQuesions)
+			{
+				listAnswerInExamPaper.AddRange(answerService.GetAnswersByQuestionID(item.QuestionID));
+			}
+			List<Answer> listA = new List<Answer>();
+			ViewBag.ListQuestion = listExamPaperQuesions;
+			ViewBag.ListAnswer = listAnswerInExamPaper;
+			ViewBag.IdExamPaper = idExamPaper;
+			TempData["idExamPaper"] = idExamPaper;
+			return View();
+		}
 	}
 }
