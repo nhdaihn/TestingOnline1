@@ -248,5 +248,21 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 
 		}
+		//public JsonResult _GetCode(int idExam)
+		//{
+		//	var str = Test.GetCode(idExam);
+		//	if (str != "")
+		//	{
+		//		return Json(str, JsonRequestBehavior.AllowGet);
+		//	}
+		//	else
+		//	{
+		//		return Json(null);
+		//	}
+		//}
+		//public JsonResult GetCodeExamPaper()
+		//{
+		//	GetCode();
+		//}
 	}
 }

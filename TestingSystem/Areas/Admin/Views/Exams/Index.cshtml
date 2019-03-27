@@ -48,7 +48,7 @@
 							<tr>
 								<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
 								<th width="7%">Number</th>
-								<th  width="15%">Name </th>
+								<th width="15%">Name </th>
 								<th>Description</th>
 								<th width="12%">Start Date</th>
 								<th width="12%">End Date</th>
@@ -68,10 +68,10 @@
 									<td>@item.Description</td>
 									<td>@item.StartDate</td>
 									<td>@item.EndDate</td>
-          
+
 									<td>
-										<a href="#" id="btnGetCode" name="@item.ExamCode">
-											<div class="btn btn-sm btn-instagram" data-toggle="modal" data-target="#GetCodeModal">Get Code</div>
+										<a href="#">
+											<div class="btn btn-sm btn-instagram" data-toggle="modal" data-target="#GetCodeModal" id="btnGetCode" value="@item.ExamCode" onclick="getcodefunction();">Get Code</div>
 										</a>
 										<a href='@Url.Action("Edit", "Exams", new {id = @item.ExamID})'>
 											<div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
@@ -98,35 +98,35 @@
 	<!-- /.row -->
 </section>
 <!-- /.content -->
-<div class="modal fade" id="GetCodeModal" tabindex="-1" role="dialog" aria-labelledby="GetCodeModal" aria-hidden="true">
+<div class="modal fade" id="getcodemodal" tabindex="-1" role="dialog" aria-labelledby="getcodemodal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Code ExamPaper</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<h5 class="modal-title">code exampaper</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="Name"></label>
-					<input type="text" class="form-control" id="thisExamCode" />
+					<label for="name"></label>
+					<input type="text" class="form-control" id="thisexamcode" value="" />
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-	$(document).ready(function() {
 
-		$('#btnGetCode').click(function(this) {
-			consolog.log($(this).attr("name"));
-			consolog.log("dsd");
-		});
-	});
+	function getcodefunction() {
+		bcode = document.getElementById('btnGetCode');
+		icode = document.getElementById('thisExamCode').val();
+		var a = bcode.val();
+		alert(a);
+	}
 </script>
 <script language="JavaScript">
 	function Check(source) {
