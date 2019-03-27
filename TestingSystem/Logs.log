@@ -1,8 +1,8 @@
-16:40:42,477 6 - Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+10:41:57,687 13 - Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
 
 ----------------------------------------------------------------------------------------------------------------------------
 
-16:44:11,497 17 - Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+10:43:42,254 8 - Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
 
 ----------------------------------------------------------------------------------------------------------------------------
 
@@ -372,6 +372,7 @@
 ----------------------------------------------------------------------------------------------------------------------------
 
 14:02:23,471 10 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+10:45:56,855 13 - Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
 
 ----------------------------------------------------------------------------------------------------------------------------
 

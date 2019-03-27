@@ -108,19 +108,18 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
-				var objExam = this.DbContext.Tests.Find(entity.TestID);
-				if (objExam != null)
+				var objTest = this.DbContext.Tests.Find(entity.TestID);
+				if (objTest != null)
 				{
-					objExam.TestName = entity.TestName;
-					objExam.CreateDate = objExam.CreateDate;
-					objExam.Description = entity.Description;
-					objExam.IsActive = entity.IsActive;
-					objExam.PassingScore = entity.PassingScore;
-                    objExam.ModifiedDate = DateTime.Now;
-                    objExam.StartDate = entity.StartDate;
-                    objExam.EndDate = entity.EndDate;
-                    objExam.ExamPaperID = entity.ExamPaperID;
-
+                    objTest.TestName = entity.TestName;
+					objTest.Description = entity.Description;
+					objTest.IsActive = entity.IsActive;
+					objTest.PassingScore = entity.PassingScore;
+                    objTest.ModifiedDate = DateTime.Now;
+                    objTest.StartDate = entity.StartDate;
+                    objTest.EndDate = entity.EndDate;
+                    objTest.ExamPaperID = entity.ExamPaperID;
+                    objTest.Status = entity.Status;
 					this.DbContext.SaveChanges();
 					return true;
 				}

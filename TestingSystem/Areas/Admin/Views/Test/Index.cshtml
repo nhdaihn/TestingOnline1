@@ -1,6 +1,6 @@
 ﻿@model List<TestingSystem.Models.Test>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "View List Test";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     int stt = 0;
 }
@@ -24,6 +24,7 @@
             <div class="box-body">
                 @using (Html.BeginForm("Index", "Test", FormMethod.Post))
                 {
+
                     <div class="row">
                         <div class="col-md-6" style="margin-bottom:15px">
                             <div class="input-group">
@@ -45,16 +46,15 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
-                                <th width="7%">Number</th>
+                                <td><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
+                                <th>Number</th>
                                 <th>Test Name</th>
-                                <th>ExamPaper</th>
-                                <th>PassingScore</th>
+                                <th>Exam Paper</th>
+                                <th>PassScore</th>
                                 <th>StartDate</th>
                                 <th>EndDate</th>
-                                <th>CreatedDate</th>
-                                <th width="5%">Status</th>
-                                <th width="20%">Action</th>
+                                <th>Status</th>
+                                <th width="15%">Action</th>
 
                             </tr>
                         </thead>
@@ -74,16 +74,24 @@
                                     <td>@item.PassingScore</td>
                                     <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
                                     <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.Status</td>
+                                    @{ if (item.Status == true)
+                                        {
+                                            <td><span class="badge success">Hiển thị</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="badge danger">Chờ duyệt</span></td>
+                                        }
+                                    }
+
                                     <td>
-                                        <a href='@Url.Action("Edit", "Question", new {id = @item.TestID})'>
+                                        <a href='@Url.Action("Edit", "Test", new {id = @item.TestID})'>
                                             <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
                                         </a>
-                                        <a href='@Url.Action("Detail", "Question", new {id = @item.TestID})'>
+                                        <a href='@Url.Action("Detail", "Test", new {id = @item.TestID})'>
                                             <div class="btn  btn-sm btn-success"><i class="fa fa-eye"></i></div>
                                         </a>
-                                        <a href='@Url.Action("Delete", "Question", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
+                                        <a href='@Url.Action("Delete", "Test", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
                                             <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
                                         </a>
                                     </td>
@@ -105,6 +113,15 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+<script>
+    $(document).ready(function () {
+        var model = $("#status").text();
+        if (model === true) {
+            $('#status').html('Đã duyệt');
+        }
+
+    });
+</script>
 <script language="JavaScript">
     function Check(source) {
         checkboxes = document.getElementsByName('ids');
@@ -132,7 +149,7 @@
         }
     }
     function reload() {
-        window.location.href = "Exams/Index"
+        window.location.href = "Test/Index"
     }
 
 </script>
@@ -158,7 +175,7 @@
                         debugger;
                         $('#delete-msgbox-modal').modal('show').off('click', '#btn-delete').on('click', '#btn-delete', function (e) {
                             $.ajax({
-                                url: "/Admin/Exams/Delete/",
+                                url: "/Admin/Test/Delete/",
                                 data: {
                                     ids: ids
                                 },
@@ -196,7 +213,7 @@
                     }
                     $('#delete-msgbox-modal').modal('show').off('click', '#btn-delete').on('click', '#btn-delete', function (e) {
                         $.ajax({
-                            url: "/Admin/Exams/Delete/",
+                            url: "/Admin/Test/Delete/",
                             data: {
                                 ids: ids
                             },

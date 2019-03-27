@@ -84,5 +84,69 @@ namespace TestingSystem.Areas.Admin.Controllers
                 throw;
             }
         }
+        public ActionResult Edit(int Id)
+        {
+            var test = testService.GetTestByID(Id);
+            var model = examPaperService.GetAll();
+            ViewBag.ExamPaperId = new SelectList(model, "ExamPaperId", "Title");
+            return View(test);
+        }
+        [HttpPost]
+        public ActionResult Edit(Test test)
+        {
+            try
+            {
+                if (testService.UpdateTest(test))
+                {
+                    Success = "Update Test successfully!";
+                    return RedirectToAction("Index", "Test");
+                }
+                else
+                {
+                    Failure = "Something went wrong, please try again!";
+                    return RedirectToAction("Edit", "Test");
+                }
+            }
+            catch (Exception e)
+            {
+                Failure = "Something went wrong, please try again!";
+                return RedirectToAction("Edit", "Test");
+            }
+        }
+
+        public ActionResult Delete(List<int> ids)
+        {
+            try
+            {
+                if (ids.Count > 0)
+                {
+                    int i = 0;
+                    foreach (var id in ids)
+                    {
+                        if (testService.DeleteTest(id) > 0)
+                        {
+                            i++;
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (i > 0)
+                    {
+                        Success = "Delete test successfully!";
+                        return RedirectToAction("Index", "Test");
+                    }
+                }
+                Failure = "Something went wrong, please try again!";
+                return RedirectToAction("Index", "Test");
+            }
+            catch (System.Exception exception)
+            {
+                Failure = exception.Message;
+                return RedirectToAction("Index", "Test");
+            }
+        }
     }
 }
