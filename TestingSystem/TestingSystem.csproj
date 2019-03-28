@@ -7800,11 +7800,13 @@
     <Content Include="Views\Shared\PartialExamPaper.cshtml" />
     <Content Include="Views\Shared\_LayoutExamine.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Views\Auditions\Index.cshtml" />
     <Content Include="Views\Shared\_AuditionLayout.cshtml" />
     <Content Include="Views\Test\ShowExamPaperById.cshtml" />
     <Content Include="Views\TestNotLogin\ShowExamPaperById.cshtml" />
     <Content Include="Views\Auditions\AuditionsTest.cshtml" />
+    <Content Include="Views\Auditions\MyAuditionsTest.cshtml" />
+    <Content Include="Views\Shared\TestPartialView.cshtml" />
+    <Content Include="Views\Auditions\ShowExamPaperById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

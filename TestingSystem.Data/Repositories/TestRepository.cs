@@ -18,7 +18,7 @@ namespace TestingSystem.Data.Repositories
 		int DeleteTest(int id);
 		IEnumerable<Test> GetAllTestIsActive();
 		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
-
+		IEnumerable<Test> GetAllTetByExamCode(string examCode);
         IEnumerable<Test> SearchExams(string txtSearch);
 
     }
@@ -78,6 +78,20 @@ namespace TestingSystem.Data.Repositories
 		{
 			var listTestActiveByKey = DbContext.Tests.Where(x => x.TestName.Contains(keySearch) && x.IsActive == true);
 			return listTestActiveByKey;
+		}
+
+		public IEnumerable<Test> GetAllTetByExamCode(string examCode)
+		{
+			var examByCode = DbContext.Exams.SingleOrDefault(x => x.ExamCode == examCode);
+			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examByCode.ExamID).ToList();
+			List<Test> listTest= new List<Test>();
+			foreach (var item in listExamTestByExamID)
+			{
+				var test = DbContext.Tests.SingleOrDefault(x => x.TestID == item.TestID);
+				listTest.Add(test);
+			}
+
+			return listTest.AsEnumerable();
 		}
 
 		public IEnumerable<Test> GetAllTest()
