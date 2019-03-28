@@ -1,6 +1,6 @@
 ﻿@model List<TestingSystem.Models.Test>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "View List Test";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     int stt = 0;
 }
@@ -24,6 +24,7 @@
             <div class="box-body">
                 @using (Html.BeginForm("Index", "Test", FormMethod.Post))
                 {
+
                     <div class="row">
                         <div class="col-md-6" style="margin-bottom:15px">
                             <div class="input-group">
@@ -34,7 +35,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a href="@Url.Action("Create","Exams")">
+                            <a href="@Url.Action("Create","Test")">
                                 <div class="btn btn-success">Create</div>
                             </a>
                         </div>
@@ -45,12 +46,15 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
-                                <th width="7%">Number</th>
-	                            <th>Test Name</th>
-                                <th>Score</th>
-                                <th>PassingScore</th>
-	                            <th width="12%">Status</th>
+                                <td><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
+                                <th>Number</th>
+                                <th>Test Name</th>
+                                <th>Exam Paper</th>
+                                <th>PassScore</th>
+                                <th>StartDate</th>
+                                <th>EndDate</th>
+                                <th>Status</th>
+                                <th width="15%">Action</th>
 
                             </tr>
                         </thead>
@@ -61,12 +65,36 @@
                                 <tr>
                                     <td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
                                     <td>@stt</td>
-	                                <td>
-		                                @item.ExamPapers.Title
-	                                </td>
-                                    <td>@item.Score</td>
+                                    <td>
+                                        @item.TestName
+                                    </td>
+                                    <td>
+                                        @item.ExamPapers.Title
+                                    </td>
                                     <td>@item.PassingScore</td>
-                                    <td>@item.Status</td>
+                                    <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
+                                    @{ if (item.Status == true)
+                                        {
+                                            <td><span class="badge success">Hiển thị</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="badge danger">Chờ duyệt</span></td>
+                                        }
+                                    }
+
+                                    <td>
+                                        <a href='@Url.Action("Edit", "Test", new {id = @item.TestID})'>
+                                            <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
+                                        </a>
+                                        <a href='@Url.Action("Detail", "Test", new {id = @item.TestID})'>
+                                            <div class="btn  btn-sm btn-success"><i class="fa fa-eye"></i></div>
+                                        </a>
+                                        <a href='@Url.Action("Delete", "Test", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
+                                            <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -74,6 +102,7 @@
                     <a onclick="return confirm('Are you sure you want to delete multiple exams ?');">
                         <button type="submit" class="btn btn-danger" id="btn-delete" disabled>Delete</button>
                     </a>
+
                 </form>
             </div>
             <!-- /.box-body -->
@@ -84,6 +113,15 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+<script>
+    $(document).ready(function () {
+        var model = $("#status").text();
+        if (model === true) {
+            $('#status').html('Đã duyệt');
+        }
+
+    });
+</script>
 <script language="JavaScript">
     function Check(source) {
         checkboxes = document.getElementsByName('ids');
@@ -111,7 +149,7 @@
         }
     }
     function reload() {
-        window.location.href = "Exams/Index"
+        window.location.href = "Test/Index"
     }
 
 </script>
@@ -137,7 +175,7 @@
                         debugger;
                         $('#delete-msgbox-modal').modal('show').off('click', '#btn-delete').on('click', '#btn-delete', function (e) {
                             $.ajax({
-                                url: "/Admin/Exams/Delete/",
+                                url: "/Admin/Test/Delete/",
                                 data: {
                                     ids: ids
                                 },
@@ -175,7 +213,7 @@
                     }
                     $('#delete-msgbox-modal').modal('show').off('click', '#btn-delete').on('click', '#btn-delete', function (e) {
                         $.ajax({
-                            url: "/Admin/Exams/Delete/",
+                            url: "/Admin/Test/Delete/",
                             data: {
                                 ids: ids
                             },

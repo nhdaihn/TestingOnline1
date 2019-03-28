@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 using TestingSystem.Models;
@@ -8,53 +9,85 @@ using TestingSystem.Sevice;
 
 namespace TestingSystem.Controllers
 {
-    public class AuditionsController : Controller
-    {
+	public class AuditionsController : Controller
+	{
+		public string Success { set { TempData["Success"] = ViewData["Success"] = value; } }
+		public string Failure { set { TempData["Failure"] = ViewData["Failure"] = value; } }
 
-        private readonly IExamPaperService examPaperService;
+		private readonly IExamPaperService examPaperService;
+		private readonly IQuestionService questionService;
+		private readonly IAnswerService answerService;
+		private readonly IExamPaperQuestionService examPaperQuestionService;
+		private readonly ITestService testService;
+		private readonly IQuestionCategorySevice questionCategorySevice;
 
-        /// <summary>
-        /// Defines the questionService
-        /// </summary>
-        private readonly IQuestionService questionService;
+		public AuditionsController(
+			IExamPaperService examPaperService,
+			IQuestionService questionService,
+			IAnswerService answerService,
+			IExamPaperQuestionService examPaperQuestionService,
+			IQuestionCategorySevice questionCategorySevice,
+			ITestService testService)
+		{
+			this.examPaperService = examPaperService;
+			this.questionService = questionService;
+			this.answerService = answerService;
+			this.examPaperQuestionService = examPaperQuestionService;
+			this.questionCategorySevice = questionCategorySevice;
+			this.testService = testService;
+		}
 
-        /// <summary>
-        /// Defines the answerService
-        /// </summary>
-        private readonly IAnswerService answerService;
+		public ActionResult AuditionsTest()
+		{
+			return View();
+		}
 
-        /// <summary>
-        /// Defines the examPaperQuestionService
-        /// </summary>
-        private readonly IExamPaperQuestionService examPaperQuestionService;
+		public ActionResult MyAuditionsTest()
+		{
 
-        /// <summary>
-        /// Defines the questionCategorySevice
-        /// </summary>
-        private readonly IQuestionCategorySevice questionCategorySevice;
-        public AuditionsController(IExamPaperService examPaperService, IQuestionService questionService, IAnswerService answerService, IExamPaperQuestionService examPaperQuestionService, IQuestionCategorySevice questionCategorySevice)
-        {
-            this.examPaperService = examPaperService;
-            this.questionService = questionService;
-            this.answerService = answerService;
-            this.examPaperQuestionService = examPaperQuestionService;
-            this.questionCategorySevice = questionCategorySevice;
-        }
-        // GET: Auditions
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult AuditionsTest()
-        {
-            return View();
-        }
-        //[HttpPost]
-        //public ActionResult AuditionsTest(string code)
-        //{
-        //    var model = examPaperService.FindCode(code);
-        //    var examPaperID = model.ExamPaperID;
-        //    return RedirectToAction("ShowExamPaperById", "TestNotLogin",new { idExamPaper = examPaperID });
-        //}
-    }
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult MyAuditionsTest(string code)
+		{
+			
+			try
+			{
+				var model = testService.GetAllTetByExamCode(code);
+				if (model != null)
+				{
+					return View(model);
+				}
+			}
+			catch (Exception e)
+			{
+				Failure = "Code not exist!";
+				return RedirectToAction("AuditionsTest");
+
+			}
+
+			return View();
+
+		}
+		public ActionResult ShowExamPaperById(int idExamPaper)
+		{
+			var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(idExamPaper);
+			var countQuestion = listExamPaperQuesions.Count();
+			ViewBag.CountQuestion = countQuestion;
+			ViewBag.Time = examPaperService.GetExamPaperById(idExamPaper).Time;
+			List<Answer> listAnswer = new List<Answer>();
+			List<Answer> listAnswerInExamPaper = new List<Answer>();
+			foreach (var item in listExamPaperQuesions)
+			{
+				listAnswerInExamPaper.AddRange(answerService.GetAnswersByQuestionID(item.QuestionID));
+			}
+			List<Answer> listA = new List<Answer>();
+			ViewBag.ListQuestion = listExamPaperQuesions;
+			ViewBag.ListAnswer = listAnswerInExamPaper;
+			ViewBag.IdExamPaper = idExamPaper;
+			TempData["idExamPaper"] = idExamPaper;
+			return View();
+		}
+	}
 }

@@ -60,8 +60,11 @@
 				<th>
 					@Html.DisplayNameFor(model => model.StartDate)
 				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.CreatedBy)
+				</th>
 				<th>Status</th>
-				<th></th>
+				<th>Action</th>
 			</tr>
 
 			@foreach (Test item in @ViewBag.listTestActive)
@@ -75,6 +78,9 @@
 					</td>
 					<td>
 						@item.StartDate
+					</td>
+					<td>
+						@item.CreatedBy
 					</td>
 
 					<td>
@@ -112,7 +118,7 @@
 					<td>
 						@if (check == true && ViewBag.countlistTestIsActive > 0)
 						{
-							@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID  }, null )
+							@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID }, null)
 							check = false;
 						}
 						else if (check == false && ViewBag.countlistTestIsActive > 0)
@@ -134,9 +140,9 @@
 	<a href="@Url.Action("Edit", "Exams", new { id = ViewBag.examID})"><button class="btn btn-success">Back</button></a>
 </section>
 @*<script>
-	$(document).ready(function() {s
-		$('#removeExamPaper').click(function() {
-			confirm('Are you sure you want to Delete?');
+		$(document).ready(function() {s
+			$('#removeExamPaper').click(function() {
+				confirm('Are you sure you want to Delete?');
+			});
 		});
-	});
-</script>*@
+	</script>*@

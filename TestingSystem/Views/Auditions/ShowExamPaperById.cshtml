@@ -1,8 +1,10 @@
-﻿@{
-	ViewBag.Title = "Index";
-	Layout = "~/Views/Shared/_LayoutExamine.cshtml";
+﻿
+@{
+    ViewBag.Title = "ShowExamPaperById";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutExamine.cshtml";
 	int i = 0;
 }
+
 <style>
 	.checkboxva {
 		float: left;
@@ -11,11 +13,13 @@
 	.myquestion {
 		padding-left: 20px;
 	}
+
 	.radiova {
 		float: left;
 	}
+
 	.myanswer {
-		padding-left: 19px;		
+		padding-left: 19px;
 	}
 </style>
 <div>
@@ -23,7 +27,7 @@
 	{
 		i++;
 		<div style="float:left; width: 55%;padding-left: 20px;">
-			<div><input type="checkbox" name="checkbox" value="@i" class="checkboxva" /> <p class="myquestion">Câu hỏi số @i</p>  </div>
+			<div><input type="checkbox" name="checkbox" value="@i" class="checkboxva" />Câu hỏi số @i</div>
 			<div>@item.Content</div>
 		</div>
 		<div style="float:left; width: 43%;">
@@ -32,7 +36,7 @@
 				if (item.QuestionID == item2.QuestionID)
 				{
 					<div>
-						<input type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" style="margin-top: 5px" /><p class="myanswer">@item2.AnswerContent</p>
+						<input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" style="margin-top: 5px" /><p class="myanswer">@item2.AnswerContent</p>
 					</div>
 				}
 			}
@@ -41,6 +45,7 @@
 			<hr>
 		</div>
 	}
+	@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore , title = ViewBag.TitleTest }));
 </div>
 <script>
 	$(document).ready(function () {

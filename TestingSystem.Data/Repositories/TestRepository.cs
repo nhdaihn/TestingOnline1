@@ -17,7 +17,11 @@ namespace TestingSystem.Data.Repositories
 		int AddTest(Test entity);
 		int DeleteTest(int id);
 		IEnumerable<Test> GetAllTestIsActive();
-	}
+		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
+		IEnumerable<Test> GetAllTetByExamCode(string examCode);
+        IEnumerable<Test> SearchExams(string txtSearch);
+
+    }
 	public class TestRepository : RepositoryBase<Test>, ITestRepository
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -29,11 +33,12 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
+                entity.Description = "good";
 				entity.CreateDate = DateTime.Now;
 				DbContext.Tests.Add(entity);
-				DbContext.SaveChanges();
-				return entity.TestID;
-			}
+                return DbContext.SaveChanges();
+
+            }
 			catch (Exception e)
 			{
 				log.Debug(e.Message);
@@ -69,6 +74,26 @@ namespace TestingSystem.Data.Repositories
 			return listTestActive.AsEnumerable();
 		}
 
+		public IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch)
+		{
+			var listTestActiveByKey = DbContext.Tests.Where(x => x.TestName.Contains(keySearch) && x.IsActive == true);
+			return listTestActiveByKey;
+		}
+
+		public IEnumerable<Test> GetAllTetByExamCode(string examCode)
+		{
+			var examByCode = DbContext.Exams.SingleOrDefault(x => x.ExamCode == examCode);
+			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examByCode.ExamID).ToList();
+			List<Test> listTest= new List<Test>();
+			foreach (var item in listExamTestByExamID)
+			{
+				var test = DbContext.Tests.SingleOrDefault(x => x.TestID == item.TestID);
+				listTest.Add(test);
+			}
+
+			return listTest.AsEnumerable();
+		}
+
 		public IEnumerable<Test> GetAllTest()
 		{
 			try
@@ -88,19 +113,27 @@ namespace TestingSystem.Data.Repositories
 			var model = DbContext.Tests.Find(id);
 			return model;
 		}
-
-		public bool UpdateTest(Test entity)
+        public IEnumerable<Test> SearchExams(string txtSearch)
+        {
+            var listTest = DbContext.Tests.Where(x => x.TestName.Contains(txtSearch)).ToList();
+            return listTest;
+        }
+        public bool UpdateTest(Test entity)
 		{
 			try
 			{
-				var objExam = this.DbContext.Tests.Find(entity.TestID);
-				if (objExam != null)
+				var objTest = this.DbContext.Tests.Find(entity.TestID);
+				if (objTest != null)
 				{
-					objExam.TestName = entity.TestName;
-					objExam.CreateDate = DateTime.Now;
-					objExam.Description = entity.Description;
-					objExam.Status = entity.Status;
-					objExam.PassingScore = entity.PassingScore;
+                    objTest.TestName = entity.TestName;
+					objTest.Description = entity.Description;
+					objTest.IsActive = entity.IsActive;
+					objTest.PassingScore = entity.PassingScore;
+                    objTest.ModifiedDate = DateTime.Now;
+                    objTest.StartDate = entity.StartDate;
+                    objTest.EndDate = entity.EndDate;
+                    objTest.ExamPaperID = entity.ExamPaperID;
+                    objTest.Status = entity.Status;
 					this.DbContext.SaveChanges();
 					return true;
 				}
