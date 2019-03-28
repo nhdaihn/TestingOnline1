@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TestingSystem.Data.Infrastructure;
@@ -46,10 +47,8 @@ namespace TestingSystem.Data.Repositories
 
         public IEnumerable<TestResult> GetALl()
         {
-
-	        var model = DbContext.TestResults.ToList();
-
-	        return model;
+	        var model = DbContext.TestResults.GroupBy(x => x.Turns).Select(x => x.FirstOrDefault()).ToList();
+	        return model.Distinct().AsEnumerable();
         }
 
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
