@@ -23,7 +23,6 @@ namespace TestingSystem.Models
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
-		[Required]
 		public string Description { get; set; }
 
 		public int CreatedBy { get; set; }

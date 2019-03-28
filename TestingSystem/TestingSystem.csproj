@@ -7807,6 +7807,7 @@
     <Content Include="Views\Auditions\MyAuditionsTest.cshtml" />
     <Content Include="Views\Shared\TestPartialView.cshtml" />
     <Content Include="Views\Auditions\ShowExamPaperById.cshtml" />
+    <Content Include="Views\Shared\_LayoutAuditionTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
