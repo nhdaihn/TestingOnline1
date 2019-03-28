@@ -1,0 +1,89 @@
+﻿
+@{
+	ViewBag.Title = "_ShowResult";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutExamine.cshtml";
+}
+
+<div class="portlet-body">
+	<div class="row">
+		<div class="col-md-12">
+			<p class="h5" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+				Bài thi: <b>	@ViewBag.TestTitle</b>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+
+			<div class="row">
+				<div class="col-md-6">
+					<p class="h5">
+						Kết quả tổng kết: <b>@ViewBag.Score/@ViewBag.CountQ</b>
+					</p>
+				</div>
+				<div class="col-md-6">
+					<p class="h5">
+
+						Xếp loại:
+
+						<b>
+							@if (ViewBag.CheckPass == true)
+							{
+								<span>Đỗ</span>
+							}
+							else
+							{
+								<span>Trượt</span>
+							}
+						</b>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<div class="portlet-body">
+			<div class="row">
+			</div><table class="responsive-table custom-table" id="sample_1">
+				<thead>
+					<tr>
+						<th>
+							Điểm thi
+						</th>
+						<th>
+							Xếp loại
+						</th>
+						<th>
+							Trạng thái
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row">
+						<td>
+							<b>@ViewBag.Score/@ViewBag.CountQ</b>
+						</td>
+
+						<td>
+							@if (ViewBag.CheckPass == true)
+							{
+								<span>Đỗ</span>
+							}
+							else
+							{
+								<span>Trượt</span>
+							}
+						</td>
+						<td>
+							Đã thi
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -12,6 +12,7 @@ namespace TestingSystem.Sevice
     public interface ITestResultService
     {
         int AddTestResult(TestResult testResult);
+        IEnumerable<TestResult> GetALl();
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
         int ReturnTurn(int testId, DateTime dateTest);
         IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
@@ -27,6 +28,12 @@ namespace TestingSystem.Sevice
         {
             return testResultRepository.AddTestResult(testResult);
         }
+
+        public IEnumerable<TestResult> GetALl()
+        {
+            return testResultRepository.GetALl();
+        }
+
         public IEnumerable<TestResult> GetQuestionByCount(int countQ)
         {
             return testResultRepository.GetQuestionByCount(countQ);

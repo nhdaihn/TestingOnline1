@@ -218,6 +218,10 @@
                                 {
                                     <li class="active"><a href="/Admin/Test/Index"><i class="fa fa-circle-o"></i>Bài thi</a></li>
                                 }
+                                @if (Action.Contains("Index."))
+                                {
+                                    <li class="active"><a href="/Admin/TestResult/Index"><i class="fa fa-circle-o"></i>Kết quả</a></li>
+                                }
                             </ul>
                         </li>
                     </ul>

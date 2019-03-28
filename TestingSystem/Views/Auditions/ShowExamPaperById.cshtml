@@ -1,10 +1,11 @@
-﻿
-@{
-    ViewBag.Title = "ShowExamPaperById";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutExamine.cshtml";
+﻿﻿@{
+	ViewBag.Title = "ShowExamPaperById";
+	Layout = "~/Views/Shared/_LayoutAuditionTest.cshtml";
 	int i = 0;
+	bool checkmulti = false;
+	int countTrue = 0;
+	int x = 0;
 }
-
 <style>
 	.checkboxva {
 		float: left;
@@ -19,7 +20,7 @@
 	}
 
 	.myanswer {
-		padding-left: 19px;
+		padding-left: 10px;
 	}
 </style>
 <div>
@@ -27,25 +28,50 @@
 	{
 		i++;
 		<div style="float:left; width: 55%;padding-left: 20px;">
-			<div><input type="checkbox" name="checkbox" value="@i" class="checkboxva" />Câu hỏi số @i</div>
+			<div><input type="checkbox" name="checkbox" value="@i" class="checkboxva" /><p class="myquestion">Câu hỏi số @i</p></div>
 			<div>@item.Content</div>
 		</div>
 		<div style="float:left; width: 43%;">
-			@foreach (var item2 in ViewBag.ListAnswer)
+			@foreach (var itemMulti in ViewBag.ListQuestionCheckMulti)
 			{
-				if (item.QuestionID == item2.QuestionID)
+				if (item.QuestionID == itemMulti.QuestionID)
 				{
-					<div>
-						<input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" style="margin-top: 5px" /><p class="myanswer">@item2.AnswerContent</p>
-					</div>
+					checkmulti = itemMulti.CheckMulti;
 				}
+			}
+			@if (checkmulti == true)
+			{
+				foreach (var item2 in ViewBag.ListAnswer)
+				{
+					if (item.QuestionID == item2.QuestionID)
+					{
+						<p><input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span class="myanswer">@item2.AnswerContent</span></p>
+					}
+				}
+			}
+			else
+			{
+				foreach (var item2 in ViewBag.ListAnswer)
+				{
+					if (item.QuestionID == item2.QuestionID)
+					{
+						<p><input type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span class="myanswer">@item2.AnswerContent</span></p>
+					}
+				}
+			}
+			@{
+				checkmulti = false;
 			}
 		</div>
 		<div style="clear: both;">
 			<hr>
 		</div>
 	}
-	@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore , title = ViewBag.TitleTest }));
+	<input type="hidden" name="countTrue" id="countTrue" value="">
+	@if (TempData["countTrue"] != null)
+	{
+		@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "Auditions", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore, title = ViewBag.TitleTest }))
+	}
 </div>
 <script>
 	$(document).ready(function () {

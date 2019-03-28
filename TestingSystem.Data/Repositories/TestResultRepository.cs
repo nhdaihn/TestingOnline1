@@ -13,6 +13,7 @@ namespace TestingSystem.Data.Repositories
     {
         int AddTestResult(TestResult testResult);
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
+        IEnumerable<TestResult> GetALl();
         int ReturnTurn(int testId, DateTime dateTest);
         IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
     }
@@ -43,6 +44,12 @@ namespace TestingSystem.Data.Repositories
             return listQ;
         }
 
+        public IEnumerable<TestResult> GetALl()
+        {
+            
+            var model = DbContext.TestResults.ToList();
+            
+            return model;
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
         {
             var listAllTestResult = this.DbContext.TestResults.ToList();
