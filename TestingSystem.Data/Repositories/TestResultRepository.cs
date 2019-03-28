@@ -12,6 +12,7 @@ namespace TestingSystem.Data.Repositories
     {
         int AddTestResult(TestResult testResult);
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
+        IEnumerable<TestResult> GetALl();
     }
     public class TestResultRepository : RepositoryBase<TestResult>, ITestResultRepository
     {
@@ -38,6 +39,14 @@ namespace TestingSystem.Data.Repositories
         {
             var listQ = DbContext.TestResults.OrderByDescending(s => s.TestResultID).Take(countQ).ToList();
             return listQ;
+        }
+
+        public IEnumerable<TestResult> GetALl()
+        {
+            
+            var model = DbContext.TestResults.ToList();
+            
+            return model;
         }
     }
 }
