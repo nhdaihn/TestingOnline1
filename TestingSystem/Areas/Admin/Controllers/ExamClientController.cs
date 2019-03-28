@@ -8,7 +8,7 @@ using TestingSystem.Sevice;
 
 namespace TestingSystem.Areas.Admin.Controllers
 {
-    public class ExamClientController : ClientController
+    public class ExamClientController : AdminController
     {
         
         private IExamPaperService examPaperService;

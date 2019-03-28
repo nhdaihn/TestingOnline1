@@ -46,10 +46,12 @@ namespace TestingSystem.Data.Repositories
 
         public IEnumerable<TestResult> GetALl()
         {
-            
-            var model = DbContext.TestResults.ToList();
-            
-            return model;
+
+	        var model = DbContext.TestResults.ToList();
+
+	        return model;
+        }
+
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
         {
             var listAllTestResult = this.DbContext.TestResults.ToList();
