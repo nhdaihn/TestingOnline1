@@ -18,7 +18,7 @@
 	}
 
 	.myanswer {
-		padding-left: 19px;
+		padding-left: 10px;
 	}
 </style>
 <div>
@@ -26,7 +26,7 @@
 	{
 		i++;
 		<div style="float:left; width: 55%;padding-left: 20px;">
-			<div><input type="checkbox" name="checkbox" value="@i" class="checkboxva" />Câu hỏi số @i</div>
+			<div><input type="checkbox" name="checkbox" value="@i" class="checkboxva" /><p class="myquestion">Câu hỏi số @i</p></div>
 			<div>@item.Content</div>
 		</div>
 		<div style="float:left; width: 43%;">
@@ -43,7 +43,7 @@
 				{
 					if (item.QuestionID == item2.QuestionID)
 					{
-						<p><input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+						<p><input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span class="myanswer">@item2.AnswerContent</span></p>
 					}
 				}
 			}
@@ -53,7 +53,7 @@
 				{
 					if (item.QuestionID == item2.QuestionID)
 					{
-						<p><input type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+						<p><input type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span class="myanswer">@item2.AnswerContent</span></p>
 					}
 				}
 			}
