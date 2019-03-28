@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestingSystem.Data.Infrastructure;
+using TestingSystem.DataTranferObject;
 using TestingSystem.Models;
 
 namespace TestingSystem.Data.Repositories
@@ -13,6 +14,8 @@ namespace TestingSystem.Data.Repositories
         int AddTestResult(TestResult testResult);
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
         IEnumerable<TestResult> GetALl();
+        int ReturnTurn(int testId, DateTime dateTest);
+        IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
     }
     public class TestResultRepository : RepositoryBase<TestResult>, ITestResultRepository
     {
@@ -47,6 +50,33 @@ namespace TestingSystem.Data.Repositories
             var model = DbContext.TestResults.ToList();
             
             return model;
+        public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
+        {
+            var listAllTestResult = this.DbContext.TestResults.ToList();
+            var listAllTestResultDTO = new List<ReviewTestResult>();
+            int i = 0;
+            foreach(var item in listAllTestResult)
+            {
+                if(i != item.Turns)
+                {
+                    ReviewTestResult obj = new ReviewTestResult();
+                    obj.TestId = item.TestID;
+                    obj.TestName = item.TestName;
+                    obj.numRank = item.Turns;
+                    obj.dateTest = item.CreatedDate;
+                    i = item.Turns;
+                    listAllTestResultDTO.Add(obj);
+                }
+            }
+            return listAllTestResultDTO;
+        }
+
+        public int ReturnTurn(int testId, DateTime dateTest)
+        {
+            var item = this.DbContext.TestResults.Where(s => s.TestID == testId && s.CreatedDate.Month == dateTest.Month && s.CreatedDate.Year == dateTest.Year && s.CreatedDate.Day == dateTest.Day).OrderByDescending(s=>s.CreatedDate).Take(1).FirstOrDefault();
+            if (item != null)
+                return item.Turns;
+            else return 0;
         }
     }
 }
