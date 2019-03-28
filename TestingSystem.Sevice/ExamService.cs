@@ -20,6 +20,7 @@ namespace TestingSystem.Sevice
 		IEnumerable<Test> GetTestByExamID(int examID);
 		int RemoveTestInExams(int id);
 		int AddTestIntoExams(int testID, int examID);
+		Exam GetExamByCode(string examCode);
 	}
 
 	public class ExamService : IExamService
@@ -70,6 +71,11 @@ namespace TestingSystem.Sevice
 		public int AddTestIntoExams(int testID, int examID)
 		{
 			return examRepository.AddTestIntoExams(testID, examID);
+		}
+
+		public Exam GetExamByCode(string examCode)
+		{
+			return examRepository.GetExamByCode(examCode);
 		}
 
 

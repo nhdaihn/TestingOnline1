@@ -19,6 +19,8 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Test> GetTestByExamID(int examID);
 		int RemoveTestInExams(int id);
 		int AddTestIntoExams(int testID, int examID);
+
+		Exam GetExamByCode(string examCode);
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
@@ -176,6 +178,12 @@ namespace TestingSystem.Data.Repositories
 			DbContext.ExamTests.Add(examTest);
 			DbContext.SaveChanges();
 			return examTest.ExamID;
+		}
+
+		public Exam GetExamByCode(string examCode)
+		{
+			var exam = DbContext.Exams.SingleOrDefault(x => x.ExamCode == examCode);
+			return exam;
 		}
 	}
 }

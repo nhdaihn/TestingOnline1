@@ -309,9 +309,10 @@
 											</div>
 										</div>
 										<div class="col-md-9 col-xs-9 margin-top-10 padding-left-15 pull-left" style="overflow: hidden">
-											<a href="@Url.Action("ShowExamPaperById", "Auditions", new {idExamPaper = item.ExamPaperID})">
+											@* can sua lai *@
+											<a href="/thong-tin-bai-thi/5279?cid=3">
 												<span class="exam-title">
-													@item.TestName
+													<a href="@Url.Action("ShowExamPaperById", "Auditions", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam, idTest = item.TestID})">@item.TestName
 												</span>
 											</a>
 

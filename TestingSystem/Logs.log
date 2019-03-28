@@ -1,0 +1,16 @@
+09:32:48,336 34 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+09:32:48,525 34 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+09:32:48,657 34 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+10:19:11,913 6 - Object reference not set to an instance of an object.
+
+----------------------------------------------------------------------------------------------------------------------------
+

@@ -1,10 +1,9 @@
-﻿
-@{
-    ViewBag.Title = "ShowExamPaperById";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutExamine.cshtml";
+﻿@{
+	ViewBag.Title = "ShowExamPaperById";
+	Layout = "~/Views/Shared/_LayoutAuditionTest.cshtml";
 	int i = 0;
+	bool checkmulti = false;
 }
-
 <style>
 	.checkboxva {
 		float: left;
@@ -31,21 +30,42 @@
 			<div>@item.Content</div>
 		</div>
 		<div style="float:left; width: 43%;">
-			@foreach (var item2 in ViewBag.ListAnswer)
+			@foreach (var itemMulti in ViewBag.ListQuestionCheckMulti)
 			{
-				if (item.QuestionID == item2.QuestionID)
+				if (item.QuestionID == itemMulti.QuestionID)
 				{
-					<div>
-						<input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" style="margin-top: 5px" /><p class="myanswer">@item2.AnswerContent</p>
-					</div>
+					checkmulti = itemMulti.CheckMulti;
 				}
+			}
+			@if (checkmulti == true)
+			{
+				foreach (var item2 in ViewBag.ListAnswer)
+				{
+					if (item.QuestionID == item2.QuestionID)
+					{
+						<p><input type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+					}
+				}
+			}
+			else
+			{
+				foreach (var item2 in ViewBag.ListAnswer)
+				{
+					if (item.QuestionID == item2.QuestionID)
+					{
+						<p><input type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+					}
+				}
+			}
+			@{
+				checkmulti = false;
 			}
 		</div>
 		<div style="clear: both;">
 			<hr>
 		</div>
 	}
-	@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore , title = ViewBag.TitleTest }));
+	@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore, title = ViewBag.TitleTest }));
 </div>
 <script>
 	$(document).ready(function () {
@@ -64,4 +84,5 @@
 		});
 	});
 </script>
+
 
