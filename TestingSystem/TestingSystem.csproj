@@ -190,6 +190,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuestionCategory\QuestionCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\Question\QuestionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReviewTestResultController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleActionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestController.cs" />
@@ -6741,6 +6742,7 @@
     <Content Include="Content\loadding.css" />
     <Content Include="Content\oclock.gif" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\pain.css" />
     <Content Include="Content\question.png" />
     <Content Include="Content\QuestionUpload\Images\250px-Terry_Crews_by_Gage_Skidmore_5.jpg" />
     <Content Include="Content\QuestionUpload\Images\Chelsea_old_logo.png" />
@@ -7750,6 +7752,8 @@
     <Content Include="Areas\Admin\Views\Test\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TestLogin\_ShowResult.cshtml" />
     <Content Include="Areas\Admin\Views\Test\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ReviewTestResult\ShowAllTestByDedicateId.cshtml" />
+    <Content Include="Areas\Admin\Views\ReviewTestResult\ShowTestResultById.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestingSystem.Data.Repositories;
+using TestingSystem.DataTranferObject;
 using TestingSystem.Models;
 
 namespace TestingSystem.Sevice
@@ -12,6 +13,8 @@ namespace TestingSystem.Sevice
     {
         int AddTestResult(TestResult testResult);
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
+        int ReturnTurn(int testId, DateTime dateTest);
+        IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
     }
     public class TestResultService : ITestResultService
     {
@@ -27,6 +30,16 @@ namespace TestingSystem.Sevice
         public IEnumerable<TestResult> GetQuestionByCount(int countQ)
         {
             return testResultRepository.GetQuestionByCount(countQ);
+        }
+
+        public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
+        {
+            return testResultRepository.ListAllTestByDedicateId(dedicateId);
+        }
+
+        public int ReturnTurn(int testId, DateTime dateTest)
+        {
+            return testResultRepository.ReturnTurn(testId, dateTest);
         }
     }
 }

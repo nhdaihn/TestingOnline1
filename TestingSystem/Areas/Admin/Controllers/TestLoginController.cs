@@ -241,10 +241,14 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             Models.ExamPaper examPaper = new Models.ExamPaper();
             examPaper = examPaperService.GetExamPaperById(exampaperid);
-            
+
 
             // lay exampaper theo id
             // listquestion: so cau hoi trong de
+
+            // check turn of test result trong hom thi
+            int turn = testResultService.ReturnTurn(idtest, DateTime.Now);
+
             foreach (var item in listQuestion)
             {
                 Candidate newCandidate = new Candidate();
@@ -257,6 +261,8 @@ namespace TestingSystem.Areas.Admin.Controllers
                 testResult.Description = "description note";
                 testResult.CreatedDate = DateTime.Now;
                 testResult.Score = numberOfCorrectAnswer;
+                testResult.Turns = turn + 1;
+
                 // list: so cau hoi da check
                 bool checkAvailable = false;
                 foreach(var item2 in list)
