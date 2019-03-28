@@ -53,8 +53,9 @@
                                 <th>PassScore</th>
                                 <th>StartDate</th>
                                 <th>EndDate</th>
+                                <th>Isactive</th>
                                 <th>Status</th>
-                                <th width="15%">Action</th>
+                                <th width="15%">Actions</th>
 
                             </tr>
                         </thead>
@@ -62,40 +63,46 @@
                             @foreach (var item in Model)
                             {
                                 stt++;
-                                <tr>
-                                    <td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
-                                    <td>@stt</td>
-                                    <td>
-                                        @item.TestName
-                                    </td>
-                                    <td>
-                                        @item.ExamPapers.Title
-                                    </td>
-                                    <td>@item.PassingScore</td>
-                                    <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
-                                    @{ if (item.Status == true)
-                                        {
-                                            <td><span class="badge success">Hiển thị</span></td>
-                                        }
-                                        else
-                                        {
-                                            <td><span class="badge danger">Chờ duyệt</span></td>
-                                        }
+                            <tr>
+                                <td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
+                                <td>@stt</td>
+                                <td>
+                                    @item.TestName
+                                </td>
+                                <td>
+                                    @item.ExamPapers.Title
+                                </td>
+                                <td>@item.PassingScore</td>
+                                <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+                                <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
+                                @{ if (item.IsActive == true)
+                                    {
+                                        <td><span class="badge success">duyệt</span></td>
                                     }
+                                    else
+                                    {
+                                        <td><span class="badge danger">Chờ duyệt</span></td>
+                                    }
+                                }
+                                @{ if (item.Status == true)
+                                    {
+                                        <td><span class="badge success">hiển thị</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge danger">ẩn</span></td>
+                                    }
+                                }
 
-                                    <td>
-                                        <a href='@Url.Action("Edit", "Test", new {id = @item.TestID})'>
-                                            <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
-                                        </a>
-                                        <a href='@Url.Action("Detail", "Test", new {id = @item.TestID})'>
-                                            <div class="btn  btn-sm btn-success"><i class="fa fa-eye"></i></div>
-                                        </a>
-                                        <a href='@Url.Action("Delete", "Test", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
-                                            <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <td>
+                                    <a href='@Url.Action("Edit", "Test", new {id = @item.TestID})'>
+                                        <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
+                                    </a>
+                                    <a href='@Url.Action("Delete", "Test", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
+                                        <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+                                    </a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

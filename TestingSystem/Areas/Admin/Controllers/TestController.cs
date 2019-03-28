@@ -34,17 +34,9 @@ namespace TestingSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Test test, int Status1)
+        public ActionResult Create(Test test)
         {
-            test.Status = true;//
-            if (Status1 == 1)
-            {
-                test.IsActive = true;
-            }
-            else if(Status1 == 2)
-            {
-                test.IsActive = false;
-            }
+          
             test.CreatedBy= int.Parse(Session["Name"].ToString());
             try
             {
