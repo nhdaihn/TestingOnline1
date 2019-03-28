@@ -24,6 +24,8 @@ namespace TestingSystem.Models
 		public DateTime CreatedDate { get; set; }
 		[Required]
 		public int Score { get; set; }
+
+		public int Turns { get; set; }
 		public int QuestionID { get; set; }
 		public int AnswerID { get; set; }
 

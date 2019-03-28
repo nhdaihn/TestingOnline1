@@ -11,6 +11,8 @@ namespace TestingSystem.Controllers
 {
 	public class AuditionsController : Controller
 	{
+		public string Success { set { TempData["Success"] = ViewData["Success"] = value; } }
+		public string Failure { set { TempData["Failure"] = ViewData["Failure"] = value; } }
 
 		private readonly IExamPaperService examPaperService;
 		private readonly IQuestionService questionService;
@@ -49,9 +51,10 @@ namespace TestingSystem.Controllers
 		[HttpPost]
 		public ActionResult MyAuditionsTest(string code)
 		{
-			var model = testService.GetAllTetByExamCode(code);
+			
 			try
 			{
+				var model = testService.GetAllTetByExamCode(code);
 				if (model != null)
 				{
 					return View(model);
@@ -59,8 +62,9 @@ namespace TestingSystem.Controllers
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
-				throw;
+				Failure = "Code not exist!";
+				return RedirectToAction("AuditionsTest");
+
 			}
 
 			return View();
