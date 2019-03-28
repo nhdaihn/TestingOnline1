@@ -194,6 +194,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestLoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestResultController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="BaseController\AdminControllter.cs" />
     <Compile Include="BaseController\ClientController.cs" />
@@ -7750,6 +7751,7 @@
     <Content Include="Areas\Admin\Views\Test\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TestLogin\_ShowResult.cshtml" />
     <Content Include="Areas\Admin\Views\Test\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TestResult\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
