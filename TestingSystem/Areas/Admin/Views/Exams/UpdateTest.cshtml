@@ -96,7 +96,7 @@
 
 					}
 					<td>
-						@if (ViewBag.countlistTestIsActive > 0)
+						@if (ViewBag.CountTestInExam > 0)
 						{
 							checkUrl = true;
 							foreach (Test obj in @ViewBag.listTestByExamID)
@@ -124,16 +124,16 @@
 						}
 						else
 						{
-							<img src="~/Content/remove.png" />
+							<img src="~/Content/remove.png" width="20px" />
 						}
 					</td>
 					<td>
-						@if (check == true && ViewBag.countlistTestIsActive > 0)
+						@if (check == true && ViewBag.CountTestInExam > 0)
 						{
 							@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID }, null)
 							check = false;
 						}
-						else if (check == false && ViewBag.countlistTestIsActive > 0)
+						else if (check == false && ViewBag.CountTestInExam > 0)
 						{
 							@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
 							check = true;
@@ -141,6 +141,7 @@
 						else
 						{
 							@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
+							check = true;
 						}
 					</td>
 				</tr>
