@@ -200,6 +200,9 @@ namespace TestingSystem.Areas.Admin.Controllers
 		//}
 		public ActionResult UpdateTest(int id)
 		{
+			var listUser = userService.ListAll();
+			ViewBag.listUser = listUser;
+			ViewBag.countUser = listUser.Count;
 			var listTestActive = testService.GetAllTestIsActive();
 			ViewBag.listTestActive = listTestActive;
 			//
@@ -218,6 +221,9 @@ namespace TestingSystem.Areas.Admin.Controllers
 		[HttpPost]
 		public ActionResult UpdateTest(int id, string keySearch)
 		{
+			var listUser = userService.ListAll();
+			ViewBag.listUser = listUser;
+			ViewBag.countUser = listUser.Count;
 			var listTestActive = testService.GetAllTestIsActiveByKeySearch(keySearch);
 			ViewBag.listTestActive = listTestActive;
 			//

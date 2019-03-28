@@ -8,6 +8,7 @@
 	int i = 0;
 	bool check = false;
 	bool checkUrl = false;
+	int count = 0;
 }
 <style>
 	.nhleft {
@@ -79,10 +80,21 @@
 					<td>
 						@item.StartDate
 					</td>
-					<td>
-						@item.CreatedBy
-					</td>
+					@foreach (User user in ViewBag.listUser)
+					{
+						count++;
+						if (item.CreatedBy == user.UserId)
+						{
+							<td>@user.Name</td>
+							break;
+						}
+						if (@count>= ViewBag.countUser)
+						{
+							<td>Know Name</td>
+							count = 0;
+						}
 
+					}
 					<td>
 						@if (ViewBag.countlistTestIsActive > 0)
 						{
