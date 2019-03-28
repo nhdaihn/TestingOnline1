@@ -13,8 +13,8 @@ namespace TestingSystem.Controllers
 {
 	public class AuditionsController : Controller
 	{
-		public string Success { set { TempData["Success"] = ViewData["Success"] = value; } }
-		public string Failure { set { TempData["Failure"] = ViewData["Failure"] = value; } }
+		//public string Success { set { TempData["Success"] = ViewData["Success"] = value; } }
+		//public string Failure { set { TempData["Failure"] = ViewData["Failure"] = value; } }
 
 		private readonly IExamPaperService examPaperService;
 		private readonly IQuestionService questionService;
@@ -63,13 +63,13 @@ namespace TestingSystem.Controllers
 				if (model != null)
 				{
 					ViewBag.IdExam = examService.GetExamByCode(code).ExamID;
-					Success = "Success";
+					//Success = "Success";
 					return View(model);
 				}
 			}
 			catch (Exception e)
 			{
-				Failure = "Code not exist!";
+				///*Fa*/ilure = "Code not exist!";
 				return RedirectToAction("AuditionsTest");
 
 			}
@@ -138,6 +138,7 @@ namespace TestingSystem.Controllers
 			//pass score bai thi
 			ViewBag.PassScore = test.PassingScore;
 			ViewBag.IdExam = idExam;
+			TempData["countTrue"] = 0;
 			return View();
 		}
 		static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
@@ -231,7 +232,6 @@ namespace TestingSystem.Controllers
 				multichoice = false;
 				checkcount = 0;
 			}
-			int idUser = int.Parse(Session["Name"].ToString());
 			// fruits : chua danh sach tat ca id question va id answer da check
 			var list = fruits;
 			int countAnswer = fruits.Count();
@@ -285,66 +285,32 @@ namespace TestingSystem.Controllers
 			examPaper = examPaperService.GetExamPaperById(exampaperid);
 
 
-			// lay exampaper theo id
-			// listquestion: so cau hoi trong de
-			foreach (var item in listQuestion)
+			var resultJson = new ResultJson
 			{
-				Candidate newCandidate = new Candidate();
-				newCandidate.CandidateID = idUser;
-				//candidateService.AddCandidate(newCandidate);
-				TestResult testResult = new TestResult();
-				testResult.TestID = idtest;
-				testResult.CandidateID = idUser;
-				testResult.TestName = examPaper.Title;
-				testResult.Description = "description note";
-				testResult.CreatedDate = DateTime.Now;
-				testResult.Score = numberOfCorrectAnswer;
-				// list: so cau hoi da check
-				bool checkAvailable = false;
-				foreach (var item2 in list)
-				{
-					// item2 co 2 attribute: id(answerid) va name(questionid)
-					if (item2.name == item.QuestionID)
-					{
-						testResult.QuestionID = item2.name;
-						testResult.AnswerID = item2.id;
-						checkAvailable = true;
-						break;
-					}
-				}
-				if (checkAvailable == false)
-				{
-					testResult.QuestionID = item.QuestionID;
-					testResult.AnswerID = -1;
-				}
-				//testResultService.AddTestResult(testResult);
-			}
-			return Json(listQuestion.Count());
+				countQ = listQuestion.Count(),
+				countTrue = numberOfCorrectAnswer
+			};
+			TempData["countTrue"] = numberOfCorrectAnswer;
+			TempData.Keep();
+			return Json(resultJson);
 		}
 
-		//public ActionResult _ShowResult(int countQ, int passscore, string title)
-		//{
-		//	int idUser = int.Parse(Session["Name"].ToString());
-		//	List<Models.TestResult> listQ = new List<Models.TestResult>();
-		//	listQ = testResultService.GetQuestionByCount(countQ).ToList();
-		//	ViewBag.TestTitle = title;
-		//	int score = 0;
-		//	bool checkPass = false;
-		//	foreach (var item in listQ)
-		//	{
-		//		score = item.Score;
-		//		break;
-		//	}
-		//	double percent = (score / countQ) * 100;
-		//	percent = Math.Round(percent);
-		//	if (percent >= passscore)
-		//	{
-		//		checkPass = true;
-		//	}
-		//	ViewBag.Score = score;
-		//	ViewBag.CheckPass = checkPass;
-		//	ViewBag.CountQ = countQ;
-		//	return View();
-		//}
+		public ActionResult _ShowResult(int countQ, int passscore, string title)
+		{
+			List<Models.TestResult> listQ = new List<Models.TestResult>();
+			ViewBag.TestTitle = title;
+			int score = 0;
+			bool checkPass = false;
+			double percent = ((int)TempData["countTrue"] / countQ) * 100;
+			percent = Math.Round(percent);
+			if (percent >= passscore)
+			{
+				checkPass = true;
+			}
+			ViewBag.Score = TempData["countTrue"];
+			ViewBag.CheckPass = checkPass;
+			ViewBag.CountQ = countQ;
+			return View();
+		}
 	}
 }

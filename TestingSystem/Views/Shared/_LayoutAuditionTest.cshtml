@@ -349,7 +349,7 @@ immediately after the control sidebar -->
 				fruits.push(obj);
 			}
 		}
-		$.post('@Url.Action("_RepostTest", "TestLogin")',
+		$.post('@Url.Action("_RepostTest", "Auditions")',
 			{
 				fruits: fruits,
 				exampaperid: @ViewBag.IdExamPaper,
@@ -357,7 +357,7 @@ immediately after the control sidebar -->
 				passscore: @ViewBag.PassScore,
 				idtest: @ViewBag.IdTest
 			},
-			function(result) {
+			function () {
 				var url = $("#RedirectTo").val();
 				location.href = url;
 			});

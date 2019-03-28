@@ -52,6 +52,7 @@
     <Compile Include="Question\QuestionDto.cs" />
     <Compile Include="Question\QuestionFilterModel.cs" />
     <Compile Include="Question\TranferID.cs" />
+    <Compile Include="ResultJson.cs" />
     <Compile Include="ResultTest.cs" />
     <Compile Include="RoleDetail.cs" />
     <Compile Include="UserDetail.cs" />

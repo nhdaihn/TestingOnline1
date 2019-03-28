@@ -3,6 +3,8 @@
 	Layout = "~/Views/Shared/_LayoutAuditionTest.cshtml";
 	int i = 0;
 	bool checkmulti = false;
+	int countTrue = 0;
+	int x = 0;
 }
 <style>
 	.checkboxva {
@@ -65,7 +67,11 @@
 			<hr>
 		</div>
 	}
-	@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "TestLogin", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore, title = ViewBag.TitleTest }))
+	<input type="hidden" name="countTrue" id="countTrue" value="">
+	@if (TempData["countTrue"] != null)
+	{
+		@Html.Hidden("RedirectTo", Url.Action("_ShowResult", "Auditions", new { countQ = Enumerable.Count(ViewBag.ListQuestion), passscore = ViewBag.PassScore, title = ViewBag.TitleTest }))
+	}
 </div>
 <script>
 	$(document).ready(function () {
