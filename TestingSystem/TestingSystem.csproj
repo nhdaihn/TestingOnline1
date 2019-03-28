@@ -6736,6 +6736,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\loadding.css" />
@@ -6769,6 +6770,8 @@
     <Content Include="Content\style-export-to-pdf.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\stylenotfound.css" />
+    <Content Include="Content\thongbao_menu.css" />
+    <Content Include="Content\xembaithinhanh.css" />
     <Content Include="Controllers\Content\add.png" />
     <Content Include="Controllers\Content\bg.jpg" />
     <Content Include="Controllers\Content\bootstrap-theme.css" />
@@ -7750,6 +7753,8 @@
     <Content Include="Areas\Admin\Views\Test\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TestLogin\_ShowResult.cshtml" />
     <Content Include="Areas\Admin\Views\Test\Edit.cshtml" />
+    <Content Include="Scripts\danhsach.js" />
+    <Content Include="Content\css_elearning_course_frontend.css" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7807,6 +7812,10 @@
     <Content Include="Views\Auditions\MyAuditionsTest.cshtml" />
     <Content Include="Views\Shared\TestPartialView.cshtml" />
     <Content Include="Views\Auditions\ShowExamPaperById.cshtml" />
+    <Content Include="Scripts\jquerymin.js" />
+    <Content Include="Scripts\js_elearning_notify.js" />
+    <Content Include="Scripts\js_frontend_dkp_course.js" />
+    <Content Include="Scripts\nguoidung_xembaithi.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
