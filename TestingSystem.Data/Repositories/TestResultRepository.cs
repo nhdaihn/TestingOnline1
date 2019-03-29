@@ -47,7 +47,7 @@ namespace TestingSystem.Data.Repositories
 
         public IEnumerable<TestResult> GetALl()
         {
-	        var model = DbContext.TestResults.GroupBy(x => x.Turns).Select(x => x.FirstOrDefault()).ToList();
+	        var model = DbContext.TestResults.GroupBy(x => new {x.TestID,x.Turns}).Select(x => x.FirstOrDefault()).ToList();
 	        return model.Distinct().AsEnumerable();
         }
 
