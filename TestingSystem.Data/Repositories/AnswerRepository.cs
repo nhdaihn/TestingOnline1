@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TestingSystem.Data.Infrastructure;
-using TestingSystem.DataTranferObject;
 using TestingSystem.Models;
 
 namespace TestingSystem.Data.Repositories
@@ -15,7 +14,6 @@ namespace TestingSystem.Data.Repositories
         int DelteAnswerbyQuestionID(int id);
         Answer GetAnswerCorrect(int idAnswer);
         List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion);
-        IEnumerable<ResultCheckIdTrue> GetAllQuestionIdandAnswerIdByExampaperId(int idExamPaper);
     }
 
     public class AnswerRepository : RepositoryBase<Answer>, IAnswerRepository
@@ -97,29 +95,6 @@ namespace TestingSystem.Data.Repositories
             }
 
             return listIdAnswer;
-        }
-
-        public IEnumerable<ResultCheckIdTrue> GetAllQuestionIdandAnswerIdByExampaperId(int idExamPaper)
-        {
-            var listQuestionByExamPaperId = this.DbContext.ExamPaperQuesions.Where(s => s.ExamPaperID == idExamPaper).ToList();
-            var listAnswer = this.DbContext.Answers.ToList();
-            var listAnswerByQuestionId = new List<Answer>();
-            List<ResultCheckIdTrue> listAnswerQuestion = new List<ResultCheckIdTrue>();
-            foreach (var item in listQuestionByExamPaperId)
-            {
-                foreach (var item2 in listAnswer)
-                {
-                    if (item.QuestionID == item2.QuestionID)
-                    {
-                        ResultCheckIdTrue obj = new ResultCheckIdTrue();
-                        obj.AnswerId = item2.AnswerID;
-                        obj.QuestionId = item2.QuestionID;
-                        obj.IsTrue = item2.IsCorrect;
-                        listAnswerQuestion.Add(obj);
-                    }
-                }
-            }
-            return listAnswerQuestion;
         }
     }
 }

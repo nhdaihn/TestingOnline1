@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="content-master-hot bxslider" style="padding-left: 20px;">
+                    <div class="content-master-hot bxslider">
                         @foreach (var item in ViewBag.ListReviewTestResult)
                         {
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 box-info-home">
@@ -51,7 +51,7 @@
                                     <div class="col-md-9 col-xs-9 margin-top-10 padding-left-15 pull-left" style="overflow: hidden">
                                         
                                         <span class="exam-title">
-                                            <a href="@Url.Action("ShowTestResultById", "ReviewTestResult", new { idTest = item.TestId, dateTest = @item.dateTest, turnTest = item.numRank})">@item.TestName</a>
+                                            <a href="@Url.Action("ShowTestResultById", "ReviewTestResult", new { idTest = item.TestId, dateTest = @item.dateTest})">@item.TestName</a>
 </span>
 
                                         <div class="box-label-exam">

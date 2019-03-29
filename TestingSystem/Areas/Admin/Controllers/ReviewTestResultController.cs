@@ -37,13 +37,13 @@ namespace TestingSystem.Areas.Admin.Controllers
             ViewBag.NameDedicate = userService.GetUserById(idUser).Name;
             return View();
         }
-        public ActionResult ShowTestResultById(int idTest, DateTime dateTest, int turnTest)
+        public ActionResult ShowTestResultById(int idTest, DateTime dateTest)
         {
             int idExamPaper = testService.GetExamPaperIdByTestId(idTest);
             /// danh sach cau hoi trong de thi
             var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(idExamPaper);
 
-
+            
 
             // so luong cau hoi
             var countQuestion = listExamPaperQuesions.Count();
@@ -61,7 +61,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             List<QuestionCheckMulti> listQuestionCheckMulti = new List<QuestionCheckMulti>();
             List<Answer> listAnswerByQuestionId = new List<Answer>();
-
+            
             // get multi choice in all question
             foreach (var item in listExamPaperQuesions)
             {
@@ -70,12 +70,12 @@ namespace TestingSystem.Areas.Admin.Controllers
                 listAnswerByQuestionId = answerService.GetAnswersByQuestionID(item.QuestionID);
                 foreach (var item2 in listAnswerByQuestionId)
                 {
-                    if (answerService.GetAnswerCorrect(item2.AnswerID) != null)
+                    if(answerService.GetAnswerCorrect(item2.AnswerID) != null)
                     {
                         checkcount++;
                     }
                 }
-                if (checkcount > 1)
+                if(checkcount > 1)
                 {
                     multichoice = true;
                 }
@@ -94,127 +94,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             test = testService.GetTestByID(idTest);
             //pass score bai thi
             ViewBag.PassScore = test.PassingScore;
-
-            List<ResultCheckId> listResultCheckIds = new List<ResultCheckId>();
-            // lay id cau tra loi va id cau hoi da check
-            listResultCheckIds = testResultService.ListAllQuestionIdAndAnswerIdByTestIdChecked(idTest, turnTest).ToList();
-            ViewBag.ListResultCheckIds = listResultCheckIds;
-            List<ResultCheckIdTrue> listAnswerQuestion = new List<ResultCheckIdTrue>();
-            listAnswerQuestion = answerService.GetAllQuestionIdandAnswerIdByExampaperId(idExamPaper).ToList();
-            ViewBag.ListAnswerQuestion = listAnswerQuestion;
-            List<QuestionCheck> listIdQuestionToCheckTrue = new List<QuestionCheck>();
-
-
-
-            int idalive = 0;
-            int i = 0;
-            foreach (var item in listResultCheckIds)
-            {
-                // id: answer id, name: question id
-                // lay answer dung trong fruits
-                if (idalive != item.QuestionId)
-                {
-                    if (listQuestionCheckMulti[i].CheckMulti == false)
-                    {
-                        var obj = answerService.GetAnswerCorrect(item.AnswerId);
-                        if (obj != null)
-                        {
-                            listIdQuestionToCheckTrue.Add(new QuestionCheck() { QuestionID = item.QuestionId, IsTrue = true });
-                        }
-                        else
-                        {
-                            listIdQuestionToCheckTrue.Add(new QuestionCheck() { QuestionID = item.QuestionId, IsTrue = false });
-                        }
-                    }
-                    else
-                    {
-                        List<int> listIdAnswerCorrectByIdQuestion = new List<int>();
-                        // lay tat ca id answer dung theo id question
-                        listIdAnswerCorrectByIdQuestion = answerService.GetListIdAnswerCorrectByIdQuestion(item.QuestionId);
-                        List<int> listIdAnswerCheckById = new List<int>();
-                        foreach (var obj in listResultCheckIds)
-                        {
-                            if (obj.QuestionId == item.QuestionId)
-                            {
-                                listIdAnswerCheckById.Add(obj.AnswerId);
-                            }
-                        }
-                        if (UnorderedEqual(listIdAnswerCorrectByIdQuestion, listIdAnswerCheckById) == true)
-                        {
-                            listIdQuestionToCheckTrue.Add(new QuestionCheck() { QuestionID = item.QuestionId, IsTrue = true });
-                        }
-                        else
-                        {
-                            listIdQuestionToCheckTrue.Add(new QuestionCheck() { QuestionID = item.QuestionId, IsTrue = false });
-                        }
-                        idalive = item.QuestionId;
-                    }
-                }
-            }
-            ViewBag.ListIdQuestionToCheckTrue = listIdQuestionToCheckTrue;
-            ViewBag.CountListIdQuestionToCheckTrue = listIdQuestionToCheckTrue.Count();
             return View();
-        }
-        static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
-        {
-            // 1
-            // Require that the counts are equal
-            if (a.Count != b.Count)
-            {
-                return false;
-            }
-            // 2
-            // Initialize new Dictionary of the type
-            Dictionary<T, int> d = new Dictionary<T, int>();
-            // 3
-            // Add each key's frequency from collection A to the Dictionary
-            foreach (T item in a)
-            {
-                int c;
-                if (d.TryGetValue(item, out c))
-                {
-                    d[item] = c + 1;
-                }
-                else
-                {
-                    d.Add(item, 1);
-                }
-            }
-            // 4
-            // Add each key's frequency from collection B to the Dictionary
-            // Return early if we detect a mismatch
-            foreach (T item in b)
-            {
-                int c;
-                if (d.TryGetValue(item, out c))
-                {
-                    if (c == 0)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        d[item] = c - 1;
-                    }
-                }
-                else
-                {
-                    // Not in dictionary
-                    return false;
-                }
-            }
-            // 5
-            // Verify that all frequencies are zero
-            foreach (int v in d.Values)
-            {
-                if (v != 0)
-                {
-                    return false;
-                }
-            }
-            // 6
-            // We know the collections are equal
-            return true;
         }
     }
 }
