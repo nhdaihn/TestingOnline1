@@ -29,6 +29,19 @@
         i++;
         <div style="float:left; width: 55%;padding-left: 20px;">
             <div>Câu hỏi số @i</div>
+            <div style="padding-bottom: 8px;">
+                @foreach (var itemTrue in ViewBag.ListIdQuestionToCheckTrue)
+                {
+                    valLoopCheckTrue++;
+                    if (itemTrue.IsTrue == true && itemTrue.QuestionID == item.QuestionID)
+                    {
+                        <img src="~/Content/checkicon.jpg" width="15px" />
+                        break;
+                    }
+                }
+                @{valLoopCheckTrue = 0; }
+                Câu hỏi số @i
+            </div>
             <div>@item.Content</div>
         </div>
         <div style="float:left; width: 43%;">
