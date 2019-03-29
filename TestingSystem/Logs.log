@@ -564,3 +564,15 @@
 08:27:49,934 18 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
 ----------------------------------------------------------------------------------------------------------------------------
 
+14:45:58,425 7 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+14:53:54,676 6 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+16:36:52,414 7 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+

@@ -7763,6 +7763,7 @@
     <Content Include="Areas\Admin\Views\TestResult\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ReviewTestResult\ShowAllTestByDedicateId.cshtml" />
     <Content Include="Areas\Admin\Views\ReviewTestResult\ShowTestResultById.cshtml" />
+    <Content Include="Areas\Admin\Views\CandidatatesTest\UpdateCandidates.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7833,7 +7834,6 @@
     <Folder Include="Areas\Admin\Models\Account\" />
     <Folder Include="Areas\Admin\Models\Exam-Question\" />
     <Folder Include="Areas\Admin\Models\Exam\" />
-    <Folder Include="Areas\Admin\Views\CandidatatesTest\" />
     <Folder Include="FileExcel\" />
     <Folder Include="Models\" />
     <Folder Include="Views\ExamPaper\" />

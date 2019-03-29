@@ -15,11 +15,13 @@ namespace TestingSystem.Areas.Admin.Controllers
 	    private readonly ITestService testService;
 
         private readonly IExamPaperService examPaperService;
+        private readonly ICandidatesTestService _candidatesTestService;
 
-		public TestController(ITestService testService, IExamPaperService examPaperService,IUserService user):base(user)
+		public TestController(ITestService testService, IExamPaperService examPaperService,IUserService user, ICandidatesTestService candidatesTestService) :base(user)
 		{
 			this.testService = testService;
             this.examPaperService = examPaperService;
+			_candidatesTestService=candidatesTestService;
 		}
         // GET: Admin/Test
         public ActionResult Index()
@@ -78,7 +80,9 @@ namespace TestingSystem.Areas.Admin.Controllers
         }
         public ActionResult Edit(int Id)
         {
-            var test = testService.GetTestByID(Id);
+	        var listCandidatesByTestID = _candidatesTestService.GetAllCandidatesByTestID(Id);
+	        ViewBag.listCandidatesByTestID = listCandidatesByTestID;
+			var test = testService.GetTestByID(Id);
             var model = examPaperService.GetAll();
             ViewBag.ExamPaperId = new SelectList(model, "ExamPaperId", "Title");
             return View(test);
