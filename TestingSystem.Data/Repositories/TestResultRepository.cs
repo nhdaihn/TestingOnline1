@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TestingSystem.Data.Infrastructure;
@@ -17,6 +16,7 @@ namespace TestingSystem.Data.Repositories
         IEnumerable<TestResult> GetALl();
         int ReturnTurn(int testId, DateTime dateTest);
         IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
+        IEnumerable<ResultCheckId> ListAllQuestionIdAndAnswerIdByTestIdChecked(int testId, int turn);
     }
     public class TestResultRepository : RepositoryBase<TestResult>, ITestResultRepository
     {
@@ -47,18 +47,18 @@ namespace TestingSystem.Data.Repositories
 
         public IEnumerable<TestResult> GetALl()
         {
-	        var model = DbContext.TestResults.GroupBy(x => new {x.TestID,x.Turns}).Select(x => x.FirstOrDefault()).ToList();
-	        return model.Distinct().AsEnumerable();
-        }
 
+			var model = DbContext.TestResults.GroupBy(x => new { x.TestID, x.Turns }).Select(x => x.FirstOrDefault()).ToList();
+			return model.Distinct().AsEnumerable();
+		}
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
         {
             var listAllTestResult = this.DbContext.TestResults.ToList();
             var listAllTestResultDTO = new List<ReviewTestResult>();
             int i = 0;
-            foreach(var item in listAllTestResult)
+            foreach (var item in listAllTestResult)
             {
-                if(i != item.Turns)
+                if (i != item.Turns)
                 {
                     ReviewTestResult obj = new ReviewTestResult();
                     obj.TestId = item.TestID;
@@ -74,10 +74,24 @@ namespace TestingSystem.Data.Repositories
 
         public int ReturnTurn(int testId, DateTime dateTest)
         {
-            var item = this.DbContext.TestResults.Where(s => s.TestID == testId && s.CreatedDate.Month == dateTest.Month && s.CreatedDate.Year == dateTest.Year && s.CreatedDate.Day == dateTest.Day).OrderByDescending(s=>s.CreatedDate).Take(1).FirstOrDefault();
+            var item = this.DbContext.TestResults.Where(s => s.TestID == testId && s.CreatedDate.Month == dateTest.Month && s.CreatedDate.Year == dateTest.Year && s.CreatedDate.Day == dateTest.Day).OrderByDescending(s => s.CreatedDate).Take(1).FirstOrDefault();
             if (item != null)
                 return item.Turns;
             else return 0;
+        }
+
+        public IEnumerable<ResultCheckId> ListAllQuestionIdAndAnswerIdByTestIdChecked(int testId, int turn)
+        {
+            var list = this.DbContext.TestResults.Where(s => s.TestID == testId && s.Turns == turn).ToList();
+            List<ResultCheckId> listResultCheckId = new List<ResultCheckId>();
+            foreach (var item in list)
+            {
+                ResultCheckId obj = new ResultCheckId();
+                obj.QuestionId = item.QuestionID;
+                obj.AnswerId = item.AnswerID;
+                listResultCheckId.Add(obj);
+            }
+            return listResultCheckId;
         }
     }
 }
