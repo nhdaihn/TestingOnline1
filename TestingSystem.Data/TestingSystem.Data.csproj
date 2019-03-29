@@ -122,6 +122,7 @@
     <Compile Include="Repositories\ActionRepository.cs" />
     <Compile Include="Repositories\AnswerRepository.cs" />
     <Compile Include="Repositories\CandidateRepository.cs" />
+    <Compile Include="Repositories\CandidatesTestRepository.cs" />
     <Compile Include="Repositories\ExamPaperExamRepository.cs" />
     <Compile Include="Repositories\ExamPaperQuestionRepository.cs" />
     <Compile Include="Repositories\ExamPaperRepository.cs" />

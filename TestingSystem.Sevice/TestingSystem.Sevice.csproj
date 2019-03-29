@@ -44,6 +44,7 @@
     <Compile Include="ActionService.cs" />
     <Compile Include="AnswerService.cs" />
     <Compile Include="CandidateService.cs" />
+    <Compile Include="CandidatesTestService.cs" />
     <Compile Include="ExamPaperExamService.cs" />
     <Compile Include="ExamPaperQuestionService.cs" />
     <Compile Include="ExamPaperService.cs" />
