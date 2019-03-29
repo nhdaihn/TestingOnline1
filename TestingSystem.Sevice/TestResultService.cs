@@ -16,7 +16,6 @@ namespace TestingSystem.Sevice
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
         int ReturnTurn(int testId, DateTime dateTest);
         IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
-        IEnumerable<ResultCheckId> ListAllQuestionIdAndAnswerIdByTestIdChecked(int testId, int turn);
     }
     public class TestResultService : ITestResultService
     {
@@ -38,11 +37,6 @@ namespace TestingSystem.Sevice
         public IEnumerable<TestResult> GetQuestionByCount(int countQ)
         {
             return testResultRepository.GetQuestionByCount(countQ);
-        }
-
-        public IEnumerable<ResultCheckId> ListAllQuestionIdAndAnswerIdByTestIdChecked(int testId, int turn)
-        {
-            return testResultRepository.ListAllQuestionIdAndAnswerIdByTestIdChecked(testId, turn);
         }
 
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
