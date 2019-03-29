@@ -16,7 +16,7 @@ namespace TestingSystem.Data.Repositories
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
 		IEnumerable<Exam> SearchExams(string txtSearch);
-		IEnumerable<Test> GetTestByExamID(int examID);
+		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
 		int RemoveTestInExams(int id);
 		int AddTestIntoExams(int testID, int examID);
 
@@ -135,17 +135,42 @@ namespace TestingSystem.Data.Repositories
 			return listExams;
 		}
 
-		public IEnumerable<Test> GetTestByExamID(int examID)
+		public IEnumerable<Test> GetTestByExamID(int examID, int idUser)
 		{
-			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
+            // lay tat ca examtest theo examid
+            var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
 			List<Test> listTests = new List<Test>();
+            // lay tat ca test theo testid trong examtest
 			foreach (var item in listExamTestByExamID)
 			{
 				var examTest = DbContext.Tests.SingleOrDefault(x => x.TestID == item.TestID);
 				listTests.Add(examTest);
 			}
 
-			return listTests.AsEnumerable();
+            // list can tra ve
+            List<Test> listTestReturn = new List<Test>();
+
+            // list candidate id trong bang CandidatesTest
+            List<int> listTestIdByCandidateID = new List<int>();
+            // lay tat ca CandidatesTest theo candidateid
+            var listTestByCandidateId = this.DbContext.CandidatesTests.Where(s => s.CandidateID == idUser).ToList();
+            foreach(var item in listTestByCandidateId)
+            {
+                listTestIdByCandidateID.Add(item.TestID);
+            }
+
+            foreach (var item2 in listTests)
+            {
+                foreach(var item3 in listTestIdByCandidateID)
+                {
+                    if(item2.TestID == item3)
+                    {
+                        listTestReturn.Add(item2);
+                    }
+                }
+            }
+
+			return listTestReturn.AsEnumerable();
 		}
 
 		public int RemoveTestInExams(int id)

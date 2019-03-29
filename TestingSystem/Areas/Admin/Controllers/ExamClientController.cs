@@ -22,6 +22,7 @@ namespace TestingSystem.Areas.Admin.Controllers
         //GET: Admin/ExamClient
         public ActionResult ListExamClient(int idExam = 0)
         {
+            int idUser = int.Parse(Session["Name"].ToString());
             var listExam = examService.GetAllExams().ToList();
             if (idExam == 0)
             {
@@ -30,12 +31,12 @@ namespace TestingSystem.Areas.Admin.Controllers
             if (idExam != 0)
             {
                 ViewBag.ListExam = listExam;
-                ViewBag.ListExamPaperInExam = examService.GetTestByExamID(idExam);
+                ViewBag.ListExamPaperInExam = examService.GetTestByExamID(idExam, idUser);
             }
             else
             {
                 ViewBag.ListExam = listExam;
-                ViewBag.ListExamPaperInExam = examService.GetTestByExamID(idExam);
+                ViewBag.ListExamPaperInExam = examService.GetTestByExamID(idExam, idUser);
             }
             ViewBag.IdExam = idExam;
             return View(listExam);

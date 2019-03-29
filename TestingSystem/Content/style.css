@@ -399,3 +399,15 @@ a#export-exam {
 .dangcannhac {
     background-color: #ed7a1f !important;
 }
+.btn-test-online {
+    color: white;
+    border: none;
+    background: #337ab7;
+    padding: 8px 13px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 5px;
+}
+.btn-test-online a {
+    color: white;
+}

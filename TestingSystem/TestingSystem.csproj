@@ -6739,7 +6739,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\checkicon.jpg" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
@@ -7764,6 +7763,7 @@
     <Content Include="Areas\Admin\Views\ReviewTestResult\ShowAllTestByDedicateId.cshtml" />
     <Content Include="Areas\Admin\Views\ReviewTestResult\ShowTestResultById.cshtml" />
     <Content Include="Areas\Admin\Views\CandidatatesTest\UpdateCandidates.cshtml" />
+    <Content Include="Areas\Admin\Views\TestLogin\ShowInfoTest.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
