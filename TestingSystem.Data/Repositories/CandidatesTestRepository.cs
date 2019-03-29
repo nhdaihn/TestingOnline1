@@ -14,7 +14,9 @@ namespace TestingSystem.Data.Repositories
 
 		int AddCandidatesIntoTest(int candidatesID, int testID);
 		int RemoveCadidatesFromTest(int cadidatesID);
-	}
+        List<int> GetAllTestIdByCandidateID(int candidateID);
+
+    }
 	public class CandidatesTestRepository : RepositoryBase<CandidatesTest>, ICandidatesTestRepository
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -77,5 +79,16 @@ namespace TestingSystem.Data.Repositories
 				return 0;
 			}
 		}
-	}
+
+        public List<int> GetAllTestIdByCandidateID(int candidateID)
+        {
+            List<int> listTestIdByCandidateID = new List<int>();
+            var listTestByCandidateId = this.DbContext.CandidatesTests.Where(s => s.CandidateID == candidateID).ToList();
+            foreach(var item in listTestByCandidateId)
+            {
+                listTestIdByCandidateID.Add(item.TestID);
+            }
+            return listTestIdByCandidateID;
+        }
+    }
 }

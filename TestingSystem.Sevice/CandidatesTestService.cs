@@ -10,7 +10,8 @@ namespace TestingSystem.Sevice
 		IEnumerable<Candidate> GetAllCandidatesByTestID(int testID);
 		int AddCandidatesIntoTest(int candidatesID, int testID);
 		int RemoveCadidatesFromTest(int cadidatesID);
-	}
+        List<int> GetAllTestIdByCandidateID(int candidateID);
+    }
 	public class CandidatesTestService : ICandidatesTestService
 	{
 		private readonly ICandidatesTestRepository _candidatesTestRepository;
@@ -36,5 +37,10 @@ namespace TestingSystem.Sevice
 		{
 			return _candidatesTestRepository.RemoveCadidatesFromTest(cadidatesID);
 		}
-	}
+
+        public List<int> GetAllTestIdByCandidateID(int candidateID)
+        {
+            return _candidatesTestRepository.GetAllTestIdByCandidateID(candidateID);
+        }
+    }
 }

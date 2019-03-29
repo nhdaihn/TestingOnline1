@@ -30,6 +30,16 @@ namespace TestingSystem.Areas.Admin.Controllers
             this.candidateService = candidateService;
         }
 
+        // hien thi thong tin bai thi
+        public ActionResult ShowInfoTest(int idExamPaper, int idExam, int idTest)
+        {
+            Test item = new Test();
+            item = testService.GetTestByID(idTest);
+            ViewBag.IdExam = idExam;
+            return View(item);
+        }
+
+        // hien thi bai thi
         // hieu la lay id bai test theo idExamPaper va idTest
         [HttpGet]
         public ActionResult ShowExamPaperById(int idExamPaper, int idExam, int idTest)
@@ -251,9 +261,6 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             foreach (var item in listQuestion)
             {
-                Candidate newCandidate = new Candidate();
-                newCandidate.CandidateID = idUser;
-                candidateService.AddCandidate(newCandidate);
                 TestResult testResult = new TestResult();
                 testResult.TestID = idtest;
                 testResult.CandidateID = idUser;

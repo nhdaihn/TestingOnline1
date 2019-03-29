@@ -62,19 +62,19 @@
                     <div class="event-icon">
                         <h4>
                             <b>
-                                Tháng 3
+                                Tháng @item.CreateDate.Month
                             </b>
                             <span></span>
                         </h4>
                         <p class="exam-calendar-date text-center">
-                            <b>14</b>
+                            <b>@item.CreateDate.Day</b>
                         </p>
                     </div>
                 </div>
                 <div class="col-md-9 col-xs-9 margin-top-10">
                     <a href="/thong-tin-bai-thi/5279?cid=3">
                         <span class="exam-title">
-                            <a href="@Url.Action("ShowExamPaperById", "TestLogin", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam, idTest = item.TestID})">@item.TestName
+                            <a href="@Url.Action("ShowInfoTest", "TestLogin", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam, idTest = item.TestID})">@item.TestName
                         </span>
                     </a>
                     <div class="box-label-exam">

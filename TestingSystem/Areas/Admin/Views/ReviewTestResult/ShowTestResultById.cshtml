@@ -30,7 +30,8 @@
     {
         i++;
         <div style="float:left; width: 55%;padding-left: 20px;">
-            <div style="padding-bottom: 8px;">
+            <div style="padding-bottom: 8px;text-decoration: underline;color: blue;font-weight: bold;font-size: 15px;">
+                Câu hỏi số @i
                 @foreach (var itemTrue in ViewBag.ListIdQuestionToCheckTrue)
                 {
                     valLoopCheckTrue++;
@@ -41,7 +42,6 @@
                     }
                 }
                 @{valLoopCheckTrue = 0; }
-                    Câu hỏi số @i
             </div>
             <div>@item.Content</div>
         </div>
@@ -64,14 +64,14 @@
                         {
                             if (item3.AnswerId == item2.AnswerID)
                             {
-                                <p><input style="margin-top: 2px;margin-right: 4px;" type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" checked="checked" /><span>@item2.AnswerContent</span></p>
+                                <p><input disabled="disabled" style="margin-top: 2px;margin-right: 4px;" type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" checked="checked" /><span style="color: black; font-weight:bold;">@item2.AnswerContent</span></p>
                                 checkChoice = true;
                                 break;
                             }
                         }
                         if (checkChoice == false)
                         {
-                            <p><input style="margin-top: 2px;margin-right: 4px;" type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+                            <p><input disabled="disabled" style="margin-top: 2px;margin-right: 4px;" type="checkbox" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
                         }
                         checkChoice = false;
                     }
@@ -87,14 +87,14 @@
                         {
                             if (item3.AnswerId == item2.AnswerID)
                             {
-                                <p><input style="margin-top: 2px;margin-right: 4px;" type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" checked="checked" /><span>@item2.AnswerContent</span></p>
+                                <p><input disabled="disabled" style="margin-top: 2px;margin-right: 4px;" type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" checked="checked" /><span style="color: black; font-weight:bold;">@item2.AnswerContent</span></p>
                                 checkChoice = true;
                                 break;
                             }
                         }
                         if (checkChoice == false)
                         {
-                            <p><input style="margin-top: 2px;margin-right: 4px;" type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
+                            <p><input disabled="disabled" style="margin-top: 2px;margin-right: 4px;" type="radio" name="@item2.QuestionID" value="@i" class="radiova" id="@item2.AnswerID" /><span>@item2.AnswerContent</span></p>
                         }
                         checkChoice = false;
                     }
