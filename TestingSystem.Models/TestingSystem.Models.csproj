@@ -67,6 +67,7 @@
     <Compile Include="Action.cs" />
     <Compile Include="Answer.cs" />
     <Compile Include="Candidate.cs" />
+    <Compile Include="CandidatesTest.cs" />
     <Compile Include="Exam.cs" />
     <Compile Include="ExamPaper.cs" />
     <Compile Include="ExamTest.cs" />
