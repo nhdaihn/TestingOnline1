@@ -113,6 +113,10 @@
     <Compile Include="Migrations\201903280201421_updateturnrow.Designer.cs">
       <DependentUpon>201903280201421_updateturnrow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903290403321_createnewtablecandidatestest.cs" />
+    <Compile Include="Migrations\201903290403321_createnewtablecandidatestest.Designer.cs">
+      <DependentUpon>201903290403321_createnewtablecandidatestest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ActionRepository.cs" />
@@ -194,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903280201421_updateturnrow.resx">
       <DependentUpon>201903280201421_updateturnrow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903290403321_createnewtablecandidatestest.resx">
+      <DependentUpon>201903290403321_createnewtablecandidatestest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
