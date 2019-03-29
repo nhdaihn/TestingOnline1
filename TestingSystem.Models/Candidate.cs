@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TestingSystem.Models
 {
@@ -15,5 +14,6 @@ namespace TestingSystem.Models
 
 	    public virtual User Users { get; set; }
 	    public ICollection<TestResult> TestResults { get; set; }
+	    public ICollection<CandidatesTest> CandidatesTests { get; set; }
 	}
 }

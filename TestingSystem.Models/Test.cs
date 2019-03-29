@@ -42,5 +42,6 @@ namespace TestingSystem.Models
 		public virtual ICollection<TestResult> TestResults { get; set; }
 		public virtual ICollection<ExamTest> ExamTests { get; set; }
 		public virtual ExamPaper ExamPapers { get; set; }
+		public virtual ICollection<CandidatesTest> CandidatesTests { get; set; }
 	}
 }
