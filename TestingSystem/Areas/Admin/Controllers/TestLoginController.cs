@@ -34,11 +34,11 @@ namespace TestingSystem.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult ShowExamPaperById(int idExamPaper, int idExam, int idTest)
         {
-            
+
             /// danh sach cau hoi trong de thi
             var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(idExamPaper);
 
-            
+
 
             // so luong cau hoi
             var countQuestion = listExamPaperQuesions.Count();
@@ -56,7 +56,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             List<QuestionCheckMulti> listQuestionCheckMulti = new List<QuestionCheckMulti>();
             List<Answer> listAnswerByQuestionId = new List<Answer>();
-            
+
             // get multi choice in all question
             foreach (var item in listExamPaperQuesions)
             {
@@ -65,12 +65,12 @@ namespace TestingSystem.Areas.Admin.Controllers
                 listAnswerByQuestionId = answerService.GetAnswersByQuestionID(item.QuestionID);
                 foreach (var item2 in listAnswerByQuestionId)
                 {
-                    if(answerService.GetAnswerCorrect(item2.AnswerID) != null)
+                    if (answerService.GetAnswerCorrect(item2.AnswerID) != null)
                     {
                         checkcount++;
                     }
                 }
-                if(checkcount > 1)
+                if (checkcount > 1)
                 {
                     multichoice = true;
                 }
@@ -154,7 +154,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             return true;
         }
         [HttpPost]
-        public JsonResult _RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid, int passscore, int idtest)
+        public JsonResult _RepostTest(IEnumerable<ResultTest> fruits, int exampaperid, int examid, int passscore, int idtest)
         {
 
             /// danh sach cau hoi trong de thi
@@ -191,7 +191,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             int idUser = int.Parse(Session["Name"].ToString());
             // fruits : chua danh sach tat ca id question va id answer da check
-			var list = fruits;
+            var list = fruits;
             int countAnswer = fruits.Count();
             int numberOfCorrectAnswer = 0;
             int i = 0;
@@ -201,7 +201,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             {
                 // id: answer id, name: question id
                 // lay answer dung trong fruits
-                if(idalive != item.name)
+                if (idalive != item.name)
                 {
                     if (listQuestionCheckMulti[i].CheckMulti == false)
                     {
@@ -241,10 +241,14 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             Models.ExamPaper examPaper = new Models.ExamPaper();
             examPaper = examPaperService.GetExamPaperById(exampaperid);
-            
+
 
             // lay exampaper theo id
             // listquestion: so cau hoi trong de
+
+            // check turn of test result trong hom thi
+            int turn = testResultService.ReturnTurn(idtest, DateTime.Now);
+
             foreach (var item in listQuestion)
             {
                 Candidate newCandidate = new Candidate();
@@ -257,25 +261,26 @@ namespace TestingSystem.Areas.Admin.Controllers
                 testResult.Description = "description note";
                 testResult.CreatedDate = DateTime.Now;
                 testResult.Score = numberOfCorrectAnswer;
+                testResult.Turns = turn + 1;
+
                 // list: so cau hoi da check
                 bool checkAvailable = false;
-                foreach(var item2 in list)
+                foreach (var item2 in list)
                 {
                     // item2 co 2 attribute: id(answerid) va name(questionid)
-                    if(item2.name == item.QuestionID)
+                    if (item2.name == item.QuestionID)
                     {
                         testResult.QuestionID = item2.name;
                         testResult.AnswerID = item2.id;
                         checkAvailable = true;
-                        break;
+                        if (checkAvailable == false)
+                        {
+                            testResult.QuestionID = item.QuestionID;
+                            testResult.AnswerID = -1;
+                        }
+                        testResultService.AddTestResult(testResult);
                     }
                 }
-                if(checkAvailable == false)
-                {
-                    testResult.QuestionID = item.QuestionID;
-                    testResult.AnswerID = -1;
-                }
-                testResultService.AddTestResult(testResult);
             }
             return Json(listQuestion.Count());
         }
@@ -283,14 +288,14 @@ namespace TestingSystem.Areas.Admin.Controllers
         public ActionResult _ShowResult(int countQ, int passscore, string title)
         {
             int idUser = int.Parse(Session["Name"].ToString());
-            List<Models.TestResult> listQ= new List<Models.TestResult>();
+            List<Models.TestResult> listQ = new List<Models.TestResult>();
             listQ = testResultService.GetQuestionByCount(countQ).ToList();
             ViewBag.DedicateName = userService.GetUserById(idUser).Name;
             ViewBag.DedicateEmail = userService.GetUserById(idUser).Email;
             ViewBag.TestTitle = title;
             int score = 0;
-            bool checkPass = false; 
-            foreach(var item in listQ)
+            bool checkPass = false;
+            foreach (var item in listQ)
             {
                 score = item.Score;
                 break;

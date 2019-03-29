@@ -76,11 +76,11 @@
 								<td><input type="checkbox" checked="@item.Status" disabled="" /></td>
 								<td>@item.CreatedDate</td>
 								<td><input type="checkbox" checked="@item.IsActive" disabled="" /></td>
-								<td>
+								@*<td>
 									<a onclick="getCodeExamPaper(@item.ExamPaperID)">
 										<div class="btn btn-success" data-toggle="modal" data-target="#ModalAddCate" value=" ">GetCodeExamPaper</div>
 									</a>
-								</td>
+								</td>*@
 
 								<td>
 									<a href='@Url.Action("ExamPaper","ExamPaper", new {examPaperId = @item.ExamPaperID })'>

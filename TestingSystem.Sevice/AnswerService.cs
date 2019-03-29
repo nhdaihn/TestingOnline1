@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestingSystem.Data.Infrastructure;
 using TestingSystem.Data.Repositories;
+using TestingSystem.DataTranferObject;
 using TestingSystem.Models;
 
 namespace TestingSystem.Sevice
@@ -19,6 +20,7 @@ namespace TestingSystem.Sevice
         void DeleteAnswer(Answer answer);
         Answer GetAnswerCorrect(int idAnswer);
         List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion);
+        IEnumerable<ResultCheckIdTrue> GetAllQuestionIdandAnswerIdByExampaperId(int idExamPaper);
     }
     public class AnswerService : IAnswerService
     {
@@ -67,6 +69,11 @@ namespace TestingSystem.Sevice
         public List<int> GetListIdAnswerCorrectByIdQuestion(int idQuestion)
         {
             return answerRepository.GetListIdAnswerCorrectByIdQuestion(idQuestion);
+        }
+
+        public IEnumerable<ResultCheckIdTrue> GetAllQuestionIdandAnswerIdByExampaperId(int idExamPaper)
+        {
+            return answerRepository.GetAllQuestionIdandAnswerIdByExampaperId(idExamPaper);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
 		IEnumerable<Test> GetAllTetByExamCode(string examCode);
         IEnumerable<Test> SearchExams(string txtSearch);
+        int GetExamPaperIdByTestId(int testId);
 
     }
 	public class TestRepository : RepositoryBase<Test>, ITestRepository
@@ -145,5 +146,15 @@ namespace TestingSystem.Data.Repositories
 				return false;
 			}
 		}
-	}
+
+        public int GetExamPaperIdByTestId(int testId)
+        {
+            var item = this.DbContext.Tests.Where(s => s.TestID == testId).FirstOrDefault();
+            if(item != null)
+            {
+                return item.ExamPaperID;
+            }
+            return 0;
+        }
+    }
 }
