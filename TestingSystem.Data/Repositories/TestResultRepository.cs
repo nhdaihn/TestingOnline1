@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,6 @@ namespace TestingSystem.Data.Repositories
 
         public IEnumerable<TestResult> GetALl()
         {
-
 			var model = DbContext.TestResults.GroupBy(x => new { x.TestID, x.Turns }).Select(x => x.FirstOrDefault()).ToList();
 			return model.Distinct().AsEnumerable();
 		}

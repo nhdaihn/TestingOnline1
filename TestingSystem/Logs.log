@@ -1,3 +1,97 @@
+
+08:20:31,270 6 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:20:31,487 6 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:20:31,600 6 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:22:50,088 11 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:22:50,341 11 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:22:50,542 11 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:25:27,421 16 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:25:27,963 16 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:25:28,081 16 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:26:25,276 8 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:26:25,471 8 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:26:25,587 8 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:00,882 8 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:01,076 8 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:01,192 8 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:16,164 8 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:16,385 8 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:16,524 8 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:29,416 19 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:29,764 19 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:29,893 19 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:49,250 18 - An error occurred while updating the entries. See the inner exception for details.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:49,815 18 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+08:27:49,934 18 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
 08:18:49,391 8 - An error occurred while updating the entries. See the inner exception for details.
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -468,6 +562,5 @@
 ----------------------------------------------------------------------------------------------------------------------------
 
 08:27:49,934 18 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
-
 ----------------------------------------------------------------------------------------------------------------------------
 
