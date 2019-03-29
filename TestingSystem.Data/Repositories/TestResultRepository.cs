@@ -48,16 +48,9 @@ namespace TestingSystem.Data.Repositories
         public IEnumerable<TestResult> GetALl()
         {
 
-<<<<<<< HEAD
-            var model = DbContext.TestResults.ToList();
-
-            return model;
-        }
-=======
 			var model = DbContext.TestResults.GroupBy(x => new { x.TestID, x.Turns }).Select(x => x.FirstOrDefault()).ToList();
 			return model.Distinct().AsEnumerable();
 		}
->>>>>>> Dai
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
         {
             var listAllTestResult = this.DbContext.TestResults.ToList();
