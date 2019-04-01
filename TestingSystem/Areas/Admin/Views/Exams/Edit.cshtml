@@ -143,57 +143,58 @@
 				@*</div>
 						</div>
 					}*@
-				<form action="@Url.Action("_RemoveTestInExams","Exams")" id="form-delete" method="post">
+				<form action="@Url.Action("_RemoveTestInExams", "Exams")" id="form-delete" method="post">
+					<input type="hidden" name="examID" value=" @Model.ExamID"/>
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
-							<tr>
-								<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
-								<th width="7%">Number</th>
-								<th>Name</th>
-								<th>StartDate</th>
-								<th>EndDate</th>
-								<th>CreatedBy</th>
-								<th width="12%">Pass Score</th>
+						<tr>
+							<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)"/></td>
+							<th width="7%">Number</th>
+							<th>Name</th>
+							<th>StartDate</th>
+							<th>EndDate</th>
+							<th>CreatedBy</th>
+							<th width="12%">Pass Score</th>
 
-							</tr>
+						</tr>
 						</thead>
 						<tbody>
-							@foreach (Test item in ViewBag.listTestByExamID)
-							{
-								stt++;
-								<tr>
-									<td><input type="checkbox" id="checkone" name="ids" value="@item.ExamPaperID" onchange="changee(this);" /></td>
-									<td>@stt</td>
-									<td>
-										@item.TestName
-									</td>
-									<td>@item.StartDate</td>
-									<td>@item.EndDate</td>
-									@*<td>@item.CreatedBy</td>*@
-									@foreach (User user in ViewBag.listUser)
+						@foreach (Test item in ViewBag.listTestByExamID)
+						{
+							stt++;
+							<tr>
+								<td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);"/></td>
+								<td>@stt</td>
+								<td>
+									@item.TestName
+								</td>
+								<td>@item.StartDate</td>
+								<td>@item.EndDate</td>
+								@*<td>@item.CreatedBy</td>*@
+								@foreach (User user in ViewBag.listUser)
+								{
+									count++;
+									if (item.CreatedBy == user.UserId)
 									{
-										count++;
-										if (item.CreatedBy == user.UserId)
-										{
-											<td>@user.Name</td>
-											break;
-										}
-										if (@count>= ViewBag.countUser)
-										{
-											<td>Know Name</td>
-											count = 0;
-										}
-
+										<td>@user.Name</td>
+										break;
 									}
-									<td>@item.PassingScore</td>
+									if (@count >= ViewBag.countUser)
+									{
+										<td>Know Name</td>
+										count = 0;
+									}
 
-									<td>
-										<a href='@Url.Action("_RemoveTestInExams","Exams", new {ids = @item.TestID,examID=Model.ExamID })' onclick="return confirm('Are you sure you want to delete this exam paper?');">
-											<div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
-										</a>
-									</td>
-								</tr>
-							}
+								}
+								<td>@item.PassingScore</td>
+
+								<td>
+									<a href='@Url.Action("_RemoveTestInExams", "Exams", new {ids = @item.TestID, examID = Model.ExamID})' onclick="return confirm('Are you sure you want to delete this exam paper?');">
+										<div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+									</a>
+								</td>
+							</tr>
+						}
 						</tbody>
 					</table>
 					<a onclick="return confirm('Are you sure you want to delete multiple exam paper?');">
