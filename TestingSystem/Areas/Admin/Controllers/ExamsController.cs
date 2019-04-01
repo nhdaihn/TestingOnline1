@@ -65,12 +65,12 @@ namespace TestingSystem.Areas.Admin.Controllers
 		}
 		public ActionResult Edit(int id)
 		{
-            int idUser = int.Parse(Session["Name"].ToString());
-            var listUser = userService.ListAll();
+			int idUser = int.Parse(Session["Name"].ToString());
+			var listUser = userService.ListAll();
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 			ViewBag.listAllTest = testService.GetAllTests();
-			var listTestByExamID = examService.GetTestByExamID(id, idUser);
+			var listTestByExamID = examService.GetTestByExamIDAdmin(id);
 			//foreach (var item in listTestByExamID)
 			//{
 			//	item.NumberOfQuestion = examPaperService.GetNumberOfQuestionByExamPaperId(item.ExamPaperID);
@@ -156,7 +156,6 @@ namespace TestingSystem.Areas.Admin.Controllers
 				throw;
 			}
 		}
-
 		public ActionResult RemoveTestInExams(List<int> ids, int examID)
 		{
 			try
@@ -201,19 +200,20 @@ namespace TestingSystem.Areas.Admin.Controllers
 		//}
 		public ActionResult UpdateTest(int id)
 		{
-            int idUser = int.Parse(Session["Name"].ToString());
-            var listUser = userService.ListAll();
+			int idUser = int.Parse(Session["Name"].ToString());
+			var listUser = userService.ListAll();
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 			var listTestActive = testService.GetAllTestIsActive();
 			ViewBag.listTestActive = listTestActive;
 			//
 			ViewBag.examID = id;
+			ViewBag.ExamName = examService.GetNameExamByID(id);
 			//
 			var countlistTestIsActive = listTestActive.Count();
 			ViewBag.countlistTestIsActive = countlistTestIsActive;
 
-			var listTestByExamID = examService.GetTestByExamID(id, idUser);
+			var listTestByExamID = examService.GetTestByExamIDAdmin(id);
 			ViewBag.listTestByExamID = listTestByExamID;
 
 			ViewBag.CountTestInExam = listTestByExamID.Count();
@@ -223,19 +223,20 @@ namespace TestingSystem.Areas.Admin.Controllers
 		[HttpPost]
 		public ActionResult UpdateTest(int id, string keySearch)
 		{
-            int idUser = int.Parse(Session["Name"].ToString());
-            var listUser = userService.ListAll();
+			int idUser = int.Parse(Session["Name"].ToString());
+			var listUser = userService.ListAll();
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 			var listTestActive = testService.GetAllTestIsActiveByKeySearch(keySearch);
 			ViewBag.listTestActive = listTestActive;
 			//
 			ViewBag.examID = id;
+			ViewBag.ExamName = examService.GetNameExamByID(id);
 			//
 			var countlistTestIsActive = listTestActive.Count();
 			ViewBag.countlistTestIsActive = countlistTestIsActive;
 
-			var listTestByExamID = examService.GetTestByExamID(id, idUser);
+			var listTestByExamID = examService.GetTestByExamIDAdmin(id);
 			ViewBag.listTestByExamID = listTestByExamID;
 
 			ViewBag.CountTestInExam = listTestByExamID.Count();
@@ -258,6 +259,81 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 
 		}
+		[HttpPost]
+		public ActionResult _AddOrDeleteMultiTestInExams(List<int> ids, int examID)
+		{
+			if (Request.Form["addMultipleTest"] != null)
+			{
+				try
+				{
+					if (ids.Count > 0)
+					{
+						int i = 0;
+						foreach (var id in ids)
+						{
+							if (examService.AddTestIntoExams(id, examID) > 0)
+							{
+								i++;
+								continue;
+							}
+							else
+							{
+								break;
+							}
+						}
+						if (i > 0)
+						{
+							Success = "Add Tests successfully!";
+							return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+						}
+					}
+					Failure = "Something went wrong, please try again!";
+					return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+				}
+
+				catch (Exception e)
+				{
+					Failure = "Something went wrong, please try again!";
+					return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+				}
+			}
+			else if (Request.Form["deleteMultipleTest"] != null)
+			{
+				try
+				{
+					if (ids.Count > 0)
+					{
+						int i = 0;
+						foreach (var id in ids)
+						{
+							if (examService.RemoveTestInExams(id) > 0)
+							{
+								i++;
+								continue;
+							}
+							else
+							{
+								break;
+							}
+						}
+						if (i > 0)
+						{
+							Success = "Delete Test successfully!";
+							return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+						}
+					}
+					Failure = "Something went wrong, please try again!";
+					return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+				}
+				catch (System.Exception exception)
+				{
+					Failure = exception.Message;
+					return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+				}
+			}
+			return RedirectToAction("UpdateTest", "Exams", new { id = examID });
+
+		}
 		public JsonResult _FindId(int Id)
 		{
 			var exam = examService.GetExamsByID(Id);
@@ -271,9 +347,39 @@ namespace TestingSystem.Areas.Admin.Controllers
 				return Json(null);
 			}
 		}
-		//public JsonResult GetCodeExamPaper()
-		//{
-		//	GetCode();
-		//}
+		public ActionResult _RemoveTestInExams(List<int> ids, int examID)
+		{
+			try
+			{
+				if (ids.Count > 0)
+				{
+					int i = 0;
+					foreach (var id in ids)
+					{
+						if (examService.RemoveTestInExams(id) > 0)
+						{
+							i++;
+							continue;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (i > 0)
+					{
+						Success = "Delete ExamPaper successfully!";
+						return RedirectToAction("Edit", "Exams", new { id = examID });
+					}
+				}
+				Failure = "Something went wrong, please try again!";
+				return RedirectToAction("Edit", "Exams", new { id = examID });
+			}
+			catch (System.Exception exception)
+			{
+				Failure = exception.Message;
+				return RedirectToAction("Edit", "Exams", new { id = examID });
+			}
+		}
 	}
 }

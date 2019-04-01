@@ -143,7 +143,7 @@
 				@*</div>
 						</div>
 					}*@
-				<form action="@Url.Action("RemoveTestInExams","Exams")" id="form-delete" method="post">
+				<form action="@Url.Action("_RemoveTestInExams","Exams")" id="form-delete" method="post">
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -188,7 +188,7 @@
 									<td>@item.PassingScore</td>
 
 									<td>
-										<a href='@Url.Action("RemoveTestInExams","Exams", new {ids = @item.ExamPaperID })' onclick="return confirm('Are you sure you want to delete this exam paper?');">
+										<a href='@Url.Action("_RemoveTestInExams","Exams", new {ids = @item.TestID,examID=Model.ExamID })' onclick="return confirm('Are you sure you want to delete this exam paper?');">
 											<div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
 										</a>
 									</td>

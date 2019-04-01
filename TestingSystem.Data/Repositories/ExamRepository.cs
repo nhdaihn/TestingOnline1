@@ -19,7 +19,8 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
 		int RemoveTestInExams(int id);
 		int AddTestIntoExams(int testID, int examID);
-
+		string GetNameExamByID(int examID);
+		IEnumerable<Test> GetTestByExamIDAdmin(int examID);
 		Exam GetExamByCode(string examCode);
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
@@ -171,6 +172,31 @@ namespace TestingSystem.Data.Repositories
             }
 
 			return listTestReturn.AsEnumerable();
+		}
+
+		public string GetNameExamByID(int examID)
+		{
+			var examName = DbContext.Exams.SingleOrDefault(x => x.ExamID == examID).ExamName;
+			return examName;
+		}
+
+		public IEnumerable<Test> GetTestByExamIDAdmin(int examID)
+		{
+			// lay tat ca examtest theo examid
+			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
+			var listTest = DbContext.Tests.ToList();
+			var listReturn = new List<Test>();
+;			foreach (var item in listExamTestByExamID)
+			{
+				foreach (var item2 in listTest)
+				{
+					if (item2.TestID == item.TestID)
+					{
+						listReturn.Add(item2);
+					}
+				}
+			}	
+			return listReturn.AsEnumerable();
 		}
 
 		public int RemoveTestInExams(int id)

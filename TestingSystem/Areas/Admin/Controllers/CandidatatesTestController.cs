@@ -126,5 +126,39 @@ namespace TestingSystem.Areas.Admin.Controllers
 			}
 
 		}
+		public ActionResult DeleteCandidatesFromTest(List<int> ids, int testID)
+		{
+			try
+			{
+				if (ids.Count > 0)
+				{
+					int i = 0;
+					foreach (var id in ids)
+					{
+						if (_candidatesTestService.RemoveCadidatesFromTest(id) > 0)
+						{
+							i++;
+							continue;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (i > 0)
+					{
+						Success = "Delete Candidate successfully!";
+						return RedirectToAction("Edit", "Test", new { id = testID });
+					}
+				}
+				Failure = "Something went wrong, please try again!";
+				return RedirectToAction("Edit", "Test", new { id = testID });
+			}
+			catch (System.Exception exception)
+			{
+				Failure = exception.Message;
+				return RedirectToAction("Edit", "Test", new { id = testID });
+			}
+		}
 	}
 }
