@@ -92,7 +92,6 @@
 ----------------------------------------------------------------------------------------------------------------------------
 
 08:27:49,934 18 - Conflicting changes detected. This may happen when trying to insert multiple entities with the same key.
-=======
 08:18:49,391 8 - An error occurred while updating the entries. See the inner exception for details.
 
 ----------------------------------------------------------------------------------------------------------------------------
