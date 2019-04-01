@@ -64,7 +64,7 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <div>
-                    <button class="btn-exam-va"><span id="time">@ViewBag.Time:00</span></button>
+                    <button class="btn-exam-va" disabled="disabled"><span id="time">@ViewBag.Time:00</span></button>
                     <button class="btn-exam-va-2" style="font-size: 18px;" onclick="submittest()">Kết thúc</button>
                     <hr class="hr-va">
                 </div>
@@ -332,29 +332,35 @@
     </script>
     <script>
     function submittest() {
-        var fruits = [];
-        var inputs = document.getElementsByClassName('radiova');
-        for (var i = 0; i < inputs.length; i += 1) {
-            if (inputs[i].checked == true) {
-                var obj = {
-                    name: inputs[i].name,
-                    id: inputs[i].id
+        if (confirm("Bạn muốn nộp bài thi?")) {
+            var fruits = [];
+            var inputs = document.getElementsByClassName('radiova');
+            for (var i = 0; i < inputs.length; i += 1) {
+                if (inputs[i].checked == true) {
+                    var obj = {
+                        name: inputs[i].name,
+                        id: inputs[i].id
+                    }
+                    fruits.push(obj);
                 }
-                fruits.push(obj);
+            }
+            if (fruits.length == 0) {
+                alert("Bạn chưa làm bài thi");
+            } else {
+                $.post('@Url.Action("_RepostTest", "TestLogin")',
+                {
+                    fruits: fruits,
+                    exampaperid: @ViewBag.IdExamPaper,
+                    examid: @ViewBag.IdExam,
+                    passscore: @ViewBag.PassScore,
+                    idtest: @ViewBag.IdTest
+                },
+               function (result) {
+                   var url = $("#RedirectTo").val();
+                   location.href = url;
+               });
             }
         }
-        $.post('@Url.Action("_RepostTest", "TestLogin")',
-        {
-            fruits: fruits,
-            exampaperid: @ViewBag.IdExamPaper,
-            examid: @ViewBag.IdExam,
-            passscore: @ViewBag.PassScore,
-            idtest: @ViewBag.IdTest
-        },
-           function (result) {
-               var url = $("#RedirectTo").val();
-               location.href = url;
-           });
     }
     </script>
 </body>
