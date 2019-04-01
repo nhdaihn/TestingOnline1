@@ -4,22 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TestingSystem.BaseController;
+using TestingSystem.Models;
 using TestingSystem.Sevice;
 
 namespace TestingSystem.Areas.Admin.Controllers
 {
-    public class CandidatatesTestController : AdminController
-    {
-	    private readonly ICandidatesTestService _candidatesTestService;
-	    public CandidatatesTestController(IUserService userService, ICandidatesTestService candidatesTestService) : base(userService)
-	    {
-		    _candidatesTestService = candidatesTestService;
-	    }
+	public class CandidatatesTestController : AdminController
+	{
+		private readonly ICandidateService _candidateService;
+		private readonly ICandidatesTestService _candidatesTestService;
+		public CandidatatesTestController(IUserService userService, ICandidatesTestService candidatesTestService, ICandidateService candidateService) : base(userService)
+		{
+			_candidatesTestService = candidatesTestService;
+			_candidateService = candidateService;
+		}
 		// GET: Admin/CandidatatesTest
 		public ActionResult Index()
-        {
-            return View();
-        }
+		{
+			return View();
+		}
 		public ActionResult RemoveCandidatesFromTest(List<int> ids, int testID)
 		{
 			try
@@ -97,13 +100,23 @@ namespace TestingSystem.Areas.Admin.Controllers
 
 			return View();
 		}
-
-
 		public ActionResult AddCandidatesIntoTest(int candidatesID, int testID)
 		{
 			try
 			{
-				_candidatesTestService.AddCandidatesIntoTest(candidatesID, testID);
+				var checkExist = _candidateService.CheckExistCandidatesByID(candidatesID);
+				if (checkExist == false)
+				{
+					Candidate myCandidate = new Candidate();
+					myCandidate.CandidateID = candidatesID;
+					var myNewCadndidate = _candidateService.AddCandidate(myCandidate);
+					_candidatesTestService.AddCandidatesIntoTest(myNewCadndidate, testID);
+				}
+				else
+				{
+					_candidatesTestService.AddCandidatesIntoTest(candidatesID, testID);
+				}
+
 				return RedirectToAction("UpdateCandidates", "CandidatatesTest", new { id = testID });
 			}
 			catch (Exception e)
