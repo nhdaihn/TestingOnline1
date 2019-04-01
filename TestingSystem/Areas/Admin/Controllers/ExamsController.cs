@@ -65,11 +65,12 @@ namespace TestingSystem.Areas.Admin.Controllers
 		}
 		public ActionResult Edit(int id)
 		{
-			var listUser = userService.ListAll();
+            int idUser = int.Parse(Session["Name"].ToString());
+            var listUser = userService.ListAll();
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 			ViewBag.listAllTest = testService.GetAllTests();
-			var listTestByExamID = examService.GetTestByExamID(id);
+			var listTestByExamID = examService.GetTestByExamID(id, idUser);
 			//foreach (var item in listTestByExamID)
 			//{
 			//	item.NumberOfQuestion = examPaperService.GetNumberOfQuestionByExamPaperId(item.ExamPaperID);
@@ -200,7 +201,8 @@ namespace TestingSystem.Areas.Admin.Controllers
 		//}
 		public ActionResult UpdateTest(int id)
 		{
-			var listUser = userService.ListAll();
+            int idUser = int.Parse(Session["Name"].ToString());
+            var listUser = userService.ListAll();
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 			var listTestActive = testService.GetAllTestIsActive();
@@ -211,7 +213,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 			var countlistTestIsActive = listTestActive.Count();
 			ViewBag.countlistTestIsActive = countlistTestIsActive;
 
-			var listTestByExamID = examService.GetTestByExamID(id);
+			var listTestByExamID = examService.GetTestByExamID(id, idUser);
 			ViewBag.listTestByExamID = listTestByExamID;
 
 			ViewBag.CountTestInExam = listTestByExamID.Count();
@@ -221,7 +223,8 @@ namespace TestingSystem.Areas.Admin.Controllers
 		[HttpPost]
 		public ActionResult UpdateTest(int id, string keySearch)
 		{
-			var listUser = userService.ListAll();
+            int idUser = int.Parse(Session["Name"].ToString());
+            var listUser = userService.ListAll();
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 			var listTestActive = testService.GetAllTestIsActiveByKeySearch(keySearch);
@@ -232,7 +235,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 			var countlistTestIsActive = listTestActive.Count();
 			ViewBag.countlistTestIsActive = countlistTestIsActive;
 
-			var listTestByExamID = examService.GetTestByExamID(id);
+			var listTestByExamID = examService.GetTestByExamID(id, idUser);
 			ViewBag.listTestByExamID = listTestByExamID;
 
 			ViewBag.CountTestInExam = listTestByExamID.Count();

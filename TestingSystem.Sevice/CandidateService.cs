@@ -6,7 +6,8 @@ namespace TestingSystem.Sevice
     public interface ICandidateService
     {
         int AddCandidate(Candidate candidate);
-    }
+        bool CheckExistCandidatesByID(int candidateID);
+	}
     public class CandidateService : ICandidateService
     {
         private readonly ICandidateRepository candidateRepository;
@@ -17,6 +18,11 @@ namespace TestingSystem.Sevice
         public int AddCandidate(Candidate candidate)
         {
             return candidateRepository.AddCandidate(candidate);
+        }
+
+        public bool CheckExistCandidatesByID(int candidateID)
+        {
+	        return candidateRepository.CheckExistCandidatesByID(candidateID);
         }
     }
 }

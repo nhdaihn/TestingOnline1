@@ -92,6 +92,7 @@
         public DbSet<ExamTest> ExamTests { get; set; }
 
         public DbSet<TestResult> TestResults { get; set; }
+        public DbSet<CandidatesTest> CandidatesTests { get; set; }
 
         public virtual void Commit()
         {
