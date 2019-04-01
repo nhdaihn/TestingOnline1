@@ -328,6 +328,15 @@
             var fiveMinutes = 60 * @ViewBag.Time,
                 display = document.querySelector('#time');
             startTimer(fiveMinutes, display);
+
+            // retain
+            var inputs = document.getElementsByClassName('radiova');
+            for (var i = 0; i < inputs.length; i += 1) {
+                if (localStorage.getItem("" + inputs[i].id) !== null) {
+                    document.getElementById(inputs[i].id).checked = true;
+                }
+            }
+            alert(@ViewBag.TimeStart);
         };
     </script>
     <script>
@@ -362,6 +371,19 @@
             }
         }
     }
+    </script>
+    <script>
+
+        function AddWS(x) {
+            if (localStorage.getItem("" + x) == null) {
+                localStorage.setItem("" + x, x);
+            } else {
+                localStorage.removeItem("" + x);
+            }
+        }
+        function Tricker() {
+            
+        }
     </script>
 </body>
 </html>

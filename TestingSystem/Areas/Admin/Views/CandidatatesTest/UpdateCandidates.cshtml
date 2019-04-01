@@ -1,0 +1,137 @@
+﻿
+@using TestingSystem.Models
+@model IEnumerable<TestingSystem.Models.Candidate>
+
+@{
+	ViewBag.Title = "Update Candidates";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+	int i = 0;
+	bool check = false;
+	bool checkUrl = false;
+	int count = 0;
+}
+<style>
+	.nhleft {
+		margin-left: 10px;
+	}
+</style>
+<section class="content-header">
+	<h1>
+		Update Exam Paper
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action("Index", "Test")"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="@Url.Action("Edit", "Test", new { id = @ViewBag.TestID})"><i class="fa fa-dashboard"></i> Edit</a></li>
+		<li><a href="@Url.Action("UpdateCandidates", "CandidatatesTest", new { id = @ViewBag.TestID})"><i class="fa fa-dashboard"></i> Update Candidates</a></li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="box box-info">
+		<p></p>
+		@using (Html.BeginForm("UpdateCandidates", "CandidatatesTest", FormMethod.Post))
+		{
+			<div class="row nhleft">
+				<div class="col-md-6" style="margin-bottom: 15px">
+					<div class="input-group">
+						<input type="hidden" name="id" value="@ViewBag.TestID" />
+						<input type="text" class="form-control" value="@ViewBag.SearchString" name="keySearch" placeholder="Key search">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Tìm kiếm</button>
+						</span>
+					</div><!-- /input-group -->
+				</div>
+				@*<div class="col-md-6">
+						<a href="/Admin/User/Create">
+							<div class="btn btn-success">Thêm mới</div>
+						</a>
+
+					</div>*@
+			</div>
+		}
+		<!-- form start -->
+		<table class="table nhleft">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Users.Name)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Users.Email)
+				</th>				
+				<th>Status</th>
+				<th>Action</th>
+			</tr>
+
+			@foreach (User item in @ViewBag.listUser)
+			{
+				<tr>
+					<td>
+						@item.Name
+					</td>
+					<td>
+						@item.Email
+					</td>					
+					<td>
+						@if (ViewBag.CountlistCandidatesByTestID > 0)
+						{
+							checkUrl = true;
+							foreach (Candidate obj in @ViewBag.listCandidatesByTestID)
+							{
+								if (item.UserId == obj.Users.UserId)
+								{
+									check = true;
+									<img src="~/Content/add.png" alt="Sample Image" width="20px" />
+									break;
+								}
+								else
+								{
+									i++;
+								}
+								if (i >= ViewBag.CountlistCandidatesByTestID)
+								{
+									<img src="~/Content/remove.png" width="20px" />
+									i = 0;
+									check = false;
+									break;
+
+								}
+							}
+							i = 0;
+						}
+						else
+						{
+							<img src="~/Content/remove.png" width="20px" />
+						}
+					</td>
+					<td>
+						@if (check == true && ViewBag.CountlistCandidatesByTestID > 0)
+						{
+							@Html.ActionLink("Remove", "RemoveCandidatesFromTest", "CandidatatesTest", new { ids = item.UserId, testID = ViewBag.TestID }, null)
+							check = false;
+						}
+						else if (check == false && ViewBag.CountTestInExam > 0)
+						{
+							@Html.ActionLink("Add", "AddCandidatesIntoTest", "CandidatatesTest", new { testID = ViewBag.TestID, candidatesID = item.UserId }, null)
+							check = true;
+						}
+						else
+						{
+							@Html.ActionLink("Add", "AddCandidatesIntoTest", "CandidatatesTest", new { testID = ViewBag.TestID, candidatesID = item.UserId }, null)
+							check = true;
+						}
+					</td>
+				</tr>
+			}
+
+		</table>
+
+	</div><!-- /.box -->
+	<a href="@Url.Action("Edit", "Test", new { id = ViewBag.TestID})"><button class="btn btn-success">Back</button></a>
+</section>
+@*<script>
+		$(document).ready(function() {s
+			$('#removeExamPaper').click(function() {
+				confirm('Are you sure you want to Delete?');
+			});
+		});
+	</script>*@

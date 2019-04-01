@@ -100,6 +100,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             //pass score bai thi
             ViewBag.PassScore = test.PassingScore;
             ViewBag.IdExam = idExam;
+            ViewBag.TimeStart = DateTime.Now.ToString("MM/dd/yyyy");
             return View();
         }
         static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
