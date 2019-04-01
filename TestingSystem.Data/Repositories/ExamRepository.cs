@@ -93,7 +93,7 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
-				exam.ExamCode= Guid.NewGuid().ToString();
+				exam.ExamCode = Guid.NewGuid().ToString();
 				exam.CreateDate = DateTime.Now;
 				DbContext.Exams.Add(exam);
 				DbContext.SaveChanges();
@@ -114,8 +114,17 @@ namespace TestingSystem.Data.Repositories
 				var exam = DbContext.Exams.Find(id);
 				if (exam != null)
 				{
-					this.DbContext.Exams.Remove(exam);
-					return DbContext.SaveChanges();
+					//kiem tra xem co test result cua bai test hay khong neu co thi khong duoc xoa ky thi
+					var checkTestHaveTestResult = DbContext.TestResults.Where(x => x.TestID == id).ToList().Count;
+					if (checkTestHaveTestResult > 0)
+					{
+						return 0;
+					}
+					else
+					{
+						this.DbContext.Exams.Remove(exam);
+						return DbContext.SaveChanges();
+					}
 				}
 				else
 				{
@@ -138,38 +147,38 @@ namespace TestingSystem.Data.Repositories
 
 		public IEnumerable<Test> GetTestByExamID(int examID, int idUser)
 		{
-            // lay tat ca examtest theo examid
-            var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
+			// lay tat ca examtest theo examid
+			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
 			List<Test> listTests = new List<Test>();
-            // lay tat ca test theo testid trong examtest
+			// lay tat ca test theo testid trong examtest
 			foreach (var item in listExamTestByExamID)
 			{
 				var examTest = DbContext.Tests.SingleOrDefault(x => x.TestID == item.TestID);
 				listTests.Add(examTest);
 			}
 
-            // list can tra ve
-            List<Test> listTestReturn = new List<Test>();
+			// list can tra ve
+			List<Test> listTestReturn = new List<Test>();
 
-            // list candidate id trong bang CandidatesTest
-            List<int> listTestIdByCandidateID = new List<int>();
-            // lay tat ca CandidatesTest theo candidateid
-            var listTestByCandidateId = this.DbContext.CandidatesTests.Where(s => s.CandidateID == idUser).ToList();
-            foreach(var item in listTestByCandidateId)
-            {
-                listTestIdByCandidateID.Add(item.TestID);
-            }
+			// list candidate id trong bang CandidatesTest
+			List<int> listTestIdByCandidateID = new List<int>();
+			// lay tat ca CandidatesTest theo candidateid
+			var listTestByCandidateId = this.DbContext.CandidatesTests.Where(s => s.CandidateID == idUser).ToList();
+			foreach (var item in listTestByCandidateId)
+			{
+				listTestIdByCandidateID.Add(item.TestID);
+			}
 
-            foreach (var item2 in listTests)
-            {
-                foreach(var item3 in listTestIdByCandidateID)
-                {
-                    if(item2.TestID == item3)
-                    {
-                        listTestReturn.Add(item2);
-                    }
-                }
-            }
+			foreach (var item2 in listTests)
+			{
+				foreach (var item3 in listTestIdByCandidateID)
+				{
+					if (item2.TestID == item3)
+					{
+						listTestReturn.Add(item2);
+					}
+				}
+			}
 
 			return listTestReturn.AsEnumerable();
 		}
@@ -186,7 +195,7 @@ namespace TestingSystem.Data.Repositories
 			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
 			var listTest = DbContext.Tests.ToList();
 			var listReturn = new List<Test>();
-;			foreach (var item in listExamTestByExamID)
+			; foreach (var item in listExamTestByExamID)
 			{
 				foreach (var item2 in listTest)
 				{
@@ -195,7 +204,7 @@ namespace TestingSystem.Data.Repositories
 						listReturn.Add(item2);
 					}
 				}
-			}	
+			}
 			return listReturn.AsEnumerable();
 		}
 
