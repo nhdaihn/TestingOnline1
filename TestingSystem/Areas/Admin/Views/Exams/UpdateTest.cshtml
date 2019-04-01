@@ -57,120 +57,121 @@
 			</div>
 		}
 		<!-- form start -->
-		<form action="@Url.Action("_AddOrDeleteMultiTestInExams", "Exams")" id="form-delete" method="post">
-			<input type="hidden" name="examID" value="@ViewBag.examID" />
-			<table class="table nhleft">
-				<tr>
-					<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
-					<th width="7%">Number</th>
-					<th>
-						@Html.DisplayNameFor(model => model.TestName)
-					</th>
-					<th>
-						@Html.DisplayNameFor(model => model.PassingScore)
-					</th>
-					<th>
-						@Html.DisplayNameFor(model => model.StartDate)
-					</th>
-					<th>
-						@Html.DisplayNameFor(model => model.CreatedBy)
-					</th>
-					<th>Status</th>
-					<th>Action</th>
-				</tr>
-
-				@foreach (Test item in @ViewBag.listTestActive)
-				{
-					stt++;
+			<form action="@Url.Action("_AddOrDeleteMultiTestInExams", "Exams")" id="form-delete" method="post">
+				<input type="hidden" name="examID" value="@ViewBag.examID" />
+				<table class="table nhleft">
 					<tr>
-						<td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
-						<td>@stt</td>
-
-						<td>
-							@item.TestName
-						</td>
-						<td>
-							@item.PassingScore
-						</td>
-						<td>
-							@item.StartDate
-						</td>
-						@foreach (User user in ViewBag.listUser)
-						{
-							count++;
-							if (item.CreatedBy == user.UserId)
-							{
-								<td>@user.Name</td>
-								break;
-							}
-							if (@count >= ViewBag.countUser)
-							{
-								<td>Know Name</td>
-								count = 0;
-							}
-
-						}
-						<td>
-							@if (ViewBag.CountTestInExam > 0)
-							{
-								checkUrl = true;
-								foreach (Test obj in @ViewBag.listTestByExamID)
-								{
-									if (item.TestID == obj.TestID)
-									{
-										check = true;
-										<img src="~/Content/add.png" alt="Sample Image" width="20px" />
-										break;
-									}
-									else
-									{
-										i++;
-									}
-									if (i >= ViewBag.CountTestInExam)
-									{
-										<img src="~/Content/remove.png" width="20px" />
-										i = 0;
-										check = false;
-										break;
-
-									}
-								}
-								i = 0;
-							}
-							else
-							{
-								<img src="~/Content/remove.png" width="20px" />
-							}
-						</td>
-						<td>
-							@if (check == true && ViewBag.CountTestInExam > 0)
-							{
-								@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID }, null)
-								check = false;
-							}
-							else if (check == false && ViewBag.CountTestInExam > 0)
-							{
-								@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
-								check = true;
-							}
-							else
-							{
-								@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
-								check = true;
-							}
-						</td>
+						<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
+						<th width="7%">Number</th>
+						<th>
+							@Html.DisplayNameFor(model => model.TestName)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.PassingScore)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.StartDate)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.CreatedBy)
+						</th>
+						<th>Status</th>
+						<th>Action</th>
 					</tr>
-				}
 
-			</table>
-			<a onclick="return confirm('Are you sure you want to add multiple tests ?');">
-				<button type="submit" class="btn btn-success btnaddmultiple" id="btn-delete" name="addMultipleTest" value="submit1" disabled>Add Multiple Test</button>
-			</a>
-			<a onclick="return confirm('Are you sure you want to delete multiple tests ?');">
-				<button type="submit" class="btn btn-danger" id="btn-delete1" name="deleteMultipleTest" value="submit2" disabled>Delete Multiple Test</button>
-			</a>
-			<a href="@Url.Action("Edit", "Exams", new { id = ViewBag.examID})"><button class="btn btn-github ">Back</button></a>
-		</form>
+					@foreach (Test item in @ViewBag.listTestActive)
+					{
+						stt++;
+						<tr>
+							<td><input type="checkbox" id="checkone" name="ids" value="@item.TestID" onchange="changee(this);" /></td>
+							<td>@stt</td>
+
+							<td>
+								@item.TestName
+							</td>
+							<td>
+								@item.PassingScore
+							</td>
+							<td>
+								@item.StartDate
+							</td>
+							@foreach (User user in ViewBag.listUser)
+							{
+								count++;
+								if (item.CreatedBy == user.UserId)
+								{
+									<td>@user.Name</td>
+									break;
+								}
+								if (@count >= ViewBag.countUser)
+								{
+									<td>Know Name</td>
+									count = 0;
+								}
+
+							}
+							<td>
+								@if (ViewBag.CountTestInExam > 0)
+								{
+									checkUrl = true;
+									foreach (Test obj in @ViewBag.listTestByExamID)
+									{
+										if (item.TestID == obj.TestID)
+										{
+											check = true;
+											<img src="~/Content/add.png" alt="Sample Image" width="20px" />
+											break;
+										}
+										else
+										{
+											i++;
+										}
+										if (i >= ViewBag.CountTestInExam)
+										{
+											<img src="~/Content/remove.png" width="20px" />
+											i = 0;
+											check = false;
+											break;
+
+										}
+									}
+									i = 0;
+								}
+								else
+								{
+									<img src="~/Content/remove.png" width="20px" />
+								}
+							</td>
+							<td>
+								@if (check == true && ViewBag.CountTestInExam > 0)
+								{
+									@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID }, null)
+									check = false;
+								}
+								else if (check == false && ViewBag.CountTestInExam > 0)
+								{
+									@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
+									check = true;
+								}
+								else
+								{
+									@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
+									check = true;
+								}
+							</td>
+						</tr>
+					}
+
+				</table>
+				<a onclick="return confirm('Are you sure you want to add multiple tests ?');">
+					<button type="submit" class="btn btn-success btnaddmultiple" id="btn-delete" name="addMultipleTest" value="submit1" disabled>Add Multiple Test</button>
+				</a>
+				<a onclick="return confirm('Are you sure you want to delete multiple tests ?');">
+					<button type="submit" class="btn btn-danger" id="btn-delete1" name="deleteMultipleTest" value="submit2" disabled>Delete Multiple Test</button>
+				</a>
+				@*<a href="@Url.Action("Edit", "Exams", new { id = ViewBag.examID})"><button class="btn btn-github ">Back</button></a>*@
+				<a href="@Url.Action("Edit", "Exams", new { id = ViewBag.examID})" class="btn btn-github">Back</a>
+			</form>
 	</div><!-- /.box -->
 
 </section>
