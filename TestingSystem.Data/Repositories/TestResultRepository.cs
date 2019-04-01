@@ -14,7 +14,7 @@ namespace TestingSystem.Data.Repositories
     {
         int AddTestResult(TestResult testResult);
         IEnumerable<TestResult> GetQuestionByCount(int countQ);
-        IEnumerable<TestResult> GetALl();
+        IEnumerable<TestResult> GetALl(int Id);
         int ReturnTurn(int testId, DateTime dateTest);
         IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
         IEnumerable<ResultCheckId> ListAllQuestionIdAndAnswerIdByTestIdChecked(int testId, int turn);
@@ -46,11 +46,11 @@ namespace TestingSystem.Data.Repositories
             return listQ;
         }
 
-        public IEnumerable<TestResult> GetALl()
+        public IEnumerable<TestResult> GetALl(int Id)
         {
-			var model = DbContext.TestResults.GroupBy(x => new { x.TestID, x.Turns }).Select(x => x.FirstOrDefault()).ToList();
-			return model.Distinct().AsEnumerable();
-		}
+            var model = DbContext.TestResults.Where(x => x.TestID == Id).GroupBy(x => new { x.TestID, x.Turns }).Select(x => x.FirstOrDefault()).ToList();
+            return model.Distinct().AsEnumerable();
+        }
         public IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId)
         {
             var listAllTestResult = this.DbContext.TestResults.ToList();

@@ -18,8 +18,8 @@ namespace TestingSystem.Areas.Admin.Controllers
         }
         public ActionResult Index()
         {
-            var model = testResultService.GetALl();
-            return View(model);
+            return View();
         }
+     
     }
 }

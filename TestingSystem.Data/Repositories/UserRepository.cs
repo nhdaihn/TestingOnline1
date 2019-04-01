@@ -219,6 +219,10 @@ namespace TestingSystem.Data.Repositories
                 return 0;
             }
         }
+        public User GetUserName(int Id)
+        {
+            return DbContext.Users.Where(x => x.UserId == Id).SingleOrDefault();
+        }
 
         /// <summary>
         /// The Register

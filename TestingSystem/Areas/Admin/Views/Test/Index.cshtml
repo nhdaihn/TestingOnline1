@@ -94,14 +94,17 @@
                                     }
                                 }
 
-                                <td>
-                                    <a href='@Url.Action("Edit", "Test", new {id = @item.TestID})'>
-                                        <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
-                                    </a>
-                                    <a href='@Url.Action("Delete", "Test", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
-                                        <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
-                                    </a>
-                                </td>
+                                        <td>
+                                            <a href='@Url.Action("Edit", "Test", new {id = @item.TestID})'>
+                                                <div class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></div>
+                                            </a>
+                                            <a href='@Url.Action("Delete", "Test", new {ids = @item.TestID})' onclick="return confirm('Are you sure you want to Delete?');">
+                                                <div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+                                            </a>
+                                            <a href='@Url.Action("_Detail", "Test", new { Id=@item.TestID })'>
+                                                <div class="btn  btn-sm btn-success"><i class="fa fa-eye"></i></div>
+                                            </a>
+                                        </td>
                             </tr>
                             }
                         </tbody>

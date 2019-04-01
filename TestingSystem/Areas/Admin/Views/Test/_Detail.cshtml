@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<TestingSystem.Models.TestResult>
 @{
-    ViewBag.Title = "View List Test";
+    ViewBag.Title = "_Detail";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     int stt = 0;
-
 }
 <section class="content-header">
     <h1>
-        Tests
+        Candidates
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li class="active">TestResult</li>
+        <li class="active">Candidate</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -43,7 +42,7 @@
                         <thead>
                             <tr>
                                 <th>Number</th>
-                                <th>Test Name</th>  
+                                <th>Test Name</th>
                                 <th>Candidate</th>
                                 <th>PassingScore</th>
                                 <th>Score</th>
