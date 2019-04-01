@@ -128,6 +128,8 @@
 
         bool Recovery(string email);
         bool Reset(string email, string pass);
+        List<User> GetAllUserRoleIsMemberOrSubMember();
+
     }
 
     /// <summary>
@@ -330,6 +332,11 @@
         public bool Reset(string email, string pass)
         {
             return userRepository.Reset(email, pass);
+        }
+
+        public List<User> GetAllUserRoleIsMemberOrSubMember()
+        {
+	        return userRepository.GetAllUserRoleIsMemberOrSubMember();
         }
     }
 }

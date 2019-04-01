@@ -131,6 +131,7 @@ namespace TestingSystem.Data.Repositories
         bool Recovery(string email);
 
         bool Reset(string email, string pass);
+        List<User> GetAllUserRoleIsMemberOrSubMember();
     }
 
     /// <summary>
@@ -619,6 +620,12 @@ namespace TestingSystem.Data.Repositories
                 log.Debug(e.Message);
                 return false;
             }
+        }
+
+        public List<User> GetAllUserRoleIsMemberOrSubMember()
+        {
+	        var listUser = DbContext.Users.Where(x => x.RoleId == 3 || x.RoleId == 4||x.RoleId==2).ToList();
+	        return listUser;
         }
     }
 }
