@@ -9,7 +9,7 @@ namespace TestingSystem.Sevice
 	{
 		IEnumerable<Candidate> GetAllCandidatesByTestID(int testID);
 		int AddCandidatesIntoTest(int candidatesID, int testID);
-		int RemoveCadidatesFromTest(int cadidatesID);
+		int RemoveCadidatesFromTest(int cadidatesID,int testID);
         List<int> GetAllTestIdByCandidateID(int candidateID);
         string GetNameTestByID(int testID);
 
@@ -35,9 +35,9 @@ namespace TestingSystem.Sevice
 			return _candidatesTestRepository.AddCandidatesIntoTest(candidatesID, testID);
 		}
 
-		public int RemoveCadidatesFromTest(int cadidatesID)
+		public int RemoveCadidatesFromTest(int cadidatesID,int testID)
 		{
-			return _candidatesTestRepository.RemoveCadidatesFromTest(cadidatesID);
+			return _candidatesTestRepository.RemoveCadidatesFromTest(cadidatesID,testID);
 		}
 
         public List<int> GetAllTestIdByCandidateID(int candidateID)

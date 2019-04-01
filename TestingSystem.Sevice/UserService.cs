@@ -129,6 +129,7 @@
         bool Recovery(string email);
         bool Reset(string email, string pass);
         List<User> GetAllUserRoleIsMemberOrSubMember();
+        List<User> GetAllUserRoleIsMemberOrSubMemberByKeySearch(string keySearch);
 
     }
 
@@ -337,6 +338,11 @@
         public List<User> GetAllUserRoleIsMemberOrSubMember()
         {
 	        return userRepository.GetAllUserRoleIsMemberOrSubMember();
+        }
+
+        public List<User> GetAllUserRoleIsMemberOrSubMemberByKeySearch(string keySearch)
+        {
+	        return userRepository.GetAllUserRoleIsMemberOrSubMemberByKeySearch(keySearch);
         }
     }
 }

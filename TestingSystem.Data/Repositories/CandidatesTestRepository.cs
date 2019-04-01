@@ -13,7 +13,7 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Candidate> GetAllCandidatesByTestID(int testID);
 		string GetNameTestByID(int testID);
 		int AddCandidatesIntoTest(int candidatesID, int testID);
-		int RemoveCadidatesFromTest(int cadidatesID);
+		int RemoveCadidatesFromTest(int cadidatesID,int testID);
         List<int> GetAllTestIdByCandidateID(int candidateID);
 
     }
@@ -64,11 +64,11 @@ namespace TestingSystem.Data.Repositories
 			}
 		}
 
-		public int RemoveCadidatesFromTest(int cadidatesID)
+		public int RemoveCadidatesFromTest(int cadidatesID, int testID)
 		{
 			try
 			{
-				var candidates = DbContext.CandidatesTests.FirstOrDefault(x => x.CandidateID==cadidatesID);
+				var candidates = DbContext.CandidatesTests.SingleOrDefault(x => x.CandidateID==cadidatesID&& x.TestID==testID);
 				if (candidates != null)
 				{
 					this.DbContext.CandidatesTests.Remove(candidates);
