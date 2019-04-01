@@ -145,17 +145,21 @@
 							<td>
 								@if (check == true && ViewBag.CountTestInExam > 0)
 								{
-									@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID }, null)
+									@*@Html.ActionLink("Remove", "RemoveTestInExams", "Exams", new { ids = item.TestID, examID = ViewBag.examID }, null)*@
+									<a href="@Url.Action( "RemoveTestInExams", "Exams",  new { ids = item.TestID, examID = ViewBag.examID }, null)" class="btn btn-google" onclick="return confirm('Are you sure you want to delete this test?');"><i class="glyphicon glyphicon-trash"></i></a>
 									check = false;
 								}
 								else if (check == false && ViewBag.CountTestInExam > 0)
 								{
-									@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
+									@*@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)*@
+									<a href="@Url.Action( "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)" class="btn btn-github "onclick="return confirm('Are you sure you want to add this test?');"><i class="glyphicon glyphicon-plus"></i></a>
 									check = true;
 								}
 								else
 								{
-									@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)
+									@*@Html.ActionLink("Add", "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)*@
+									<a href="@Url.Action( "AddTestInExams", "Exams", new { examID = ViewBag.examID, testID = item.TestID }, null)" class="btn btn-github "onclick="return confirm('Are you sure you want to add this test?');"><i class="glyphicon glyphicon-plus"></i></a>
+
 									check = true;
 								}
 							</td>

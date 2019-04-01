@@ -6800,8 +6800,6 @@
     <Content Include="Scripts\DatetimePicker\css\gijgo.min.css" />
     <Content Include="Scripts\DatetimePicker\JS\gijgo.min.js" />
     <Content Include="Scripts\DatetimePicker\JS\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\DatetimePicker\JS\PrivewHint.js" />
-    <Content Include="Scripts\DatetimePicker\JS\PrivirewAnnoun.js" />
     <Content Include="Scripts\myjquery.js" />
     <Content Include="Scripts\notify.min.js" />
     <Content Include="Scripts\Question\ckeditor\adapters\jquery.js" />
