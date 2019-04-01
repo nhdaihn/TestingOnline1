@@ -19,8 +19,10 @@ namespace TestingSystem.Sevice
 		IEnumerable<Exam> SearchExams(string txtSearch);
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
 		int RemoveTestInExams(int id);
+		string GetNameExamByID(int examID);
 		int AddTestIntoExams(int testID, int examID);
 		Exam GetExamByCode(string examCode);
+		IEnumerable<Test> GetTestByExamIDAdmin(int examID);
 	}
 
 	public class ExamService : IExamService
@@ -68,6 +70,11 @@ namespace TestingSystem.Sevice
 			return examRepository.RemoveTestInExams(id);
 		}
 
+		public string GetNameExamByID(int examID)
+		{
+			return examRepository.GetNameExamByID(examID);
+		}
+
 		public int AddTestIntoExams(int testID, int examID)
 		{
 			return examRepository.AddTestIntoExams(testID, examID);
@@ -76,6 +83,11 @@ namespace TestingSystem.Sevice
 		public Exam GetExamByCode(string examCode)
 		{
 			return examRepository.GetExamByCode(examCode);
+		}
+
+		public IEnumerable<Test> GetTestByExamIDAdmin(int examID)
+		{
+			return examRepository.GetTestByExamIDAdmin(examID);
 		}
 
 

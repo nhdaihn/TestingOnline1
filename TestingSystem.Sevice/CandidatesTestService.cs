@@ -11,7 +11,9 @@ namespace TestingSystem.Sevice
 		int AddCandidatesIntoTest(int candidatesID, int testID);
 		int RemoveCadidatesFromTest(int cadidatesID);
         List<int> GetAllTestIdByCandidateID(int candidateID);
-    }
+        string GetNameTestByID(int testID);
+
+	}
 	public class CandidatesTestService : ICandidatesTestService
 	{
 		private readonly ICandidatesTestRepository _candidatesTestRepository;
@@ -42,5 +44,10 @@ namespace TestingSystem.Sevice
         {
             return _candidatesTestRepository.GetAllTestIdByCandidateID(candidateID);
         }
-    }
+
+        public string GetNameTestByID(int testID)
+        {
+	        return _candidatesTestRepository.GetNameTestByID(testID);
+        }
+	}
 }

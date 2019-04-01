@@ -11,7 +11,7 @@ namespace TestingSystem.Data.Repositories
 	public interface ICandidatesTestRepository : IRepository<CandidatesTest>
 	{
 		IEnumerable<Candidate> GetAllCandidatesByTestID(int testID);
-
+		string GetNameTestByID(int testID);
 		int AddCandidatesIntoTest(int candidatesID, int testID);
 		int RemoveCadidatesFromTest(int cadidatesID);
         List<int> GetAllTestIdByCandidateID(int candidateID);
@@ -38,6 +38,12 @@ namespace TestingSystem.Data.Repositories
 
 			return listCandidates.AsEnumerable();
 
+		}
+
+		public string GetNameTestByID(int testID)
+		{
+			var testName = DbContext.Tests.SingleOrDefault(x => x.TestID == testID).TestName;
+			return testName;
 		}
 
 		public int AddCandidatesIntoTest(int candidatesID, int testID)
