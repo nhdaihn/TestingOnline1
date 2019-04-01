@@ -85,3 +85,11 @@
     });
 </script>
 
+<script>
+    window.addEventListener("beforeunload", function (e) {
+        var confirmationMessage = "\o/";
+
+        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+        alert("sdsa");                          //Webkit, Safari, Chrome
+    });
+</script>
