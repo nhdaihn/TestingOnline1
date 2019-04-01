@@ -131,6 +131,8 @@ namespace TestingSystem.Data.Repositories
         bool Recovery(string email);
 
         bool Reset(string email, string pass);
+
+        User GetUserName(int Id);
     }
 
     /// <summary>
@@ -217,6 +219,10 @@ namespace TestingSystem.Data.Repositories
                 log.Debug(e.Message);
                 return 0;
             }
+        }
+        public User GetUserName(int Id)
+        {
+            return DbContext.Users.Where(x => x.UserId == Id).SingleOrDefault();
         }
 
         /// <summary>

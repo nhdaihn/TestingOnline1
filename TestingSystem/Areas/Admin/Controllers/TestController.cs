@@ -16,12 +16,15 @@ namespace TestingSystem.Areas.Admin.Controllers
 
         private readonly IExamPaperService examPaperService;
         private readonly ICandidatesTestService _candidatesTestService;
+        private readonly ITestResultRepository testResultRepository;
 
-		public TestController(ITestService testService, IExamPaperService examPaperService,IUserService user, ICandidatesTestService candidatesTestService) :base(user)
+
+		public TestController(ITestService testService, IExamPaperService examPaperService,IUserService user, ITestResultRepository testResultRepository, ICandidatesTestService candidatesTestService) :base(user)
 		{
 			this.testService = testService;
             this.examPaperService = examPaperService;
 			_candidatesTestService=candidatesTestService;
+            this.testResultRepository = testResultRepository;
 		}
         // GET: Admin/Test
         public ActionResult Index()
@@ -108,6 +111,12 @@ namespace TestingSystem.Areas.Admin.Controllers
                 Failure = "Something went wrong, please try again!";
                 return RedirectToAction("Edit", "Test");
             }
+        }
+
+        public ActionResult _Detail(int Id)
+        {
+            var listCandidate = testResultRepository.GetALl(Id);
+            return View(listCandidate);
         }
 
         public ActionResult Delete(List<int> ids)

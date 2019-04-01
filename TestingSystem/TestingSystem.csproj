@@ -7764,6 +7764,8 @@
     <Content Include="Areas\Admin\Views\ReviewTestResult\ShowTestResultById.cshtml" />
     <Content Include="Areas\Admin\Views\CandidatatesTest\UpdateCandidates.cshtml" />
     <Content Include="Areas\Admin\Views\TestLogin\ShowInfoTest.cshtml" />
+    <Content Include="Areas\Admin\Views\TestResult\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\_Detail.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
