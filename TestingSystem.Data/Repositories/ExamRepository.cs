@@ -12,9 +12,9 @@ namespace TestingSystem.Data.Repositories
 	{
 		//Get all exams to view list exam
 		IEnumerable<Exam> GetAllExams();
-        IEnumerable<Exam> GetAllFollow();
+		IEnumerable<Exam> GetAllFollow();
 		// Update exam
-        bool UpdateExam(Exam exam);
+		bool UpdateExam(Exam exam);
 		// Get exam by exam id
 		Exam GetExamsByID(int id);
 		// Create new exam
@@ -26,7 +26,7 @@ namespace TestingSystem.Data.Repositories
 		// Get all test by exam id(use for client).
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
 		// Delete test in list exam
-		int RemoveTestInExams(int id);
+		int RemoveTestInExams(int testID, int examID);
 		// Add test into exam
 		int AddTestIntoExams(int testID, int examID);
 		// Get Name exam by exam id
@@ -221,29 +221,7 @@ namespace TestingSystem.Data.Repositories
 				}
 			}
 			return listReturn.AsEnumerable();
-		}
-
-		public int RemoveTestInExams(int testID, int examID)
-		{
-			try
-			{
-				var test = DbContext.ExamTests.FirstOrDefault(x => x.TestID == testID&& x.ExamID==examID);
-				if (test != null)
-				{
-					this.DbContext.ExamTests.Remove(test);
-					return DbContext.SaveChanges();
-				}
-				else
-				{
-					return 0;
-				}
-			}
-			catch (Exception e)
-			{
-				log.Debug(e.Message);
-				return 0;
-			}
-		}
+		}		
 
 		public int AddTestIntoExams(int testID, int examID)
 		{
@@ -278,6 +256,28 @@ namespace TestingSystem.Data.Repositories
 		{
 			var exam = DbContext.Exams.Where(x => x.Status == 1).ToList();
 			return exam;
+		}
+
+		public int RemoveTestInExams(int testID, int examID)
+		{
+			try
+			{
+				var test = DbContext.ExamTests.FirstOrDefault(x => x.TestID == testID && x.ExamID == examID);
+				if (test != null)
+				{
+					this.DbContext.ExamTests.Remove(test);
+					return DbContext.SaveChanges();
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			catch (Exception e)
+			{
+				log.Debug(e.Message);
+				return 0;
+			}
 		}
 	}
 }
