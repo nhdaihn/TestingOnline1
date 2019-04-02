@@ -10,20 +10,25 @@ namespace TestingSystem.Areas.Admin.Controllers
 {
     public class ExamClientController : AdminController
     {
-        
+
         private IExamPaperService examPaperService;
         private IExamService examService;
+        private ITestResultService testResultService;
+        private TestService TestService;
 
-        public ExamClientController(IUserService userService, IExamService examService, IExamPaperService examPaperService) : base(userService)
+        public ExamClientController(IUserService userService, TestService TestService, IExamService examService, IExamPaperService examPaperService, ITestResultService testResultService) : base(userService)
         {
             this.examPaperService = examPaperService;
             this.examService = examService;
+            this.testResultService = testResultService;
+            this.TestService = TestService;
         }
         //GET: Admin/ExamClient
         public ActionResult ListExamClient(int idExam = 0)
         {
             int idUser = int.Parse(Session["Name"].ToString());
-            var listExam = examService.GetAllExams().ToList();
+            var listExam = examService.GetExamFollow().ToList();
+            var listTest = TestService.GetAllTests();
             if (idExam == 0)
             {
                 idExam = listExam[0].ExamID;
@@ -41,5 +46,13 @@ namespace TestingSystem.Areas.Admin.Controllers
             ViewBag.IdExam = idExam;
             return View(listExam);
         }
+        [ChildActionOnly]
+        public ActionResult _CountUser(int TestId)
+        {
+            var count = testResultService.CountUsed(TestId);
+            ViewBag.Count = count;
+            return View();
+        }
     }
+   
 }

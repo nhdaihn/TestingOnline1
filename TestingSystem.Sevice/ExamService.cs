@@ -23,7 +23,9 @@ namespace TestingSystem.Sevice
 		int AddTestIntoExams(int testID, int examID);
 		Exam GetExamByCode(string examCode);
 		IEnumerable<Test> GetTestByExamIDAdmin(int examID);
-	}
+
+        IEnumerable<Exam> GetExamFollow();
+    }
 
 	public class ExamService : IExamService
 	{
@@ -95,5 +97,10 @@ namespace TestingSystem.Sevice
 		{
 			return examRepository.UpdateExam(exam);
 		}
-	}
+
+        public IEnumerable<Exam> GetExamFollow()
+        {
+            return examRepository.GetAllFollow();
+        }
+    }
 }

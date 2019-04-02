@@ -18,6 +18,7 @@ namespace TestingSystem.Data.Repositories
         int ReturnTurn(int testId, DateTime dateTest);
         IEnumerable<ReviewTestResult> ListAllTestByDedicateId(int dedicateId);
         IEnumerable<ResultCheckId> ListAllQuestionIdAndAnswerIdByTestIdChecked(int testId, int turn);
+        int CountUsed(int Id);
     }
     public class TestResultRepository : RepositoryBase<TestResult>, ITestResultRepository
     {
@@ -92,6 +93,12 @@ namespace TestingSystem.Data.Repositories
                 listResultCheckId.Add(obj);
             }
             return listResultCheckId;
+        }
+
+        public int CountUsed(int Id=21)
+        {
+            var count = DbContext.TestResults.Where(x => x.TestID == Id).GroupBy(x => new { x.CandidateID}).ToList().Distinct().Count();
+            return count;
         }
     }
 }

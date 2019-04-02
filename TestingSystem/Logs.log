@@ -708,6 +708,7 @@
 
 11:32:42,149 8 - Object reference not set to an instance of an object.
 11:52:50,232 13 - Object reference not set to an instance of an object.
+11:24:06,413 6 - An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
 
 ----------------------------------------------------------------------------------------------------------------------------
 

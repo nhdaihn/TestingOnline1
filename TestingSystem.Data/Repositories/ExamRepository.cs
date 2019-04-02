@@ -11,7 +11,8 @@ namespace TestingSystem.Data.Repositories
 	public interface IExamRepository : IRepository<Exam>
 	{
 		IEnumerable<Exam> GetAllExams();
-		bool UpdateExam(Exam exam);
+        IEnumerable<Exam> GetAllFollow();
+        bool UpdateExam(Exam exam);
 		Exam GetExamsByID(int id);
 		int AddExam(Exam exam);
 		int DeleteExam(int id);
@@ -245,5 +246,11 @@ namespace TestingSystem.Data.Repositories
 			var exam = DbContext.Exams.SingleOrDefault(x => x.ExamCode == examCode);
 			return exam;
 		}
-	}
+
+        public IEnumerable<Exam> GetAllFollow()
+        {
+            var exam = DbContext.Exams.Where(x => x.Status == 1).ToList();
+            return exam;
+        }
+    }
 }
