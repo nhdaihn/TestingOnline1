@@ -100,8 +100,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             //pass score bai thi
             ViewBag.PassScore = test.PassingScore;
             ViewBag.IdExam = idExam;
-            TempData["timeStart"] = DateTime.Now.ToString("MM/dd/yyyy");
-            TempData.Keep();
+            
             return View();
         }
         static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
@@ -166,7 +165,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             return true;
         }
         [HttpPost]
-        public JsonResult _RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid, int passscore, int idtest)
+        public JsonResult _RepostTest(int exampaperid,int examid, int passscore, int idtest, IEnumerable<ResultTest> fruits = null)
         {
 
             /// danh sach cau hoi trong de thi
@@ -287,18 +286,20 @@ namespace TestingSystem.Areas.Admin.Controllers
                             testResult.QuestionID = item2.name;
                             testResult.AnswerID = item2.id;
                             checkAvailable = true;
-                            break;
+                            testResultService.AddTestResult(testResult);
                         }
                     }
                     if (checkAvailable == false)
                     {
                         testResult.QuestionID = item.QuestionID;
                         testResult.AnswerID = -1;
+                        testResultService.AddTestResult(testResult);
                     }
                     testResultService.AddTestResult(testResult);
                 }
                 return Json(listQuestion.Count());
-            } else
+            }
+            else
             {
                 foreach (var item in listQuestion)
                 {

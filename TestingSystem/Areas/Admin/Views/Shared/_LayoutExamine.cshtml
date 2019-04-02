@@ -83,7 +83,7 @@
                     @for (int i = 0; i < ViewBag.CountQuestion; i++)
                     {
                         var j = i + 1;
-                        <div style="background-color: #cccccc; width: 30px; height: 20px; float: left; margin: 5px;color: white;text-align:center;" id="@i">@j</div>
+                        <div style="background-color: #cccccc; width: 30px; height: 20px; float: left; margin: 5px;color: white;text-align:center;" id="@i" class="state-question">@j</div>
                     }
                 </div>
             </section>
@@ -305,8 +305,8 @@
     <script>
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10)
+            const refreshId = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -314,25 +314,51 @@
                 if (--timer < 0) {
                     timer = duration;
                 }
-                if (timer == 0) {
-                    alert("Time Over");
+                if (timer <= 1) {
+                    localStorage.clear();
+                    clearInterval(refreshId);
                 }
             }, 1000);
         }
-        var starttime, now;
-            window.onload = function () {
-                var fiveMinutes = 60 * @ViewBag.Time,
-                display = document.querySelector('#time');
 
+        window.onload = function () {
+            var fiveMinutes = 60 * @ViewBag.Time;
+            display = document.querySelector('#time');
+            startTimer(fiveMinutes, display);
 
-                // retain
-                var inputs = document.getElementsByClassName('radiova');
-                for (var i = 0; i < inputs.length; i += 1) {
-                    if (localStorage.getItem("" + inputs[i].id) !== null) {
-                        document.getElementById(inputs[i].id).checked = true;
+            // retain check of question
+            var inputs = document.getElementsByClassName('radiova');
+            for (var i = 0; i < inputs.length; i += 1) {
+                if (localStorage.getItem("" + inputs[i].id) !== null) {
+                    document.getElementById(inputs[i].id).checked = true;
+                }
+            }
+            // retain state of status question
+            var inputs2 = document.getElementsByClassName('state-question');
+            for (var i = 0; i < inputs2.length; i += 1) {
+                if (localStorage.getItem("" + inputs2[i].id) !== null) {
+                    if (localStorage.getItem("" + inputs2[i].id) == "datraloi") {
+                        document.getElementById(inputs2[i].id).classList.add("datraloi");
+                    } 
+                    if (localStorage.getItem("" + inputs2[i].id) == "dangcannhac") {
+                        document.getElementById(inputs2[i].id).classList.add("dangcannhac");
+                    } 
+                }
+            }
+            // retain state of status question dang can nhac
+            var inputs3 = document.getElementsByClassName('checkboxva');
+            for (var i = 0; i < inputs3.length; i += 1) {
+                if (localStorage.getItem("dangcannhac" + inputs3[i].id) !== null) {
+                    if (localStorage.getItem("dangcannhac" + inputs3[i].id) == "dangcannhac") {
+                        document.getElementById("dangcannhac" + inputs3[i].id).checked = true;
+                    }
+                    if (localStorage.getItem("dangcannhac" + inputs3[i].id) !== "dangcannhac") {
+                        document.getElementById("dangcannhac" + inputs3[i].id).checked = false;
                     }
                 }
-                var n;
+            }
+
+            var n;
                 var howfar;
                 if (localStorage.getItem("timestart") == null) {
                     localStorage.clear();
@@ -344,10 +370,10 @@
                     var d = new Date();
                     n = d.getTime();
                     localStorage.setItem("timecurrent", n);
-                    howfar = (localStorage.getItem("timecurrent") - localStorage.getItem("timestart"))/1000;
+                    howfar = (localStorage.getItem("timecurrent") - localStorage.getItem("timestart")) / 1000;
                     startTimer(fiveMinutes - howfar, display);
                 }
-            };
+        };
     </script>
     <script>
         function submittest() {
@@ -365,20 +391,21 @@
             }
             if (fruits.length == 0) {
                 alert("Bạn chưa làm bài thi");
+                localStorage.clear();
             } else {
                 localStorage.clear();
                 $.post('@Url.Action("_RepostTest", "TestLogin")',
                 {
-                    fruits: fruits,
                     exampaperid: @ViewBag.IdExamPaper,
                     examid: @ViewBag.IdExam,
                     passscore: @ViewBag.PassScore,
-                    idtest: @ViewBag.IdTest
+                    idtest: @ViewBag.IdTest,
+                    fruits: fruits
                 },
                function (result) {
                    var url = $("#RedirectTo").val();
                    location.href = url;
-               });
+                    });
             }
         }
     }
@@ -391,9 +418,6 @@
             } else {
                 localStorage.removeItem("" + x);
             }
-        }
-        function Tricker() {
-
         }
     </script>
 </body>
