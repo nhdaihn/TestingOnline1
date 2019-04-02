@@ -83,7 +83,7 @@
                     @for (int i = 0; i < ViewBag.CountQuestion; i++)
                     {
                         var j = i + 1;
-                        <div style="background-color: #cccccc; width: 30px; height: 20px; float: left; margin: 5px;color: white;text-align:center;" id="@i">@j</div>
+                        <div style="background-color: #cccccc; width: 30px; height: 20px; float: left; margin: 5px;color: white;text-align:center;" id="@i" class="state-question">@j</div>
                     }
                 </div>
             </section>
@@ -306,7 +306,7 @@
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
             const refreshId = setInterval(function () {
-                minutes = parseInt(timer / 60, 10)
+                minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -324,17 +324,42 @@
         }
 
         window.onload = function () {
-            var fiveMinutes = 60 * @ViewBag.Time,
+            var fiveMinutes = 60 * @ViewBag.Time;
             display = document.querySelector('#time');
             startTimer(fiveMinutes, display);
 
-            // retain
+            // retain check of question
             var inputs = document.getElementsByClassName('radiova');
             for (var i = 0; i < inputs.length; i += 1) {
                 if (localStorage.getItem("" + inputs[i].id) !== null) {
                     document.getElementById(inputs[i].id).checked = true;
                 }
             }
+            // retain state of status question
+            var inputs2 = document.getElementsByClassName('state-question');
+            for (var i = 0; i < inputs2.length; i += 1) {
+                if (localStorage.getItem("" + inputs2[i].id) !== null) {
+                    if (localStorage.getItem("" + inputs2[i].id) == "datraloi") {
+                        document.getElementById(inputs2[i].id).classList.add("datraloi");
+                    } 
+                    if (localStorage.getItem("" + inputs2[i].id) == "dangcannhac") {
+                        document.getElementById(inputs2[i].id).classList.add("dangcannhac");
+                    } 
+                }
+            }
+            // retain state of status question dang can nhac
+            var inputs3 = document.getElementsByClassName('checkboxva');
+            for (var i = 0; i < inputs3.length; i += 1) {
+                if (localStorage.getItem("dangcannhac" + inputs3[i].id) !== null) {
+                    if (localStorage.getItem("dangcannhac" + inputs3[i].id) == "dangcannhac") {
+                        document.getElementById("dangcannhac" + inputs3[i].id).checked = true;
+                    }
+                    if (localStorage.getItem("dangcannhac" + inputs3[i].id) !== "dangcannhac") {
+                        document.getElementById("dangcannhac" + inputs3[i].id).checked = false;
+                    }
+                }
+            }
+
             var n;
                 var howfar;
                 if (localStorage.getItem("timestart") == null) {
