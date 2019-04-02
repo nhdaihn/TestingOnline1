@@ -7828,6 +7828,7 @@
     <Content Include="Scripts\js_elearning_notify.js" />
     <Content Include="Scripts\js_frontend_dkp_course.js" />
     <Content Include="Scripts\nguoidung_xembaithi.js" />
+    <Content Include="Views\Auditions\_ShowInfoTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

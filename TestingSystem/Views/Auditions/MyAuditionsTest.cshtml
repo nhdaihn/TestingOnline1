@@ -312,7 +312,7 @@
 											@* can sua lai *@
 											<a href="/thong-tin-bai-thi/5279?cid=3">
 												<span class="exam-title">
-													<a href="@Url.Action("ShowExamPaperById", "Auditions", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam, idTest = item.TestID})">@item.TestName
+													<a href="@Url.Action("_ShowInfoTest", "Auditions", new { idExamPaper = item.ExamPaperID, idExam = ViewBag.IdExam, idTest = item.TestID})">@item.TestName
 												</span>
 											</a>
 
@@ -321,14 +321,14 @@
 													<span>Đăng ký tự do</span>
 												</div>
 												<div class="hidden-sm no-padding margin-top-5">
-													<p class="col-md-6 col-xs-6 no-padding">
+													<p class=" no-padding">
 														<i class="fa fa-calendar"></i>
-														13/11/2018
+														@item.CreateDate.ToString(string.Format("dd/MM/yyyy"))
 													</p>
-													<p class="col-md-6 col-xs-6 no-padding  padding-left-20 pull-left">
+													@*<p class="col-md-6 col-xs-6 no-padding  padding-left-20 pull-left">
 														<i class="fa fa-calendar"></i>
 														Không giới hạn
-													</p>
+													</p>*@
 												</div>
 
 											</div>

@@ -41,7 +41,13 @@ namespace TestingSystem.Controllers
 			this.questionCategorySevice = questionCategorySevice;
 			this.testService = testService;
 		}
-
+		public ActionResult _ShowInfoTest(int idExamPaper, int idExam, int idTest)
+		{
+			Test item = new Test();
+			item = testService.GetTestByID(idTest);
+			ViewBag.IdExam = idExam;
+			return View(item);
+		}
 		public ActionResult AuditionsTest()
 		{
 			return View();
