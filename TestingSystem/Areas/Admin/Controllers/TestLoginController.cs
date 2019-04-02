@@ -100,6 +100,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             //pass score bai thi
             ViewBag.PassScore = test.PassingScore;
             ViewBag.IdExam = idExam;
+            
             return View();
         }
         static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
@@ -164,7 +165,7 @@ namespace TestingSystem.Areas.Admin.Controllers
             return true;
         }
         [HttpPost]
-        public JsonResult _RepostTest(IEnumerable<ResultTest> fruits, int exampaperid,int examid, int passscore, int idtest)
+        public JsonResult _RepostTest(int exampaperid,int examid, int passscore, int idtest, IEnumerable<ResultTest> fruits = null)
         {
 
             /// danh sach cau hoi trong de thi
@@ -201,96 +202,120 @@ namespace TestingSystem.Areas.Admin.Controllers
 
             int idUser = int.Parse(Session["Name"].ToString());
             // fruits : chua danh sach tat ca id question va id answer da check
-			var list = fruits;
-            int countAnswer = fruits.Count();
-            int numberOfCorrectAnswer = 0;
-            int i = 0;
-            bool checkcontinue = true;
-            int idalive = 0;
-            foreach (var item in list)
-            {
-                // id: answer id, name: question id
-                // lay answer dung trong fruits
-                if(idalive != item.name)
-                {
-                    if (listQuestionCheckMulti[i].CheckMulti == false)
-                    {
-                        var obj = answerService.GetAnswerCorrect(item.id);
-                        if (obj != null)
-                        {
-                            numberOfCorrectAnswer++;
-                        }
-                    }
-                    else
-                    {
-                        List<int> listIdAnswerCorrectByIdQuestion = new List<int>();
-                        // lay tat ca id answer dung theo id question
-                        listIdAnswerCorrectByIdQuestion = answerService.GetListIdAnswerCorrectByIdQuestion(item.name);
-                        List<int> listIdAnswerCheckById = new List<int>();
-                        foreach (var obj in list)
-                        {
-                            if (obj.name == item.name)
-                            {
-                                listIdAnswerCheckById.Add(obj.id);
-                            }
-                        }
-                        if (UnorderedEqual(listIdAnswerCorrectByIdQuestion, listIdAnswerCheckById) == true)
-                        {
-                            numberOfCorrectAnswer++;
-                        }
-                        idalive = item.name;
-                    }
-                }
-            }
-            // get all question include not check
-            List<QuestionDto> listQuestion = new List<QuestionDto>();
-            listQuestion = questionService.GetQuestionsByExamPaperId(exampaperid).ToList();
-
-
-            double percent = numberOfCorrectAnswer / countAnswer;
+            var list = fruits;
 
             Models.ExamPaper examPaper = new Models.ExamPaper();
             examPaper = examPaperService.GetExamPaperById(exampaperid);
 
-
-            // lay exampaper theo id
-            // listquestion: so cau hoi trong de
-
             // check turn of test result trong hom thi
             int turn = testResultService.ReturnTurn(idtest, DateTime.Now);
 
-            foreach (var item in listQuestion)
-            {
-                TestResult testResult = new TestResult();
-                testResult.TestID = idtest;
-                testResult.CandidateID = idUser;
-                testResult.TestName = examPaper.Title;
-                testResult.Description = "description note";
-                testResult.CreatedDate = DateTime.Now;
-                testResult.Score = numberOfCorrectAnswer;
-                testResult.Turns = turn + 1;
+            // get all question include not check
+            List<QuestionDto> listQuestion = new List<QuestionDto>();
+            listQuestion = questionService.GetQuestionsByExamPaperId(exampaperid).ToList();
 
-                // list: so cau hoi da check
-                bool checkAvailable = false;
-                foreach(var item2 in list)
+            if (fruits.Count() > 0 && fruits != null)
+            {
+                int countAnswer = fruits.Count();
+                int numberOfCorrectAnswer = 0;
+                int i = 0;
+                int idalive = 0;
+                foreach (var item in list)
                 {
-                    // item2 co 2 attribute: id(answerid) va name(questionid)
-                    if(item2.name == item.QuestionID)
+                    // id: answer id, name: question id
+                    // lay answer dung trong fruits
+                    if (idalive != item.name)
                     {
-                        testResult.QuestionID = item2.name;
-                        testResult.AnswerID = item2.id;
-                        checkAvailable = true;
-                        break;
+                        if (listQuestionCheckMulti[i].CheckMulti == false)
+                        {
+                            var obj = answerService.GetAnswerCorrect(item.id);
+                            if (obj != null)
+                            {
+                                numberOfCorrectAnswer++;
+                            }
+                        }
+                        else
+                        {
+                            List<int> listIdAnswerCorrectByIdQuestion = new List<int>();
+                            // lay tat ca id answer dung theo id question
+                            listIdAnswerCorrectByIdQuestion = answerService.GetListIdAnswerCorrectByIdQuestion(item.name);
+                            List<int> listIdAnswerCheckById = new List<int>();
+                            foreach (var obj in list)
+                            {
+                                if (obj.name == item.name)
+                                {
+                                    listIdAnswerCheckById.Add(obj.id);
+                                }
+                            }
+                            if (UnorderedEqual(listIdAnswerCorrectByIdQuestion, listIdAnswerCheckById) == true)
+                            {
+                                numberOfCorrectAnswer++;
+                            }
+                            idalive = item.name;
+                        }
                     }
                 }
-                if(checkAvailable == false)
+
+
+                double percent = numberOfCorrectAnswer / countAnswer;
+
+
+                // lay exampaper theo id
+                // listquestion: so cau hoi trong de
+
+
+
+                foreach (var item in listQuestion)
                 {
+                    TestResult testResult = new TestResult();
+                    testResult.TestID = idtest;
+                    testResult.CandidateID = idUser;
+                    testResult.TestName = examPaper.Title;
+                    testResult.Description = "description note";
+                    testResult.CreatedDate = DateTime.Now;
+                    testResult.Score = numberOfCorrectAnswer;
+                    testResult.Turns = turn + 1;
+
+                    // list: so cau hoi da check
+                    bool checkAvailable = false;
+                    foreach (var item2 in list)
+                    {
+                        // item2 co 2 attribute: id(answerid) va name(questionid)
+                        if (item2.name == item.QuestionID)
+                        {
+                            testResult.QuestionID = item2.name;
+                            testResult.AnswerID = item2.id;
+                            checkAvailable = true;
+                            break;
+                        }
+                    }
+                    if (checkAvailable == false)
+                    {
+                        testResult.QuestionID = item.QuestionID;
+                        testResult.AnswerID = -1;
+                    }
+                    testResultService.AddTestResult(testResult);
+                }
+                return Json(listQuestion.Count());
+            }
+            else
+            {
+                foreach (var item in listQuestion)
+                {
+                    TestResult testResult = new TestResult();
+                    testResult.TestID = idtest;
+                    testResult.CandidateID = idUser;
+                    testResult.TestName = examPaper.Title;
+                    testResult.Description = "description note";
+                    testResult.CreatedDate = DateTime.Now;
+                    testResult.Score = 0;
+                    testResult.Turns = turn + 1;
                     testResult.QuestionID = item.QuestionID;
                     testResult.AnswerID = -1;
+                    testResultService.AddTestResult(testResult);
                 }
-                testResultService.AddTestResult(testResult);
+                return Json(0);
             }
-            return Json(listQuestion.Count());
         }
 
         public ActionResult _ShowResult(int countQ, int passscore, string title)
