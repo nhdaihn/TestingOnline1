@@ -286,15 +286,15 @@ namespace TestingSystem.Areas.Admin.Controllers
                             testResult.QuestionID = item2.name;
                             testResult.AnswerID = item2.id;
                             checkAvailable = true;
-                            break;
+                            testResultService.AddTestResult(testResult);
                         }
                     }
                     if (checkAvailable == false)
                     {
                         testResult.QuestionID = item.QuestionID;
                         testResult.AnswerID = -1;
+                        testResultService.AddTestResult(testResult);
                     }
-                    testResultService.AddTestResult(testResult);
                 }
                 return Json(listQuestion.Count());
             }
