@@ -12,7 +12,7 @@ namespace TestingSystem.Sevice
 		int RemoveCadidatesFromTest(int cadidatesID,int testID);
         List<int> GetAllTestIdByCandidateID(int candidateID);
         string GetNameTestByID(int testID);
-
+        bool checkExistCandidateInCandidatesTest(int candidateID, int testID);
 	}
 	public class CandidatesTestService : ICandidatesTestService
 	{
@@ -48,6 +48,11 @@ namespace TestingSystem.Sevice
         public string GetNameTestByID(int testID)
         {
 	        return _candidatesTestRepository.GetNameTestByID(testID);
+        }
+
+        public bool checkExistCandidateInCandidatesTest(int candidateID, int testID)
+        {
+	        return _candidatesTestRepository.checkExistCandidateInCandidatesTest(candidateID, testID);
         }
 	}
 }

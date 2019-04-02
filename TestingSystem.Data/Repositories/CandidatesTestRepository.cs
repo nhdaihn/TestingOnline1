@@ -13,10 +13,10 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Candidate> GetAllCandidatesByTestID(int testID);
 		string GetNameTestByID(int testID);
 		int AddCandidatesIntoTest(int candidatesID, int testID);
-		int RemoveCadidatesFromTest(int cadidatesID,int testID);
-        List<int> GetAllTestIdByCandidateID(int candidateID);
-
-    }
+		int RemoveCadidatesFromTest(int cadidatesID, int testID);
+		List<int> GetAllTestIdByCandidateID(int candidateID);
+		bool checkExistCandidateInCandidatesTest(int candidateID, int testID);
+	}
 	public class CandidatesTestRepository : RepositoryBase<CandidatesTest>, ICandidatesTestRepository
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -68,7 +68,7 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
-				var candidates = DbContext.CandidatesTests.SingleOrDefault(x => x.CandidateID==cadidatesID&& x.TestID==testID);
+				var candidates = DbContext.CandidatesTests.SingleOrDefault(x => x.CandidateID == cadidatesID && x.TestID == testID);
 				if (candidates != null)
 				{
 					this.DbContext.CandidatesTests.Remove(candidates);
@@ -86,15 +86,28 @@ namespace TestingSystem.Data.Repositories
 			}
 		}
 
-        public List<int> GetAllTestIdByCandidateID(int candidateID)
-        {
-            List<int> listTestIdByCandidateID = new List<int>();
-            var listTestByCandidateId = this.DbContext.CandidatesTests.Where(s => s.CandidateID == candidateID).ToList();
-            foreach(var item in listTestByCandidateId)
-            {
-                listTestIdByCandidateID.Add(item.TestID);
-            }
-            return listTestIdByCandidateID;
-        }
-    }
+		public List<int> GetAllTestIdByCandidateID(int candidateID)
+		{
+			List<int> listTestIdByCandidateID = new List<int>();
+			var listTestByCandidateId = this.DbContext.CandidatesTests.Where(s => s.CandidateID == candidateID).ToList();
+			foreach (var item in listTestByCandidateId)
+			{
+				listTestIdByCandidateID.Add(item.TestID);
+			}
+			return listTestIdByCandidateID;
+		}
+
+		public bool checkExistCandidateInCandidatesTest(int candidateID, int testID)
+		{
+			var candidatesTest = DbContext.CandidatesTests.Where(x => x.CandidateID == candidateID && x.TestID == testID).ToList();
+			if (candidatesTest.Count > 0)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
 }

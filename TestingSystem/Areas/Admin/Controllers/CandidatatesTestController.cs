@@ -32,7 +32,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 					int i = 0;
 					foreach (var id in ids)
 					{
-						if (_candidatesTestService.RemoveCadidatesFromTest(id,testID) > 0)
+						if (_candidatesTestService.RemoveCadidatesFromTest(id, testID) > 0)
 						{
 							i++;
 							continue;
@@ -136,7 +136,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 					int i = 0;
 					foreach (var id in ids)
 					{
-						if (_candidatesTestService.RemoveCadidatesFromTest(id,testID) > 0)
+						if (_candidatesTestService.RemoveCadidatesFromTest(id, testID) > 0)
 						{
 							i++;
 							continue;
@@ -174,6 +174,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 						foreach (var id in ids)
 						{
 							var checkExist = _candidateService.CheckExistCandidatesByID(id);
+							var checkExistInCandidatesTest = _candidatesTestService.checkExistCandidateInCandidatesTest(id, testID);
 							if (checkExist == false)
 							{
 								Candidate myCandidate = new Candidate();
@@ -185,8 +186,11 @@ namespace TestingSystem.Areas.Admin.Controllers
 							}
 							else
 							{
-								_candidatesTestService.AddCandidatesIntoTest(id, testID);
-								i++;
+								if (checkExistInCandidatesTest == true)
+								{
+									_candidatesTestService.AddCandidatesIntoTest(id, testID);
+									i++;
+								}
 							}
 						}
 						if (i > 0)
@@ -214,7 +218,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 						int i = 0;
 						foreach (var id in ids)
 						{
-							if (_candidatesTestService.RemoveCadidatesFromTest(id,testID) > 0)
+							if (_candidatesTestService.RemoveCadidatesFromTest(id, testID) > 0)
 							{
 								i++;
 								continue;
