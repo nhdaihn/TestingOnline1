@@ -10,18 +10,30 @@ namespace TestingSystem.Data.Repositories
 {
 	public interface IExamRepository : IRepository<Exam>
 	{
+		//Get all exams to view list exam
 		IEnumerable<Exam> GetAllExams();
         IEnumerable<Exam> GetAllFollow();
+		// Update exam
         bool UpdateExam(Exam exam);
+		// Get exam by exam id
 		Exam GetExamsByID(int id);
+		// Create new exam
 		int AddExam(Exam exam);
+		// Delete exam
 		int DeleteExam(int id);
+		// Search exam by name
 		IEnumerable<Exam> SearchExams(string txtSearch);
+		// Get all test by exam id(use for client).
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
+		// Delete test in list exam
 		int RemoveTestInExams(int id);
+		// Add test into exam
 		int AddTestIntoExams(int testID, int examID);
+		// Get Name exam by exam id
 		string GetNameExamByID(int examID);
+		// Get test by exam test id (use for admin)
 		IEnumerable<Test> GetTestByExamIDAdmin(int examID);
+		// Get code exam
 		Exam GetExamByCode(string examCode);
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
