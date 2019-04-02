@@ -305,28 +305,27 @@
     <script>
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
-            setInterval(function () {
+            const refreshId = setInterval(function () {
                 minutes = parseInt(timer / 60, 10)
                 seconds = parseInt(timer % 60, 10);
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-
                 display.textContent = minutes + ":" + seconds;
 
                 if (--timer < 0) {
                     timer = duration;
                 }
-                if (timer == 0) {
-                    alert("Time Over");
-                    submittest();
+                if (timer <= 1) {
+                    clearInterval(refreshId);
+                    localStorage.clear();
                 }
             }, 1000);
         }
 
         window.onload = function () {
             var fiveMinutes = 60 * @ViewBag.Time,
-                display = document.querySelector('#time');
+            display = document.querySelector('#time');
             startTimer(fiveMinutes, display);
 
             // retain
@@ -336,7 +335,21 @@
                     document.getElementById(inputs[i].id).checked = true;
                 }
             }
-            alert(@ViewBag.TimeStart);
+            var n;
+                var howfar;
+                if (localStorage.getItem("timestart") == null) {
+                    localStorage.clear();
+                    var d = new Date();
+                    n = d.getTime();
+                    localStorage.setItem("timestart", n);
+                    startTimer(fiveMinutes, display);
+                } else {
+                    var d = new Date();
+                    n = d.getTime();
+                    localStorage.setItem("timecurrent", n);
+                    howfar = (localStorage.getItem("timecurrent") - localStorage.getItem("timestart")) / 1000;
+                    startTimer(fiveMinutes - howfar, display);
+                }
         };
     </script>
     <script>
@@ -355,19 +368,21 @@
             }
             if (fruits.length == 0) {
                 alert("Bạn chưa làm bài thi");
+                localStorage.clear();
             } else {
+                localStorage.clear();
                 $.post('@Url.Action("_RepostTest", "TestLogin")',
                 {
-                    fruits: fruits,
                     exampaperid: @ViewBag.IdExamPaper,
                     examid: @ViewBag.IdExam,
                     passscore: @ViewBag.PassScore,
-                    idtest: @ViewBag.IdTest
+                    idtest: @ViewBag.IdTest,
+                    fruits: fruits
                 },
                function (result) {
                    var url = $("#RedirectTo").val();
                    location.href = url;
-               });
+                    });
             }
         }
     }
@@ -380,9 +395,6 @@
             } else {
                 localStorage.removeItem("" + x);
             }
-        }
-        function Tricker() {
-            
         }
     </script>
 </body>
