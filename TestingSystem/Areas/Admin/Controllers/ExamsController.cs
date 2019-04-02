@@ -50,7 +50,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 				if (myexam > 0)
 				{
 					Success = "Insert Exam successfully!";
-					return RedirectToAction("Edit", "Exams",new{id= myexam });
+					return RedirectToAction("Edit", "Exams", new { id = myexam });
 				}
 				else
 				{
@@ -166,7 +166,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 					int i = 0;
 					foreach (var id in ids)
 					{
-						if (examService.RemoveTestInExams(id) > 0)
+						if (examService.RemoveTestInExams(id,examID) > 0)
 						{
 							i++;
 							continue;
@@ -272,15 +272,25 @@ namespace TestingSystem.Areas.Admin.Controllers
 						int i = 0;
 						foreach (var id in ids)
 						{
-							if (examService.AddTestIntoExams(id, examID) > 0)
+							var checkExist = examService.CheckTestExistInExam(id, examID);
+							if (checkExist ==false)
 							{
-								i++;
+								if (examService.AddTestIntoExams(id, examID) > 0)
+								{
+									i++;
+									continue;
+								}
+								else
+								{
+									break;
+								}
+							}
+
+							if (checkExist ==true)
+							{
 								continue;
 							}
-							else
-							{
-								break;
-							}
+
 						}
 						if (i > 0)
 						{
@@ -307,7 +317,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 						int i = 0;
 						foreach (var id in ids)
 						{
-							if (examService.RemoveTestInExams(id) > 0)
+							if (examService.RemoveTestInExams(id,examID) > 0)
 							{
 								i++;
 								continue;
@@ -357,7 +367,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 					int i = 0;
 					foreach (var id in ids)
 					{
-						if (examService.RemoveTestInExams(id) > 0)
+						if (examService.RemoveTestInExams(id,examID) > 0)
 						{
 							i++;
 							continue;

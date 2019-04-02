@@ -18,13 +18,14 @@ namespace TestingSystem.Sevice
 		Exam GetExamsByID(int id);
 		IEnumerable<Exam> SearchExams(string txtSearch);
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
-		int RemoveTestInExams(int id);
+		int RemoveTestInExams(int testID, int examID);
 		string GetNameExamByID(int examID);
 		int AddTestIntoExams(int testID, int examID);
 		Exam GetExamByCode(string examCode);
 		IEnumerable<Test> GetTestByExamIDAdmin(int examID);
+		bool CheckTestExistInExam(int testID, int examID);
 
-        IEnumerable<Exam> GetExamFollow();
+		IEnumerable<Exam> GetExamFollow();
     }
 
 	public class ExamService : IExamService
@@ -67,9 +68,9 @@ namespace TestingSystem.Sevice
 			return examRepository.GetTestByExamID(examID, idUser);
 		}
 
-		public int RemoveTestInExams(int id)
+		public int RemoveTestInExams(int testID, int examID)
 		{
-			return examRepository.RemoveTestInExams(id);
+			return examRepository.RemoveTestInExams(testID,examID);
 		}
 
 		public string GetNameExamByID(int examID)
@@ -90,6 +91,11 @@ namespace TestingSystem.Sevice
 		public IEnumerable<Test> GetTestByExamIDAdmin(int examID)
 		{
 			return examRepository.GetTestByExamIDAdmin(examID);
+		}
+
+		public bool CheckTestExistInExam(int testID, int examID)
+		{
+			return examRepository.CheckTestExistInExam(testID, examID);
 		}
 
 

@@ -12,9 +12,9 @@ namespace TestingSystem.Data.Repositories
 	{
 		//Get all exams to view list exam
 		IEnumerable<Exam> GetAllExams();
-        IEnumerable<Exam> GetAllFollow();
+		IEnumerable<Exam> GetAllFollow();
 		// Update exam
-        bool UpdateExam(Exam exam);
+		bool UpdateExam(Exam exam);
 		// Get exam by exam id
 		Exam GetExamsByID(int id);
 		// Create new exam
@@ -26,7 +26,7 @@ namespace TestingSystem.Data.Repositories
 		// Get all test by exam id(use for client).
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
 		// Delete test in list exam
-		int RemoveTestInExams(int id);
+		int RemoveTestInExams(int testID,int examID);
 		// Add test into exam
 		int AddTestIntoExams(int testID, int examID);
 		// Get Name exam by exam id
@@ -35,6 +35,8 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Test> GetTestByExamIDAdmin(int examID);
 		// Get code exam
 		Exam GetExamByCode(string examCode);
+		//Check test exist in exam
+		bool CheckTestExistInExam(int testID, int examID);
 	}
 	public class ExamRepository : RepositoryBase<Exam>, IExamRepository
 	{
@@ -208,7 +210,7 @@ namespace TestingSystem.Data.Repositories
 			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
 			var listTest = DbContext.Tests.ToList();
 			var listReturn = new List<Test>();
-;			foreach (var item in listExamTestByExamID)
+			; foreach (var item in listExamTestByExamID)
 			{
 				foreach (var item2 in listTest)
 				{
@@ -217,15 +219,15 @@ namespace TestingSystem.Data.Repositories
 						listReturn.Add(item2);
 					}
 				}
-			}	
+			}
 			return listReturn.AsEnumerable();
 		}
 
-		public int RemoveTestInExams(int id)
+		public int RemoveTestInExams(int testID, int examID)
 		{
 			try
 			{
-				var test = DbContext.ExamTests.FirstOrDefault(x => x.TestID == id);
+				var test = DbContext.ExamTests.FirstOrDefault(x => x.TestID == testID&& x.ExamID==examID);
 				if (test != null)
 				{
 					this.DbContext.ExamTests.Remove(test);
@@ -259,10 +261,23 @@ namespace TestingSystem.Data.Repositories
 			return exam;
 		}
 
-        public IEnumerable<Exam> GetAllFollow()
-        {
-            var exam = DbContext.Exams.Where(x => x.Status == 1).ToList();
-            return exam;
-        }
-    }
+		public bool CheckTestExistInExam(int testID, int examID)
+		{
+			var checkExists = DbContext.ExamTests.Where(x => x.TestID == testID && x.ExamID == examID).ToList();
+			if (checkExists != null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		public IEnumerable<Exam> GetAllFollow()
+		{
+			var exam = DbContext.Exams.Where(x => x.Status == 1).ToList();
+			return exam;
+		}
+	}
 }
