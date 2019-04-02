@@ -7829,6 +7829,7 @@
     <Content Include="Scripts\js_elearning_notify.js" />
     <Content Include="Scripts\js_frontend_dkp_course.js" />
     <Content Include="Scripts\nguoidung_xembaithi.js" />
+    <Content Include="Views\Auditions\_ShowInfoTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7899,7 +7900,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56562</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56562/</IISUrl>
+          <IISUrl>http://localhost:56568/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

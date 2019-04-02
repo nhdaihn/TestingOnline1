@@ -32,7 +32,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 					int i = 0;
 					foreach (var id in ids)
 					{
-						if (_candidatesTestService.RemoveCadidatesFromTest(id) > 0)
+						if (_candidatesTestService.RemoveCadidatesFromTest(id,testID) > 0)
 						{
 							i++;
 							continue;
@@ -80,9 +80,9 @@ namespace TestingSystem.Areas.Admin.Controllers
 			return View();
 		}
 		[HttpPost]
-		public ActionResult UpdateTest(int id, string keySearch)
+		public ActionResult UpdateCandidates(int id, string keySearch)
 		{
-			var listUser = userService.GetAllUserRoleIsMemberOrSubMember();
+			var listUser = userService.GetAllUserRoleIsMemberOrSubMemberByKeySearch(keySearch);
 			ViewBag.listUser = listUser;
 			ViewBag.countUser = listUser.Count;
 
@@ -136,7 +136,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 					int i = 0;
 					foreach (var id in ids)
 					{
-						if (_candidatesTestService.RemoveCadidatesFromTest(id) > 0)
+						if (_candidatesTestService.RemoveCadidatesFromTest(id,testID) > 0)
 						{
 							i++;
 							continue;
@@ -214,7 +214,7 @@ namespace TestingSystem.Areas.Admin.Controllers
 						int i = 0;
 						foreach (var id in ids)
 						{
-							if (_candidatesTestService.RemoveCadidatesFromTest(id) > 0)
+							if (_candidatesTestService.RemoveCadidatesFromTest(id,testID) > 0)
 							{
 								i++;
 								continue;

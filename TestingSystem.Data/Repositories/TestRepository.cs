@@ -9,7 +9,7 @@ using TestingSystem.Models;
 
 namespace TestingSystem.Data.Repositories
 {
-	public interface ITestRepository :IRepository<Test>
+	public interface ITestRepository : IRepository<Test>
 	{
 		IEnumerable<Test> GetAllTest();
 		bool UpdateTest(Test entity);
@@ -19,10 +19,10 @@ namespace TestingSystem.Data.Repositories
 		IEnumerable<Test> GetAllTestIsActive();
 		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
 		IEnumerable<Test> GetAllTetByExamCode(string examCode);
-        IEnumerable<Test> SearchExams(string txtSearch);
-        int GetExamPaperIdByTestId(int testId);
+		IEnumerable<Test> SearchExams(string txtSearch);
+		int GetExamPaperIdByTestId(int testId);
 
-    }
+	}
 	public class TestRepository : RepositoryBase<Test>, ITestRepository
 	{
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -34,12 +34,12 @@ namespace TestingSystem.Data.Repositories
 		{
 			try
 			{
-                entity.Description = "good";
+				entity.Description = "good";
 				entity.CreateDate = DateTime.Now;
 				DbContext.Tests.Add(entity);
-                return DbContext.SaveChanges();
+				return DbContext.SaveChanges();
 
-            }
+			}
 			catch (Exception e)
 			{
 				log.Debug(e.Message);
@@ -52,15 +52,24 @@ namespace TestingSystem.Data.Repositories
 			try
 			{
 				var test = DbContext.Tests.Find(id);
-				if (test != null)
-				{
-					this.DbContext.Tests.Remove(test);
-					return DbContext.SaveChanges();
-				}
-				else
+				var checkTestResult = DbContext.TestResults.FirstOrDefault(x => x.TestID == id);
+				if (checkTestResult != null)
 				{
 					return 0;
 				}
+				else
+				{
+					if (test != null)
+					{
+						this.DbContext.Tests.Remove(test);
+						return DbContext.SaveChanges();
+					}
+					else
+					{
+						return 0;
+					}
+				}
+
 			}
 			catch (Exception e)
 			{
@@ -85,7 +94,7 @@ namespace TestingSystem.Data.Repositories
 		{
 			var examByCode = DbContext.Exams.SingleOrDefault(x => x.ExamCode == examCode);
 			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examByCode.ExamID).ToList();
-			List<Test> listTest= new List<Test>();
+			List<Test> listTest = new List<Test>();
 			foreach (var item in listExamTestByExamID)
 			{
 				var test = DbContext.Tests.SingleOrDefault(x => x.TestID == item.TestID);
@@ -114,27 +123,27 @@ namespace TestingSystem.Data.Repositories
 			var model = DbContext.Tests.Find(id);
 			return model;
 		}
-        public IEnumerable<Test> SearchExams(string txtSearch)
-        {
-            var listTest = DbContext.Tests.Where(x => x.TestName.Contains(txtSearch)).ToList();
-            return listTest;
-        }
-        public bool UpdateTest(Test entity)
+		public IEnumerable<Test> SearchExams(string txtSearch)
+		{
+			var listTest = DbContext.Tests.Where(x => x.TestName.Contains(txtSearch)).ToList();
+			return listTest;
+		}
+		public bool UpdateTest(Test entity)
 		{
 			try
 			{
 				var objTest = this.DbContext.Tests.Find(entity.TestID);
 				if (objTest != null)
 				{
-                    objTest.TestName = entity.TestName;
+					objTest.TestName = entity.TestName;
 					objTest.Description = entity.Description;
 					objTest.IsActive = entity.IsActive;
 					objTest.PassingScore = entity.PassingScore;
-                    objTest.ModifiedDate = DateTime.Now;
-                    objTest.StartDate = entity.StartDate;
-                    objTest.EndDate = entity.EndDate;
-                    objTest.ExamPaperID = entity.ExamPaperID;
-                    objTest.Status = entity.Status;
+					objTest.ModifiedDate = DateTime.Now;
+					objTest.StartDate = entity.StartDate;
+					objTest.EndDate = entity.EndDate;
+					objTest.ExamPaperID = entity.ExamPaperID;
+					objTest.Status = entity.Status;
 					this.DbContext.SaveChanges();
 					return true;
 				}
@@ -147,14 +156,14 @@ namespace TestingSystem.Data.Repositories
 			}
 		}
 
-        public int GetExamPaperIdByTestId(int testId)
-        {
-            var item = this.DbContext.Tests.Where(s => s.TestID == testId).FirstOrDefault();
-            if(item != null)
-            {
-                return item.ExamPaperID;
-            }
-            return 0;
-        }
-    }
+		public int GetExamPaperIdByTestId(int testId)
+		{
+			var item = this.DbContext.Tests.Where(s => s.TestID == testId).FirstOrDefault();
+			if (item != null)
+			{
+				return item.ExamPaperID;
+			}
+			return 0;
+		}
+	}
 }

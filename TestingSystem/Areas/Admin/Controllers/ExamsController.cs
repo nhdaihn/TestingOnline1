@@ -46,10 +46,11 @@ namespace TestingSystem.Areas.Admin.Controllers
 		{
 			try
 			{
-				if (examService.AddExam(exam) > 0)
+				var myexam = examService.AddExam(exam);
+				if (myexam > 0)
 				{
 					Success = "Insert Exam successfully!";
-					return RedirectToAction("Index", "Exams");
+					return RedirectToAction("Edit", "Exams",new{id= myexam });
 				}
 				else
 				{

@@ -132,7 +132,8 @@ namespace TestingSystem.Data.Repositories
 
         bool Reset(string email, string pass);
         List<User> GetAllUserRoleIsMemberOrSubMember();
-    }
+        List<User> GetAllUserRoleIsMemberOrSubMemberByKeySearch(string keySearch);
+	}
 
     /// <summary>
     /// Defines the <see cref="UserRepository" />
@@ -629,6 +630,12 @@ namespace TestingSystem.Data.Repositories
         public List<User> GetAllUserRoleIsMemberOrSubMember()
         {
 	        var listUser = DbContext.Users.Where(x => x.RoleId == 3 || x.RoleId == 4||x.RoleId==2).ToList();
+	        return listUser;
+        }
+
+        public List<User> GetAllUserRoleIsMemberOrSubMemberByKeySearch(string keySearch)
+        {
+	        var listUser = GetAllUserRoleIsMemberOrSubMember().Where(x=>x.Name.Contains(keySearch)||x.UserName.Contains(keySearch)).ToList();
 	        return listUser;
         }
     }

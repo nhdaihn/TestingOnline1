@@ -64,7 +64,7 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <div>
-                    <button class="btn-exam-va"><span id="time">@ViewBag.Time:00</span></button>
+                    <button class="btn-exam-va" disabled="disabled"><span id="time">@ViewBag.Time:00</span></button>
                     <button class="btn-exam-va-2" style="font-size: 18px;" onclick="submittest()">Kết thúc</button>
                     <hr class="hr-va">
                 </div>
@@ -305,57 +305,97 @@
     <script>
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
-            setInterval(function () {
+            const refreshId = setInterval(function () {
                 minutes = parseInt(timer / 60, 10)
                 seconds = parseInt(timer % 60, 10);
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-
                 display.textContent = minutes + ":" + seconds;
 
                 if (--timer < 0) {
                     timer = duration;
                 }
-                if (timer == 0) {
-                    alert("Time Over");
-                    submittest();
+                if (timer <= 1) {
+                    localStorage.clear();
+                    clearInterval(refreshId);
                 }
             }, 1000);
         }
 
         window.onload = function () {
             var fiveMinutes = 60 * @ViewBag.Time,
-                display = document.querySelector('#time');
+            display = document.querySelector('#time');
             startTimer(fiveMinutes, display);
+
+            // retain
+            var inputs = document.getElementsByClassName('radiova');
+            for (var i = 0; i < inputs.length; i += 1) {
+                if (localStorage.getItem("" + inputs[i].id) !== null) {
+                    document.getElementById(inputs[i].id).checked = true;
+                }
+            }
+            var n;
+                var howfar;
+                if (localStorage.getItem("timestart") == null) {
+                    localStorage.clear();
+                    var d = new Date();
+                    n = d.getTime();
+                    localStorage.setItem("timestart", n);
+                    startTimer(fiveMinutes, display);
+                } else {
+                    var d = new Date();
+                    n = d.getTime();
+                    localStorage.setItem("timecurrent", n);
+                    howfar = (localStorage.getItem("timecurrent") - localStorage.getItem("timestart")) / 1000;
+                    startTimer(fiveMinutes - howfar, display);
+                }
         };
     </script>
     <script>
     function submittest() {
-        var fruits = [];
-        var inputs = document.getElementsByClassName('radiova');
-        for (var i = 0; i < inputs.length; i += 1) {
-            if (inputs[i].checked == true) {
-                var obj = {
-                    name: inputs[i].name,
-                    id: inputs[i].id
+        if (confirm("Bạn muốn nộp bài thi?")) {
+            var fruits = [];
+            var inputs = document.getElementsByClassName('radiova');
+            for (var i = 0; i < inputs.length; i += 1) {
+                if (inputs[i].checked == true) {
+                    var obj = {
+                        name: inputs[i].name,
+                        id: inputs[i].id
+                    }
+                    fruits.push(obj);
                 }
-                fruits.push(obj);
+            }
+            if (fruits.length == 0) {
+                alert("Bạn chưa làm bài thi");
+                localStorage.clear();
+            } else {
+                localStorage.clear();
+                $.post('@Url.Action("_RepostTest", "TestLogin")',
+                {
+                    exampaperid: @ViewBag.IdExamPaper,
+                    examid: @ViewBag.IdExam,
+                    passscore: @ViewBag.PassScore,
+                    idtest: @ViewBag.IdTest,
+                    fruits: fruits
+                },
+               function (result) {
+                   var url = $("#RedirectTo").val();
+                   location.href = url;
+                    });
             }
         }
-        $.post('@Url.Action("_RepostTest", "TestLogin")',
-        {
-            fruits: fruits,
-            exampaperid: @ViewBag.IdExamPaper,
-            examid: @ViewBag.IdExam,
-            passscore: @ViewBag.PassScore,
-            idtest: @ViewBag.IdTest
-        },
-           function (result) {
-               var url = $("#RedirectTo").val();
-               location.href = url;
-           });
     }
+    </script>
+    <script>
+
+        function AddWS(x) {
+            if (localStorage.getItem("" + x) == null) {
+                localStorage.setItem("" + x, x);
+            } else {
+                localStorage.removeItem("" + x);
+            }
+        }
     </script>
 </body>
 </html>

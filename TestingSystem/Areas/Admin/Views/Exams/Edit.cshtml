@@ -3,7 +3,7 @@
 @{
 	/**/
 
-	ViewBag.Title = "Edit";
+	ViewBag.Title = "Edit Exam";
 	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 	int stt = 0;
 	int count = 0;
@@ -37,9 +37,9 @@
 	}
 </style>
 <section class="content-header">
-	<h1>
+	<h4>
 		Edit Exam
-	</h1>
+	</h4>
 	<ol class="breadcrumb">
 		<li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="active">Edit Exam</li>
@@ -155,6 +155,7 @@
 								<th>EndDate</th>
 								<th>CreatedBy</th>
 								<th width="12%">Pass Score</th>
+								<th style="width: 47px">Action</th>
 
 							</tr>
 						</thead>
@@ -177,6 +178,7 @@
 										if (item.CreatedBy == user.UserId)
 										{
 											<td>@user.Name</td>
+											count = 0;
 											break;
 										}
 										if (@count >= ViewBag.countUser)
@@ -191,6 +193,9 @@
 									<td>
 										<a href='@Url.Action("_RemoveTestInExams", "Exams", new {ids = @item.TestID, examID = Model.ExamID})' onclick="return confirm('Are you sure you want to delete this exam paper?');">
 											<div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+										</a>
+										<a href='@Url.Action("UpdateCandidates", "CandidatatesTest", new {id= @item.TestID})'>
+											<div class="btn  btn-sm btn-github"><i class="glyphicon glyphicon-user"></i></div>
 										</a>
 									</td>
 								</tr>

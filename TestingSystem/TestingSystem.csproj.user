@@ -23,6 +23,7 @@
     </WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_LayoutPageFile>~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_LayoutPageFile>~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml</WebStackScaffolding_LayoutPageFile>
+    <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_LayoutAuditionTest.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_LayoutPageFile>
     </WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
