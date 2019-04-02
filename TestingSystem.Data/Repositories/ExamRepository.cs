@@ -12,9 +12,9 @@ namespace TestingSystem.Data.Repositories
 	{
 		//Get all exams to view list exam
 		IEnumerable<Exam> GetAllExams();
-		IEnumerable<Exam> GetAllFollow();
+        IEnumerable<Exam> GetAllFollow();
 		// Update exam
-		bool UpdateExam(Exam exam);
+        bool UpdateExam(Exam exam);
 		// Get exam by exam id
 		Exam GetExamsByID(int id);
 		// Create new exam
@@ -26,7 +26,7 @@ namespace TestingSystem.Data.Repositories
 		// Get all test by exam id(use for client).
 		IEnumerable<Test> GetTestByExamID(int examID, int idUser);
 		// Delete test in list exam
-		int RemoveTestInExams(int testID,int examID);
+		int RemoveTestInExams(int id);
 		// Add test into exam
 		int AddTestIntoExams(int testID, int examID);
 		// Get Name exam by exam id

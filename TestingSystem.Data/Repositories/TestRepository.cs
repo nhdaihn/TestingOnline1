@@ -11,15 +11,63 @@ namespace TestingSystem.Data.Repositories
 {
 	public interface ITestRepository : IRepository<Test>
 	{
+        /// <summary>
+        /// GetAllTest
+        /// </summary>
+        /// <returns></returns>
 		IEnumerable<Test> GetAllTest();
+        /// <summary>
+        /// UpdateTest
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
 		bool UpdateTest(Test entity);
+        /// <summary>
+        /// GetTestById
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 		Test GetTestByID(int id);
+        /// <summary>
+        /// AddTest
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
 		int AddTest(Test entity);
+        /// <summary>
+        /// DeleteTest
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 		int DeleteTest(int id);
+        /// <summary>
+        /// GetAllTestIsActive
+        /// </summary>
+        /// <returns></returns>
 		IEnumerable<Test> GetAllTestIsActive();
+        /// <summary>
+        /// GetAllTestIsActiveByKeySearch
+        /// </summary>
+        /// <param name="keySearch"></param>
+        /// <returns></returns>
 		IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch);
+        /// <summary>
+        /// GetAllTetByExamCode
+        /// </summary>
+        /// <param name="examCode"></param>
+        /// <returns></returns>
 		IEnumerable<Test> GetAllTetByExamCode(string examCode);
+        /// <summary>
+        /// SearchExams
+        /// </summary>
+        /// <param name="txtSearch"></param>
+        /// <returns></returns>
 		IEnumerable<Test> SearchExams(string txtSearch);
+        /// <summary>
+        /// GetExamPaperIdByTestId
+        /// </summary>
+        /// <param name="testId"></param>
+        /// <returns></returns>
 		int GetExamPaperIdByTestId(int testId);
 
 	}
@@ -30,6 +78,11 @@ namespace TestingSystem.Data.Repositories
 		{
 
 		}
+        /// <summary>
+        /// Add Test
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
 		public int AddTest(Test entity)
 		{
 			try
@@ -46,7 +99,11 @@ namespace TestingSystem.Data.Repositories
 				return 0;
 			}
 		}
-
+        /// <summary>
+        /// Delete Test
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 		public int DeleteTest(int id)
 		{
 			try
@@ -77,19 +134,31 @@ namespace TestingSystem.Data.Repositories
 				return 0;
 			}
 		}
-
+        /// <summary>
+        /// GetALL Test By IsActive
+        /// </summary>
+        /// <returns></returns>
 		public IEnumerable<Test> GetAllTestIsActive()
 		{
 			var listTestActive = DbContext.Tests.Where(x => x.IsActive == true).ToList();
 			return listTestActive.AsEnumerable();
 		}
-
+        /// <summary>
+        /// Get All Test where KeySeach
+        /// </summary>
+        /// <param name="keySearch"></param>
+        /// <returns></returns>
 		public IEnumerable<Test> GetAllTestIsActiveByKeySearch(string keySearch)
 		{
 			var listTestActiveByKey = DbContext.Tests.Where(x => x.TestName.Contains(keySearch) && x.IsActive == true);
 			return listTestActiveByKey;
 		}
 
+        /// <summary>
+        /// Get all Test by Code
+        /// </summary>
+        /// <param name="examCode"></param>
+        /// <returns></returns>
 		public IEnumerable<Test> GetAllTetByExamCode(string examCode)
 		{
 			var examByCode = DbContext.Exams.SingleOrDefault(x => x.ExamCode == examCode);
@@ -104,6 +173,10 @@ namespace TestingSystem.Data.Repositories
 			return listTest.AsEnumerable();
 		}
 
+        /// <summary>
+        /// Get All Test
+        /// </summary>
+        /// <returns></returns>
 		public IEnumerable<Test> GetAllTest()
 		{
 			try
@@ -118,16 +191,31 @@ namespace TestingSystem.Data.Repositories
 			}
 		}
 
+        /// <summary>
+        /// Get Test by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 		public Test GetTestByID(int id)
 		{
 			var model = DbContext.Tests.Find(id);
 			return model;
 		}
+        /// <summary>
+        /// Get List Test by Search
+        /// </summary>
+        /// <param name="txtSearch"></param>
+        /// <returns></returns>
 		public IEnumerable<Test> SearchExams(string txtSearch)
 		{
 			var listTest = DbContext.Tests.Where(x => x.TestName.Contains(txtSearch)).ToList();
 			return listTest;
 		}
+        /// <summary>
+        /// Update Test
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
 		public bool UpdateTest(Test entity)
 		{
 			try
@@ -156,6 +244,11 @@ namespace TestingSystem.Data.Repositories
 			}
 		}
 
+        /// <summary>
+        /// Get ExamPaper by TestId
+        /// </summary>
+        /// <param name="testId"></param>
+        /// <returns></returns>
 		public int GetExamPaperIdByTestId(int testId)
 		{
 			var item = this.DbContext.Tests.Where(s => s.TestID == testId).FirstOrDefault();

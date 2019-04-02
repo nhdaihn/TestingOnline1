@@ -256,21 +256,23 @@ namespace TestingSystem.Areas.Admin.Controllers
                     }
                 }
 
+                // lay exampaper theo id
+                // listquestion: so cau hoi trong de
 
                 double percent = numberOfCorrectAnswer / countAnswer;
 
 
                 // lay exampaper theo id
                 // listquestion: so cau hoi trong de
-
-
+                
+                var testName = testService.GetTestByID(idtest).TestName;
 
                 foreach (var item in listQuestion)
                 {
                     TestResult testResult = new TestResult();
                     testResult.TestID = idtest;
                     testResult.CandidateID = idUser;
-                    testResult.TestName = examPaper.Title;
+                    testResult.TestName = testName;
                     testResult.Description = "description note";
                     testResult.CreatedDate = DateTime.Now;
                     testResult.Score = numberOfCorrectAnswer;
