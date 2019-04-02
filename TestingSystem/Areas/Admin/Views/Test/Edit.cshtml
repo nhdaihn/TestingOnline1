@@ -158,34 +158,35 @@
 				@*</div>
 						</div>
 					}*@
-				<form action="@Url.Action("DeleteCandidatesFromTest","CandidatatesTest")" id="form-delete" method="post">
+				<form action="@Url.Action("DeleteCandidatesFromTest", "CandidatatesTest")" id="form-delete" method="post">
+					<input type="hidden" name="testID" value="@Model.TestID"/>
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
-							<tr>
-								<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)" /></td>
-								<th width="7%">Number</th>
-								<th>Name</th>
-								<th>Email</th>
-							</tr>
+						<tr>
+							<td width="5%"><input name="all" id="checkall" type="checkbox" onchange="Check(this)"/></td>
+							<th width="7%">Number</th>
+							<th>Name</th>
+							<th>Email</th>
+						</tr>
 						</thead>
 						<tbody>
-							@foreach (Candidate item in ViewBag.listCandidatesByTestID)
-							{
-								stt++;
-								<tr>
-									<td><input type="checkbox" id="checkone" name="ids" value="@item.CandidateID" onchange="changee(this);" /></td>
-									<td>@stt</td>
-									<td>
-										@item.Users.Name
-									</td>
-									<td>@item.Users.Email</td>
-									<td>
-										<a href='@Url.Action("DeleteCandidatesFromTest","CandidatatesTest", new {ids = @item.CandidateID,testID=@Model.TestID })' onclick="return confirm('Are you sure you want to delete this candidate?');">
-											<div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
-										</a>
-									</td>
-								</tr>
-							}
+						@foreach (Candidate item in ViewBag.listCandidatesByTestID)
+						{
+							stt++;
+							<tr>
+								<td><input type="checkbox" id="checkone" name="ids" value="@item.CandidateID" onchange="changee(this);"/></td>
+								<td>@stt</td>
+								<td>
+									@item.Users.Name
+								</td>
+								<td>@item.Users.Email</td>
+								<td>
+									<a href='@Url.Action("DeleteCandidatesFromTest", "CandidatatesTest", new {ids = @item.CandidateID, testID = @Model.TestID})' onclick="return confirm('Are you sure you want to delete this candidate?');">
+										<div class="btn  btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+									</a>
+								</td>
+							</tr>
+						}
 						</tbody>
 					</table>
 					<a onclick="return confirm('Are you sure you want to delete multiple candidatea?');">
