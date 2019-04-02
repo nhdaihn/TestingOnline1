@@ -41,6 +41,13 @@ namespace TestingSystem.Controllers
 			this.questionCategorySevice = questionCategorySevice;
 			this.testService = testService;
 		}
+        /// <summary>
+        /// _ShowInfoTest
+        /// </summary>
+        /// <param name="idExamPaper"></param>
+        /// <param name="idExam"></param>
+        /// <param name="idTest"></param>
+        /// <returns></returns>
 		public ActionResult _ShowInfoTest(int idExamPaper, int idExam, int idTest)
 		{
 			Test item = new Test();
@@ -59,6 +66,11 @@ namespace TestingSystem.Controllers
 			return View();
 		}
 
+        /// <summary>
+        /// MyAuditionsTest
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
 		[HttpPost]
 		public ActionResult MyAuditionsTest(string code)
 		{
@@ -83,9 +95,16 @@ namespace TestingSystem.Controllers
 			return View();
 
 		}
-		
-		// hieu la lay id bai test theo idExamPaper va idTest
-		[HttpGet]
+
+        // hieu la lay id bai test theo idExamPaper va idTest
+        /// <summary>
+        /// ShowExamPaperById
+        /// </summary>
+        /// <param name="idExamPaper"></param>
+        /// <param name="idExam"></param>
+        /// <param name="idTest"></param>
+        /// <returns></returns>
+        [HttpGet]
 		public ActionResult ShowExamPaperById(int idExamPaper, int idExam, int idTest)
 		{
 
@@ -147,6 +166,13 @@ namespace TestingSystem.Controllers
 			TempData["countTrue"] = 0;
 			return View();
 		}
+        /// <summary>
+        /// UnorderedEqual
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
 		static bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
 		{
 			// 1
@@ -208,6 +234,15 @@ namespace TestingSystem.Controllers
 			// We know the collections are equal
 			return true;
 		}
+        /// <summary>
+        /// _RepostTest
+        /// </summary>
+        /// <param name="fruits"></param>
+        /// <param name="exampaperid"></param>
+        /// <param name="examid"></param>
+        /// <param name="passscore"></param>
+        /// <param name="idtest"></param>
+        /// <returns></returns>
 		[HttpPost]
 		public JsonResult _RepostTest(IEnumerable<ResultTest> fruits, int exampaperid, int examid, int passscore, int idtest)
 		{

@@ -15,6 +15,10 @@ namespace TestingSystem.Controllers
 		{
 			this.examPaperService = examPaperService;
 		}
+        /// <summary>
+        /// PartialExamPaper
+        /// </summary>
+        /// <returns></returns>
         public ActionResult PartialExamPaper()
         {
 	        var model = examPaperService.ListExamPapersTop();

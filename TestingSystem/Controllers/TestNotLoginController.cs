@@ -22,6 +22,11 @@ namespace TestingSystem.Controllers
             this.answerService = answerService;
             this.examPaperService = examPaperService;
         }
+        /// <summary>
+        /// ShowExamPaperById
+        /// </summary>
+        /// <param name="idExamPaper"></param>
+        /// <returns></returns>
         public ActionResult ShowExamPaperById(int idExamPaper)
         {
             var listExamPaperQuesions = questionService.GetQuestionsByExamPaperId(idExamPaper);
@@ -41,6 +46,11 @@ namespace TestingSystem.Controllers
             TempData["idExamPaper"] = idExamPaper;
             return View();
         }
+        /// <summary>
+        /// RepostTest
+        /// </summary>
+        /// <param name="fruits"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult RepostTest(IEnumerable<ResultTest> fruits)
         {

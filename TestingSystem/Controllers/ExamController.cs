@@ -14,8 +14,12 @@ namespace TestingSystem.Controllers
 		{
 			this.examPaperRepository = ExamPaperRepository;
 		}
-		// GET: Exam
-		public ActionResult Index()
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
+        // GET: Exam
+        public ActionResult Index()
 		{
 			var model = examPaperRepository.ListExamPapersTop();
 			return PartialView(model);
