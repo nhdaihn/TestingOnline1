@@ -317,8 +317,8 @@
                     timer = duration;
                 }
                 if (timer <= 1) {
+	                localStorage.clear();
                     clearInterval(refreshId);
-                    localStorage.clear();
                 }
             }, 1000);
         }
