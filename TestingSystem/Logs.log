@@ -702,3 +702,7 @@
 
 ----------------------------------------------------------------------------------------------------------------------------
 
+11:24:06,413 6 - An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
+
+----------------------------------------------------------------------------------------------------------------------------
+
