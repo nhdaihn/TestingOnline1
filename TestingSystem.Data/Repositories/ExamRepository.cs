@@ -195,7 +195,7 @@ namespace TestingSystem.Data.Repositories
 			var listExamTestByExamID = DbContext.ExamTests.Where(x => x.ExamID == examID).ToList();
 			var listTest = DbContext.Tests.ToList();
 			var listReturn = new List<Test>();
-			; foreach (var item in listExamTestByExamID)
+;			foreach (var item in listExamTestByExamID)
 			{
 				foreach (var item2 in listTest)
 				{
@@ -204,7 +204,7 @@ namespace TestingSystem.Data.Repositories
 						listReturn.Add(item2);
 					}
 				}
-			}
+			}	
 			return listReturn.AsEnumerable();
 		}
 
